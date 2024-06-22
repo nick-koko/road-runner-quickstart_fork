@@ -11,14 +11,14 @@ public class MeepMeepTesting {
     public static void main(String[] args) {
         MeepMeep meepMeep = new MeepMeep(900);
 
-        int autonChoice = 5;
+        int autonChoice = 3;
         Action blueCloseSideLeftLine;
         Action blueCloseSideCenterLine;
         Action blueCloseSideRightLine;
 
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
+                .setConstraints(50, 30, Math.toRadians(180), Math.toRadians(180), 15)
                 .build();
         if (autonChoice == 1) {
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(11.8, 61.7, Math.toRadians(270)))
@@ -129,7 +129,7 @@ public class MeepMeepTesting {
                     .strafeTo(new Vector2d(49, 60))
                     .build();
 
-            myBot.runAction(blueCloseSideCenterLine);
+            myBot.runAction(blueCloseSideLeftLine);
         }
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_CENTERSTAGE_JUICE_DARK)
