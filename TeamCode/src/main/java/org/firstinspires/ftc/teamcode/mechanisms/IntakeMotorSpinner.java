@@ -27,11 +27,10 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.mechanisms;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 /*
  * This OpMode ramps a single motor speed up and down repeatedly until Stop is pressed.
@@ -48,24 +47,19 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 public class IntakeMotorSpinner {
 
-    static final double INCREMENT   = 0.01;     // amount to ramp motor each CYCLE_MS cycle
-    static final int    CYCLE_MS    =   50;     // period of each cycle
-    static final double MAX_FWD     =  1.0;     // Maximum FWD power applied to motor
-    static final double MAX_REV     = -1.0;     // Maximum REV power applied to motor
-
     // Define class members
     DcMotor motor;
     double  power   = 0;
-    boolean rampUp  = true;
 
+    public void init(HardwareMap hwMap) {
+        motor = hwMap.get(DcMotor.class, "intake_motor");
+    }
 
     public void Intake() {
 
         // Connect to motor (Assume standard left wheel)
-        motor = hardwareMap.get(DcMotor.class, "intake_motor");
 
         power = 0.5 ;
-
 
             /*telemetry.addData("Motor Power", "%5.2f", power);
             telemetry.addData(">", "Press Stop to end test." );
@@ -73,41 +67,29 @@ public class IntakeMotorSpinner {
 
             // Set the motor to the new power and pause;
             motor.setPower(power);
-            sleep(CYCLE_MS);
-            idle();
 
 
-        // Turn off motor and signal done;
-       /* motor.setPower(0);
-        telemetry.addData(">", "Done");
+        // signal done;
+       /* telemetry.addData(">", "Done");
         telemetry.update();*/
 
     }
 
     public void Outtake() {
 
-        // Connect to motor (Assume standard left wheel)
-        motor = hardwareMap.get(DcMotor.class, "intake_motor");
-
         power = -0.5 ;
 
         // Set the motor to the new power and pause;
         motor.setPower(power);
-        sleep(CYCLE_MS);
-        idle();
     }
 
     public void Stop() {
 
-        // Connect to motor (Assume standard left wheel)
-        motor = hardwareMap.get(DcMotor.class, "intake_motor");
-
+        // Set power to zero
         power = 0.0 ;
 
-        // Set the motor to the new power and pause;
+        // Set the motor to the new power;
         motor.setPower(power);
-        sleep(CYCLE_MS);
-        idle();
     }
 
 }
