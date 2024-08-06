@@ -64,8 +64,8 @@ public final class MecanumDrive {
 
         // drive model parameters
         public double inPerTick = 0.002951371;
-        public double lateralInPerTick =  0.00240;  // Changed to tile value, carpet value was: 0.00188694 lower value is more strafe slip
-        public double trackWidthTicks = 5269.0; // Changed to tile value, carpet value was: 5483.75;
+        public double lateralInPerTick =  0.002236062;  // Changed to tile value, carpet value was: 0.00188694 lower value is more strafe slip
+        public double trackWidthTicks = 5283.0; // Changed to tile value, carpet value was: 5483.75;
 
         // feedforward parameters (in tick units)
         public double kS = 0.7388585036182111;
