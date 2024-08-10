@@ -32,19 +32,6 @@ package org.firstinspires.ftc.teamcode.mechanisms;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-/*
- * This OpMode ramps a single motor speed up and down repeatedly until Stop is pressed.
- * The code is structured as a LinearOpMode
- *
- * This code assumes a DC motor configured with the name "left_drive" as is found on a Robot.
- *
- * INCREMENT sets how much to increase/decrease the power each cycle
- * CYCLE_MS sets the update period.
- *
- * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
- * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
- */
-
 public class IntakeMotorSpinner {
 
     // Define class members
@@ -57,29 +44,18 @@ public class IntakeMotorSpinner {
 
     public void Intake() {
 
-        // Connect to motor (Assume standard left wheel)
+        power = 0.7 ;
 
-        power = 0.5 ;
-
-            /*telemetry.addData("Motor Power", "%5.2f", power);
-            telemetry.addData(">", "Press Stop to end test." );
-            telemetry.update();*/
-
-            // Set the motor to the new power and pause;
+            // Set the motor to the new power
             motor.setPower(power);
-
-
-        // signal done;
-       /* telemetry.addData(">", "Done");
-        telemetry.update();*/
 
     }
 
     public void Outtake() {
 
-        power = -0.5 ;
+        power = -0.7 ;
 
-        // Set the motor to the new power and pause;
+        // Set the motor to the new power
         motor.setPower(power);
     }
 
