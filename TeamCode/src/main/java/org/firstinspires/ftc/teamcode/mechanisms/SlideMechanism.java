@@ -18,6 +18,7 @@ public class SlideMechanism {
     }
 
     private SLIDE_STATES curSlideState = null;
+    private SLIDE_STATES nextSlideState = null;
 
     public void init(HardwareMap hwMap) {
 
@@ -26,6 +27,7 @@ public class SlideMechanism {
         this.slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         this.slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         curSlideState = SLIDE_STATES.SLIDE_LOW_POS;
+        nextSlideState = SLIDE_STATES.SLIDE_LOW_POS;
     }
 
 
@@ -52,25 +54,28 @@ public class SlideMechanism {
 
     // Method to move the slide to the low position
     public void slidePositionLow() {
-
+        nextSlideState = SLIDE_STATES.SLIDE_LOW_POS;
         moveToPosition(LOW_POSITION);
     }
 
     // Method to move the slide to the middle position
     public void slidePositionMiddle() {
 
+        nextSlideState = SLIDE_STATES.SLIDE_MIDDLE_POS;
         moveToPosition(MIDDLE_POSITION);
     }
 
     // Method to move the slide to the high position
     public void slidePositionHigh() {
 
+        nextSlideState = SLIDE_STATES.SLIDE_HIGH_POS;
         moveToPosition(HIGH_POSITION);
     }
 
     // Method to move the slide to the drive position
     public void slidePositionDrive() {
 
+        nextSlideState = SLIDE_STATES.SLIDE_DRIVE_POS;
         moveToPosition(DRIVE_POSITION);
     }
 
@@ -97,5 +102,9 @@ public class SlideMechanism {
             curSlideState = SLIDE_STATES.SLIDE_DRIVE_POS;
         }
         return curSlideState;
+    }
+
+    public SLIDE_STATES getNextSlideState() {
+        return nextSlideState;
     }
 }
