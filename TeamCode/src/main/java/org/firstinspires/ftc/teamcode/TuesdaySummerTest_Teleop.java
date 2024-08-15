@@ -86,7 +86,9 @@ public class TuesdaySummerTest_Teleop extends OpMode{
      */
     @Override
     public void start() {
-        //runtime.reset();
+        //Goto Intake Position
+        intakeArmServo.armPositionIntake();
+        slide.slidePositionLow();
     }
 
     /*
@@ -195,7 +197,7 @@ public class TuesdaySummerTest_Teleop extends OpMode{
         }
         else {
             // Go to drive position
-            if(slide.getSlideState() != SlideMechanism.SLIDE_STATES.SLIDE_LOW_POS) {
+            if((slide.getSlideState() != SlideMechanism.SLIDE_STATES.SLIDE_LOW_POS) && (slide.getNextSlideState() != SlideMechanism.SLIDE_STATES.SLIDE_LOW_POS)) {
                 intakeArmServo.armPositionDrive();
             }
         }
