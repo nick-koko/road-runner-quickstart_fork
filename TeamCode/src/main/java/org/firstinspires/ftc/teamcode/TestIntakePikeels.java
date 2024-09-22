@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.IntakeServoSpinner;
 import org.firstinspires.ftc.teamcode.mechanisms.SensorColor;
 import org.firstinspires.ftc.teamcode.mechanisms.SlideMechanism;
 
-@TeleOp(name="TuesdaySummerTest_Teleop")
+@TeleOp(name="TuesdayIntakePikeels")
 // @Disabled
 public class TestIntakePikeels extends OpMode{
     
