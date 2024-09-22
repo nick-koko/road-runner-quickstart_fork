@@ -11,7 +11,7 @@ public class MeepMeepTesting {
     public static void main(String[] args) {
         MeepMeep meepMeep = new MeepMeep(900);
 
-        int autonChoice = 3;
+        int autonChoice = 7;
         Action blueCloseSideLeftLine;
         Action blueCloseSideCenterLine;
         Action blueCloseSideRightLine;
@@ -130,9 +130,16 @@ public class MeepMeepTesting {
                     .build();
 
             myBot.runAction(blueCloseSideLeftLine);
-        }
+        }  else if (autonChoice == 7) {
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-9.25, -62, Math.toRadians(90)))
+                                .lineToY(-34)
 
-        meepMeep.setBackground(MeepMeep.Background.FIELD_CENTERSTAGE_JUICE_DARK)
+                        //.splineTo(new Vector2d(20, 30), Math.toRadians(90))
+                        //.splineTo(new Vector2d(0, 60), Math.toRadians(180))
+                        .build());
+         }
+
+                meepMeep.setBackground(MeepMeep.Background.GRID_BLUE)
                 .setDarkMode(true)
                 .setBackgroundAlpha(0.95f)
                 .addEntity(myBot)

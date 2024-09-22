@@ -22,6 +22,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeRegistrar;
 
 import org.firstinspires.ftc.robotcore.internal.opmode.OpModeMeta;
+import org.firstinspires.ftc.teamcode.BlueSideBuckets;
 import org.firstinspires.ftc.teamcode.FirstDemoProgram;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 import org.firstinspires.ftc.teamcode.TankDrive;
@@ -163,6 +164,7 @@ public final class TuningOpModes {
 
         manager.register(metaForClass(ManualFeedbackTuner.class), ManualFeedbackTuner.class);
         manager.register(metaForClass(SplineTest.class), SplineTest.class);
+        manager.register(metaForClass(BlueSideBuckets.class), BlueSideBuckets.class);
         manager.register(metaForClass(LocalizationTest.class), LocalizationTest.class);
         manager.register(metaForClass(FirstDemoProgram.class), FirstDemoProgram.class);
 
