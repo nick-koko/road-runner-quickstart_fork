@@ -18,7 +18,7 @@ public class MeepMeepTesting {
 
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                .setConstraints(50, 30, Math.toRadians(180), Math.toRadians(180), 15)
+                .setConstraints(55, 50, Math.toRadians(180), Math.toRadians(180), 15)
                 .build();
         if (autonChoice == 1) {
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(11.8, 61.7, Math.toRadians(270)))
@@ -131,13 +131,40 @@ public class MeepMeepTesting {
 
             myBot.runAction(blueCloseSideLeftLine);
         }  else if (autonChoice == 7) {
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-9.25, -62, Math.toRadians(90)))
-                                .lineToY(-34)
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(9.25, 62, Math.toRadians(90)))
+                                .lineToY(34)
+                        .waitSeconds(0.9)
+                                .setTangent(Math.toRadians(60))
+                                .splineToLinearHeading(new Pose2d(48.5, 37.5, Math.toRadians(-90)), Math.toRadians(0))
 
                         //.splineTo(new Vector2d(20, 30), Math.toRadians(90))
                         //.splineTo(new Vector2d(0, 60), Math.toRadians(180))
                         .build());
-         }
+         }  else if (autonChoice == 8) {
+            myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(9.25, 62, Math.toRadians(90)))
+                    .lineToY(34)
+                    .waitSeconds(1)
+                    .setTangent(Math.toRadians(90))
+                    .splineToLinearHeading(new Pose2d(33.1, 34.6, Math.toRadians(-35)), Math.toRadians(0))
+                    .waitSeconds(1)
+                    .splineToLinearHeading(new Pose2d(52.6, 52.6, Math.toRadians(-135)), Math.toRadians(0))
+                    .waitSeconds(2)
+                    .splineToLinearHeading(new Pose2d(42.0, 27.6, Math.toRadians(-5)), Math.toRadians(0))
+                    .waitSeconds(1)
+                    .splineToLinearHeading(new Pose2d(52.6, 52.6, Math.toRadians(-135)), Math.toRadians(0))
+                    .waitSeconds(2)
+                    .splineToLinearHeading(new Pose2d(52.0, 27.6, Math.toRadians(-5)), Math.toRadians(0))
+                    .waitSeconds(1)
+                    .splineToLinearHeading(new Pose2d(52.6, 52.6, Math.toRadians(-135)), Math.toRadians(0))
+                    .waitSeconds(2)
+                    .splineToLinearHeading(new Pose2d(23.3, 0.3, Math.toRadians(0)), Math.toRadians(180))
+
+
+
+                    //.splineTo(new Vector2d(20, 30), Math.toRadians(90))
+                    //.splineTo(new Vector2d(0, 60), Math.toRadians(180))
+                    .build());
+        }
 
                 meepMeep.setBackground(MeepMeep.Background.FIELD_INTO_THE_DEEP_JUICE_DARK)
                 .setDarkMode(true)

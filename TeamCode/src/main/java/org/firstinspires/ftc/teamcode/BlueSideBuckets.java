@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.tuning.TuningOpModes;
 public final class BlueSideBuckets extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
-        Pose2d beginPose = new Pose2d(-9.25, -62, Math.toRadians(90));
+        Pose2d beginPose = new Pose2d(9.25, 62, Math.toRadians(90));
         if (TuningOpModes.DRIVE_CLASS.equals(MecanumDrive.class)) {
             MecanumDrive drive = new MecanumDrive(hardwareMap, beginPose);
 
@@ -18,8 +18,12 @@ public final class BlueSideBuckets extends LinearOpMode {
 
             Actions.runBlocking(
                 drive.actionBuilder(beginPose)
-                        .lineToY(-34)
-                                //.splineTo(new Vector2d(20, 30), Math.PI / 2)
+                        .lineToY(34)
+                        .waitSeconds(0.9)
+                        .setTangent(Math.toRadians(60))
+                        .splineToLinearHeading(new Pose2d(48.5, 37.5, Math.toRadians(-90)), Math.toRadians(0))
+
+                        //.splineTo(new Vector2d(20, 30), Math.PI / 2)
                         //.splineTo(new Vector2d(0, 60), Math.PI)
                         .build());
         } else if (TuningOpModes.DRIVE_CLASS.equals(TankDrive.class)) {

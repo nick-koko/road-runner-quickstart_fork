@@ -150,8 +150,10 @@ public class TestIntakePikeels extends OpMode{
         if (gamepad2.dpad_left) {
             frontIntake.Intake();
         }
-        else if (gamepad2.dpad_right) {
+        else if (gamepad2.dpad_down) {
             frontIntake.Stop();
+        } else if (gamepad2.dpad_right) {
+            frontIntake.Outtake();
         }
 
         // SLIDE CONDITIONS
