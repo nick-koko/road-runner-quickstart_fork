@@ -11,7 +11,7 @@ public class MeepMeepTesting {
     public static void main(String[] args) {
         MeepMeep meepMeep = new MeepMeep(900);
 
-        int autonChoice = 7;
+        int autonChoice = 8;
         Action blueCloseSideLeftLine;
         Action blueCloseSideCenterLine;
         Action blueCloseSideRightLine;

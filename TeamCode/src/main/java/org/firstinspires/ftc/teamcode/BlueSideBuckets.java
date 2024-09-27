@@ -1,43 +1,32 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.tuning.TuningOpModes;
-
+@Config
+@Autonomous(name = "BkueSideBuckets", group = "Autonomous")
 public final class BlueSideBuckets extends LinearOpMode {
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void runOpMode() {
         Pose2d beginPose = new Pose2d(9.25, 62, Math.toRadians(90));
-        if (TuningOpModes.DRIVE_CLASS.equals(MecanumDrive.class)) {
-            MecanumDrive drive = new MecanumDrive(hardwareMap, beginPose);
+        MecanumDrive drive = new MecanumDrive(hardwareMap, beginPose);
 
-            waitForStart();
+        waitForStart();
 
-            Actions.runBlocking(
-                drive.actionBuilder(beginPose)
-                        .lineToY(34)
-                        .waitSeconds(0.9)
-                        .setTangent(Math.toRadians(60))
-                        .splineToLinearHeading(new Pose2d(48.5, 37.5, Math.toRadians(-90)), Math.toRadians(0))
+        Actions.runBlocking(
+            drive.actionBuilder(beginPose)
+                    .lineToY(34)
+                    .waitSeconds(0.9)
+                    .setTangent(Math.toRadians(60))
+                    .splineToLinearHeading(new Pose2d(48.5, 37.5, Math.toRadians(-90)), Math.toRadians(0))
 
-                        //.splineTo(new Vector2d(20, 30), Math.PI / 2)
-                        //.splineTo(new Vector2d(0, 60), Math.PI)
-                        .build());
-        } else if (TuningOpModes.DRIVE_CLASS.equals(TankDrive.class)) {
-            TankDrive drive = new TankDrive(hardwareMap, beginPose);
+                    //.splineTo(new Vector2d(20, 30), Math.PI / 2)
+                    //.splineTo(new Vector2d(0, 60), Math.PI)
+                    .build());
 
-            waitForStart();
-
-            Actions.runBlocking(
-                    drive.actionBuilder(beginPose)
-                            .splineTo(new Vector2d(30, 30), Math.PI / 2)
-                            .splineTo(new Vector2d(0, 60), Math.PI)
-                            .build());
-        } else {
-            throw new RuntimeException();
-        }
     }
 }
