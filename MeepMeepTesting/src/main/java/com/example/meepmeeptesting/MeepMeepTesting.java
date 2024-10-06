@@ -11,7 +11,7 @@ public class MeepMeepTesting {
     public static void main(String[] args) {
         MeepMeep meepMeep = new MeepMeep(900);
 
-        int autonChoice = 8;
+        int autonChoice = 7;
         Action blueCloseSideLeftLine;
         Action blueCloseSideCenterLine;
         Action blueCloseSideRightLine;
@@ -133,9 +133,22 @@ public class MeepMeepTesting {
         }  else if (autonChoice == 7) {
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(9.25, 62, Math.toRadians(90)))
                                 .lineToY(34)
-                        .waitSeconds(0.9)
+                                .waitSeconds(0.99)
                                 .setTangent(Math.toRadians(60))
                                 .splineToLinearHeading(new Pose2d(48.5, 37.5, Math.toRadians(-90)), Math.toRadians(0))
+                                .waitSeconds(0.99)
+                                 .splineToLinearHeading(new Pose2d(56, 54, Math.toRadians(-135)), Math.toRadians(0))
+                                 .waitSeconds(0.99)
+                                .splineToLinearHeading(new Pose2d(58, 37.5, Math.toRadians(-90)), Math.toRadians(0))
+                                 .waitSeconds(0.99)
+                                  .splineToLinearHeading(new Pose2d(56, 54, Math.toRadians(-135)), Math.toRadians(0))
+                                 .waitSeconds(0.99)
+                                 .splineToLinearHeading(new Pose2d(57, 37.5, Math.toRadians(-45)), Math.toRadians(0))
+                                .waitSeconds(0.99)
+                .setTangent(Math.toRadians(90))
+                .splineToLinearHeading(new Pose2d(56, 54, Math.toRadians(-135)), Math.toRadians(0))
+                .waitSeconds(0.99)
+                .splineToLinearHeading(new Pose2d(25, 0, Math.toRadians(-180)), Math.toRadians(180))
 
                         //.splineTo(new Vector2d(20, 30), Math.toRadians(90))
                         //.splineTo(new Vector2d(0, 60), Math.toRadians(180))
