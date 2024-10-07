@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.mechanisms;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-/*
+
 public class DualSlideMechanism {
     // Assuming some motor control library is used, e.g., FTC SDK, but this can be customized
     private DcMotor slideMotorL;
@@ -69,36 +69,36 @@ public class DualSlideMechanism {
     // Method to move the slide to the low position
     public void slidePositionLow() {
         nextSlideState = SLIDE_STATES.SLIDE_LOW_POS;
-        moveToPosition(LOW_POSITION);
+        moveToPosition(LOW_POSITION_LEFT, LOW_POSITION_RIGHT);
     }
 
     // Method to move the slide to the middle position
     public void slidePositionMiddle() {
 
         nextSlideState = SLIDE_STATES.SLIDE_MIDDLE_POS;
-        moveToPosition(MIDDLE_POSITION);
+        moveToPosition(MIDDLE_POSITION_LEFT, MIDDLE_POSITION_RIGHT);
     }
 
     // Method to move the slide to the high position
     public void slidePositionHigh() {
 
         nextSlideState = SLIDE_STATES.SLIDE_HIGH_POS;
-        moveToPosition(HIGH_POSITION);
+        moveToPosition(HIGH_POSITION_LEFT, HIGH_POSITION_RIGHT);
     }
 
     // Method to move the slide to the drive position
     public void slidePositionDrive() {
 
         nextSlideState = SLIDE_STATES.SLIDE_DRIVE_POS;
-        moveToPosition(DRIVE_POSITION);
+        moveToPosition(DRIVE_POSITION_LEFT, DRIVE_POSITION_RIGHT);
     }
 
     // Private method to move the slide to a specific position
-    private void moveToPosition(int position) {
-        this.slideMotorL.setTargetPosition(position);
+    private void moveToPosition(int leftPosition, int rightPosition) {
+        this.slideMotorL.setTargetPosition(leftPosition);
         this.slideMotorL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         this.slideMotorL.setPower(0.4);
-        this.slideMotorR.setTargetPosition(position);
+        this.slideMotorR.setTargetPosition(rightPosition);
         this.slideMotorR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         this.slideMotorR.setPower(0.4);
         
@@ -109,10 +109,10 @@ public class DualSlideMechanism {
         
         // Stop the motor once the target position is reached
         // this.slideMotor.setPower(0);
-  /*  }
+    }
 
     public SLIDE_STATES getSlideState() {
-        if (this.slideMotorL.getCurrentPosition() < (DRIVE_POSITION - 100)) {
+        if (this.slideMotorL.getCurrentPosition() < (DRIVE_POSITION_LEFT - 100)) {
             curSlideState = SLIDE_STATES.SLIDE_LOW_POS;
         }
         else {
@@ -124,4 +124,4 @@ public class DualSlideMechanism {
     public SLIDE_STATES getNextSlideState() {
         return nextSlideState;
     }
-}*/
+}

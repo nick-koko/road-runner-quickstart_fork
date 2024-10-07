@@ -10,9 +10,9 @@ public class ArmMechanism {
     private Servo armServo;
 
     // Target positions for the servo arm
-    private static final double INTAKE_POSITION = 0.11;
+    private static final double INTAKE_POSITION = 0.5;
     private static final double DRIVE_POSITION = 0.25;
-    private static final double DUMP_POSITION = 0.95;
+    private static final double DUMP_POSITION = 1.0;
     private ElapsedTime armTimer = new ElapsedTime();
     public enum ARM_STATES{
         ARM_INTAKE_POS, ARM_LOW_POS, ARM_DRIVE_POS, ARM_MIDDLE_POS, ARM_HIGH_POS, ARM_DUMP_POS

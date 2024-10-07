@@ -190,9 +190,9 @@ public class TestIntakePikeels extends OpMode{
         // ARM CONDITIONS
         if (gamepad2.left_bumper || gamepad2.right_bumper) {
             // Go to dumping position
-            if(slide.getSlideState() != SlideMechanism.SLIDE_STATES.SLIDE_LOW_POS) {
+            //if(slide.getSlideState() != SlideMechanism.SLIDE_STATES.SLIDE_LOW_POS) {
                 intakeArmServo.armPositionDump();
-            }
+            //}
         }
         else {
             // Go to drive position
