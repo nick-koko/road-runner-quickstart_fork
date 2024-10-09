@@ -59,12 +59,9 @@ public class BlueSideActionsTestAuton extends LinearOpMode {
         // Actions.runBlocking(claw.closeClaw());
 
 
-        while (!isStopRequested() && !opModeIsActive()) {
+        while (opModeInInit()) {
+            //TODO Add code to continue to run during initialization here
         }
-
-        waitForStart();
-
-        if (isStopRequested()) return;
 
         Actions.runBlocking(
                new SequentialAction(
