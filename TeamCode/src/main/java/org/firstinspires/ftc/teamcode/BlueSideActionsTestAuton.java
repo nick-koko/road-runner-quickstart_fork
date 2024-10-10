@@ -40,7 +40,7 @@ public class BlueSideActionsTestAuton extends LinearOpMode {
         trajectoryActionBlueSideBuckets = drive.actionBuilder(initialPoseBlueSideBuckets)
                 .lineToY(34)
                 .stopAndAdd(outtakeSlide.liftUp())
-                .stopAndAdd(outtakeClaw.clawOpen())
+                //.stopAndAdd(outtakeClaw.clawOpen())
                 .stopAndAdd(outtakeSlide.liftDown())
                 .setTangent(Math.toRadians(60))
                 .splineToLinearHeading(new Pose2d(48.5, 37.5, Math.toRadians(-90)), Math.toRadians(0))
@@ -61,7 +61,7 @@ public class BlueSideActionsTestAuton extends LinearOpMode {
 
 
         // actions that need to happen on init; for instance, a claw tightening.
-        Actions.runBlocking(outtakeClaw.clawClose();
+        // Actions.runBlocking(outtakeClaw.clawClose());
 
 
         while (opModeInInit()) {
