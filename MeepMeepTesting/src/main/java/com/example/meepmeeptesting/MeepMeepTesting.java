@@ -83,7 +83,8 @@ public class MeepMeepTesting {
                     .build();
 
             Action run1 = trajToBlueBars.build();
-            myBot.runAction(run1);
+            //myBot.runAction(run1);
+            myBot.runAction(trajectoryActionCloseOut);
 
             //myBot.runAction(trajectoryActionCloseOut);
 

@@ -14,6 +14,7 @@ import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.actions.DualSlideActions;
+import org.firstinspires.ftc.teamcode.mechanisms.ClawMechanism;
 
 
 @Config
@@ -29,34 +30,38 @@ public class BlueSideActionsTestAuton extends LinearOpMode {
     public void runOpMode() {
         Pose2d initialPoseBlueSideBuckets = new Pose2d(9.25, 62, Math.toRadians(90));
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPoseBlueSideBuckets);
+        Action trajectoryActionBlueSideBuckets;
         DualSlideActions outtakeSlide =  new DualSlideActions();
-        //ClawMechanism outtakeClaw = new ClawMechanism(); TODO Make a claw mechanism class
+        ClawMechanism outtakeClaw = new ClawMechanism();
 
         //Outtake
         outtakeSlide.init(hardwareMap);
 
-        TrajectoryActionBuilder trajToBlueBars = drive.actionBuilder(initialPoseBlueSideBuckets)
-                .lineToY(34);
-        TrajectoryActionBuilder trajYellowSample1 = trajToBlueBars.fresh()
+        trajectoryActionBlueSideBuckets = drive.actionBuilder(initialPoseBlueSideBuckets)
+                .lineToY(34)
+                .stopAndAdd(outtakeSlide.liftUp())
+                .stopAndAdd(outtakeClaw.clawOpen())
+                .stopAndAdd(outtakeSlide.liftDown())
                 .setTangent(Math.toRadians(60))
-                .splineToLinearHeading(new Pose2d(48.5, 37.5, Math.toRadians(-90)), Math.toRadians(0));
-        TrajectoryActionBuilder trajToBucketsYellowSample1 = trajYellowSample1.fresh()
-                .splineToLinearHeading(new Pose2d(56, 54, Math.toRadians(-135)), Math.toRadians(0));
-        TrajectoryActionBuilder trajYellowSample2 = trajToBucketsYellowSample1.fresh()
-                .splineToLinearHeading(new Pose2d(58, 37.5, Math.toRadians(-90)), Math.toRadians(0));
-
-
-        Action trajectoryActionToBlueBars = trajToBlueBars.build();
-
-        Action trajectoryActionYellowSample1 = trajYellowSample1.build();
-
-        Action trajectoryActionToBucketsYellowSample1 = trajToBucketsYellowSample1.build();
-
-        Action trajectoryActionYellowSample2 = trajYellowSample2.build();
+                .splineToLinearHeading(new Pose2d(48.5, 37.5, Math.toRadians(-90)), Math.toRadians(0))
+                .waitSeconds(0.99)
+                .splineToLinearHeading(new Pose2d(56, 54, Math.toRadians(-135)), Math.toRadians(0))
+                .waitSeconds(0.99)
+                .splineToLinearHeading(new Pose2d(58, 37.5, Math.toRadians(-90)), Math.toRadians(0))
+                .waitSeconds(0.99)
+                .splineToLinearHeading(new Pose2d(56, 54, Math.toRadians(-135)), Math.toRadians(0))
+                .waitSeconds(0.99)
+                .splineToLinearHeading(new Pose2d(57, 37.5, Math.toRadians(-45)), Math.toRadians(0))
+                .waitSeconds(0.99)
+                .setTangent(Math.toRadians(90))
+                .splineToLinearHeading(new Pose2d(56, 54, Math.toRadians(-135)), Math.toRadians(0))
+                .waitSeconds(0.99)
+                .splineToLinearHeading(new Pose2d(25, 0, Math.toRadians(-180)), Math.toRadians(180))
+                .build();
 
 
         // actions that need to happen on init; for instance, a claw tightening.
-        // Actions.runBlocking(claw.closeClaw());
+        Actions.runBlocking(outtakeClaw.clawClose();
 
 
         while (opModeInInit()) {
@@ -65,7 +70,8 @@ public class BlueSideActionsTestAuton extends LinearOpMode {
 
         Actions.runBlocking(
                new SequentialAction(
-                        new ParallelAction(
+                       trajectoryActionBlueSideBuckets
+/*                     new ParallelAction(
                                 trajectoryActionToBlueBars,
                                 outtakeSlide.liftUp()
                         ),
@@ -73,7 +79,7 @@ public class BlueSideActionsTestAuton extends LinearOpMode {
                        outtakeSlide.liftDown(),
                        trajectoryActionYellowSample1,
                        trajectoryActionToBucketsYellowSample1,
-                       trajectoryActionYellowSample2
+                        */
                 )
         );
     }
