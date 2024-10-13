@@ -169,7 +169,7 @@ public class RunThisPikeelzTeleop2024 extends OpMode{
         }
         else if(gamepad1.a || gamepad2.a){
             // Go to low position
-            if ((intakeArmServo.getARMState() == ArmMechanism.ARM_STATES.ARM_LOW_POS) || (intakeArmServo.getARMState() == ArmMechanism.ARM_STATES.ARM_INTAKE_POS)) {
+            if (intakeArmServo.getARMState() == IntakeArm.INTAKE_ARM_STATES.INTAKE_ARM_INTAKE_POS) {
                 //slide.slidePositionLow();
             }
         }
@@ -187,7 +187,7 @@ public class RunThisPikeelzTeleop2024 extends OpMode{
         }
         else if (gamepad2.dpad_down) {
             intakeArmServo.armPositionIntake();
-            while ((intakeArmServo.getARMState() != ArmMechanism.ARM_STATES.ARM_INTAKE_POS) && (intakeArmServo.getARMState() != ArmMechanism.ARM_STATES.ARM_LOW_POS)) {
+            while (intakeArmServo.getARMState() != IntakeArm.INTAKE_ARM_STATES.INTAKE_ARM_INTAKE_POS)  {
 
             }
             //slide.slidePositionLow();
