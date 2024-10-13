@@ -8,7 +8,7 @@ public class ClawMechanism {
     // Assuming some motor control library is used, e.g., FTC SDK, but this can be customized
     private Servo clawServo;
 
-    // Target positions for the servo arm
+    // Target positions for the servo claw
     private static final double OPEN_POSITION = 0.5;
     private static final double CLOSE_POSITION = 0.25;
     private ElapsedTime clawTimer = new ElapsedTime();
