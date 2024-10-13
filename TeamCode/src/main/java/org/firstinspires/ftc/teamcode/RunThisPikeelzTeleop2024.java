@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.NormalizedRGBA;
 
 import org.firstinspires.ftc.teamcode.mechanisms.ArmMechanism;
 import org.firstinspires.ftc.teamcode.mechanisms.DualSlideMechanism;
+import org.firstinspires.ftc.teamcode.mechanisms.IntakeArm;
 import org.firstinspires.ftc.teamcode.mechanisms.IntakeServoSpinner;
 import org.firstinspires.ftc.teamcode.mechanisms.IntakeSlide;
 import org.firstinspires.ftc.teamcode.mechanisms.SensorColor;
@@ -27,7 +28,7 @@ public class RunThisPikeelzTeleop2024 extends OpMode{
     DualSlideMechanism outtakeSlide =  new DualSlideMechanism();  //Mr. Todone
     IntakeSlide intakeSlide =  new IntakeSlide();  //Mr. Todone
     //ARM SUBSYSTEM
-    ArmMechanism intakeArmServo = new ArmMechanism();
+    IntakeArm intakeArmServo = new IntakeArm();
 
     SensorColor intakeBoxColorSensor = new SensorColor();
 
