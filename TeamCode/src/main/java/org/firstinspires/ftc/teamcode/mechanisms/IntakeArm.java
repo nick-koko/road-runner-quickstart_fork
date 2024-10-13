@@ -12,14 +12,14 @@ public class IntakeArm {
     // Target positions for the servo arm
     private static final double INTAKE_POSITION = 0.5; //above group... will kill power
     private static final double DRIVE_POSITION = 0.75; //perpindicuar
-    private static final double DUMP_POSITION = 1.0; //servo towards slides
+    private static final double TRANSFER_POSITION = 1.0; //servo towards slides
     private ElapsedTime armTimer = new ElapsedTime();
     public enum INTAKE_ARM_STATES{
-        INTAKE_ARM_INTAKE_POS, INTAKE_ARM_DRIVE_POS, INTAKE_ARM_DUMP_POS
+        INTAKE_ARM_INTAKE_POS, INTAKE_ARM_DRIVE_POS, INTAKE_ARM_TRANSFER_POS
     }
 
-    private ARM_STATES curARMState = null;
-    private ARM_STATES nextARMState = null;
+    private INTAKE_ARM_STATES curARMState = null;
+    private INTAKE_ARM_STATES nextARMState = null;
 
     double stateDelayTime = 0;
 
@@ -34,25 +34,25 @@ public class IntakeArm {
     // Method to move the arm to the intake position
     public void armPositionIntake() {
             intakeArmServo.setPosition(INTAKE_POSITION);
-            curARMState = INTAKE_ARM_STATES.ARM_INTAKE_POS;
-            nextARMState = INTAKE_ARM_STATES.ARM_INTAKE_POS;
+            curARMState = INTAKE_ARM_STATES.INTAKE_ARM_INTAKE_POS;
+            nextARMState = INTAKE_ARM_STATES.INTAKE_ARM_INTAKE_POS;
     }
 
     // Method to move the arm to the intake position
     public void armPositionDrive() {
         intakeArmServo.setPosition(DRIVE_POSITION);
-        curARMState = INTAKE_ARM_STATES.ARM_DRIVE_POS;
-        nextARMState = INTAKE_ARM_STATES.ARM_DRIVE_POS;
+        curARMState = INTAKE_ARM_STATES.INTAKE_ARM_DRIVE_POS;
+        nextARMState = INTAKE_ARM_STATES.INTAKE_ARM_DRIVE_POS;
     }
 
     // Method to move the arm to the intake position
     public void armPositionDump() {
-        intakeArmServo.setPosition(DUMP_POSITION);
-        curARMState = INTAKE_ARM_STATES.ARM_DUMP_POS;
-        nextARMState = INTAKE_ARM_STATES.ARM_DUMP_POS;
+        intakeArmServo.setPosition(INTAKE_POSITION);
+        curARMState = INTAKE_ARM_STATES.INTAKE_ARM_TRANSFER_POS;
+        nextARMState = INTAKE_ARM_STATES.INTAKE_ARM_TRANSFER_POS;
     }
 
-    public ARM_STATES getARMState() {
+    public INTAKE_ARM_STATES getARMState() {
         return curARMState;
     }
 }
