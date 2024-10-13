@@ -13,8 +13,8 @@ import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import org.firstinspires.ftc.teamcode.actions.DualSlideActions;
-import org.firstinspires.ftc.teamcode.mechanisms.ClawMechanism;
+//import org.firstinspires.ftc.teamcode.actions.DualSlideActions;
+//import org.firstinspires.ftc.teamcode.mechanisms.ClawMechanism;
 
 
 @Config
@@ -31,17 +31,17 @@ public class BlueSideActionsTestAuton extends LinearOpMode {
         Pose2d initialPoseBlueSideBuckets = new Pose2d(9.25, 62, Math.toRadians(90));
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPoseBlueSideBuckets);
         Action trajectoryActionBlueSideBuckets;
-        DualSlideActions outtakeSlide =  new DualSlideActions();
-        ClawMechanism outtakeClaw = new ClawMechanism();
+        //DualSlideActions outtakeSlide =  new DualSlideActions();
+        //ClawMechanism outtakeClaw = new ClawMechanism();
 
         //Outtake
-        outtakeSlide.init(hardwareMap);
+        //outtakeSlide.init(hardwareMap);
 
         trajectoryActionBlueSideBuckets = drive.actionBuilder(initialPoseBlueSideBuckets)
                 .lineToY(34)
-                .stopAndAdd(outtakeSlide.liftUp())
+                //.stopAndAdd(outtakeSlide.liftUp())
                 //.stopAndAdd(outtakeClaw.clawOpen())
-                .stopAndAdd(outtakeSlide.liftDown())
+                //.stopAndAdd(outtakeSlide.liftDown())
                 .setTangent(Math.toRadians(60))
                 .splineToLinearHeading(new Pose2d(48.5, 37.5, Math.toRadians(-90)), Math.toRadians(0))
                 .waitSeconds(0.99)

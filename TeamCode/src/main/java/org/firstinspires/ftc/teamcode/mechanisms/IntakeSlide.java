@@ -21,7 +21,7 @@ public class IntakeSlide {
 
     public void init(HardwareMap hwMap) {
 
-        slideMotor = hwMap.get(DcMotor.class, "slide_motor");
+        slideMotor = hwMap.get(DcMotor.class, "intake_slide_motor");
         this.slideMotor.setDirection(DcMotor.Direction.REVERSE);
         this.slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         this.slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
