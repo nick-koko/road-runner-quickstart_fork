@@ -26,7 +26,7 @@ public class OuttakeDumpMechanism {
         dumperServo = hwMap.get(Servo.class, "dump_servo");
         this.dumperServo.setDirection(Servo.Direction.FORWARD);
         curDUMPERState = DUMPER_STATES.DUMPER_DOWN_POS;
-        nextDUMPERState = DUMPER_STATES.DUMPER_DUMP_POS;
+        nextDUMPERState = DUMPER_STATES.DUMPER_DOWN_POS;
     }
 
     // Method to move the dumper to the down position

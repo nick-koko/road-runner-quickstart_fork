@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.mechanisms;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class DualSlideMechanism {
@@ -12,10 +13,10 @@ public class DualSlideMechanism {
     private static final int MIDDLE_POSITION_LEFT = 1200;
     private static final int HIGH_POSITION_LEFT = 2000;
     private static final int DRIVE_POSITION_LEFT = 800;
-    private static final int LOW_POSITION_RIGHT = -0;
-    private static final int MIDDLE_POSITION_RIGHT = -1200;
-    private static final int HIGH_POSITION_RIGHT = -2000;
-    private static final int DRIVE_POSITION_RIGHT = -800;
+    private static final int LOW_POSITION_RIGHT = 0;
+    private static final int MIDDLE_POSITION_RIGHT = 1200;
+    private static final int HIGH_POSITION_RIGHT = 2000;
+    private static final int DRIVE_POSITION_RIGHT = 800;
 //TODO
     public enum SLIDE_STATES{
         SLIDE_INTAKE_POS, SLIDE_LOW_POS, SLIDE_DRIVE_POS, SLIDE_MIDDLE_POS, SLIDE_HIGH_POS
@@ -31,7 +32,7 @@ public class DualSlideMechanism {
         this.slideMotorL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         this.slideMotorL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         slideMotorR = hwMap.get(DcMotor.class, "slide_motor_right"); //Mr. Todone-->😎👌👌
-        this.slideMotorR.setDirection(DcMotor.Direction.REVERSE);
+        this.slideMotorR.setDirection(DcMotor.Direction.FORWARD);
         this.slideMotorR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         this.slideMotorR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         curSlideState = SLIDE_STATES.SLIDE_LOW_POS;

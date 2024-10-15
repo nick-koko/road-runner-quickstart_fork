@@ -90,10 +90,9 @@ public class RunThisPikeelzTeleop2024 extends OpMode{
     @Override
     public void start() {
         //Goto Intake Position
-        intakeArmServo.armPositionIntake();
+        intakeArmServo.armPositionDrive();
         //slide.slidePositionLow();
     }
-
     /*
      * Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
      */
@@ -101,6 +100,15 @@ public class RunThisPikeelzTeleop2024 extends OpMode{
     public void loop() {
 
         //Mecanum
+
+        /*TODO :
+           We can use Odometry location and remove the Mecanum code if we use the MecanumDrive class. Then the
+           drive code would look something like:
+               robot.setDrivePowers(PoseVelocity2d(
+                Vector2d((-gamepad1.right_stick_y).toDouble(), (-gamepad1.right_stick_x).toDouble()),
+                gamepad1.left_stick_x.toDouble()))
+           Refer to LocalizationTest.java as an example
+         */
             double drive = -gamepad1.right_stick_y;
             double strafe = gamepad1.right_stick_x;
             double rotate = gamepad1.left_stick_x;
@@ -197,7 +205,7 @@ public class RunThisPikeelzTeleop2024 extends OpMode{
         if (gamepad2.left_bumper || gamepad2.right_bumper) {
             // Go to dumping position
             //if(slide.getSlideState() != SlideMechanism.SLIDE_STATES.SLIDE_LOW_POS) {
-                intakeArmServo.armPositionDump();
+                intakeArmServo.armPositionTransfer();
             //}
         }
         else {
