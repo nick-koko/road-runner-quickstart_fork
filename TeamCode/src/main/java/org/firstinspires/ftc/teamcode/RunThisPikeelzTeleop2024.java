@@ -1,22 +1,21 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.NormalizedRGBA;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.teamcode.mechanisms.ArmMechanism;
-import org.firstinspires.ftc.teamcode.mechanisms.IntakeMotorSpinner;
+import org.firstinspires.ftc.teamcode.mechanisms.DualSlideMechanism;
+import org.firstinspires.ftc.teamcode.mechanisms.IntakeArm;
+import org.firstinspires.ftc.teamcode.mechanisms.IntakeServoSpinner;
+import org.firstinspires.ftc.teamcode.mechanisms.IntakeSlide;
 import org.firstinspires.ftc.teamcode.mechanisms.SensorColor;
 import org.firstinspires.ftc.teamcode.mechanisms.SlideMechanism;
 
-@TeleOp(name="TuesdaySummerTest_Teleop")
+@TeleOp(name="RunThisPikeelzTeleop2024.com")
 // @Disabled
-public class TuesdaySummerTest_Teleop extends OpMode{
+public class RunThisPikeelzTeleop2024 extends OpMode{
     
     private DcMotor frontLeftDriveMotor = null;
     private DcMotor frontRightDriveMotor = null;
@@ -24,11 +23,12 @@ public class TuesdaySummerTest_Teleop extends OpMode{
     private DcMotor backRightDriveMotor = null;
 
     //INTAKE SUBSYSTEM
-    IntakeMotorSpinner frontIntake = new IntakeMotorSpinner();
+    IntakeServoSpinner frontIntake = new IntakeServoSpinner();
     //SLIDE SUBSYSTEM
-    SlideMechanism slide =  new SlideMechanism();
+    DualSlideMechanism outtakeSlide =  new DualSlideMechanism();  //Mr. Todone
+    IntakeSlide intakeSlide =  new IntakeSlide();  //Mr. Todone
     //ARM SUBSYSTEM
-    ArmMechanism intakeArmServo = new ArmMechanism();
+    IntakeArm intakeArmServo = new IntakeArm();
 
     SensorColor intakeBoxColorSensor = new SensorColor();
 
@@ -63,8 +63,11 @@ public class TuesdaySummerTest_Teleop extends OpMode{
         //Intake
         frontIntake.init(hardwareMap);
 
-        //Slide
-        slide.init(hardwareMap);
+        //Intake slide
+        intakeSlide.init(hardwareMap);
+
+        //Outtake slide
+        outtakeSlide.init(hardwareMap);
 
         //Arm
         intakeArmServo.init(hardwareMap);
@@ -87,10 +90,9 @@ public class TuesdaySummerTest_Teleop extends OpMode{
     @Override
     public void start() {
         //Goto Intake Position
-        intakeArmServo.armPositionIntake();
-        slide.slidePositionLow();
+        intakeArmServo.armPositionDrive();
+        //slide.slidePositionLow();
     }
-
     /*
      * Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
      */
@@ -98,6 +100,15 @@ public class TuesdaySummerTest_Teleop extends OpMode{
     public void loop() {
 
         //Mecanum
+
+        /*TODO :
+           We can use Odometry location and remove the Mecanum code if we use the MecanumDrive class. Then the
+           drive code would look something like:
+               robot.setDrivePowers(PoseVelocity2d(
+                Vector2d((-gamepad1.right_stick_y).toDouble(), (-gamepad1.right_stick_x).toDouble()),
+                gamepad1.left_stick_x.toDouble()))
+           Refer to LocalizationTest.java as an example
+         */
             double drive = -gamepad1.right_stick_y;
             double strafe = gamepad1.right_stick_x;
             double rotate = gamepad1.left_stick_x;
@@ -153,53 +164,55 @@ public class TuesdaySummerTest_Teleop extends OpMode{
         if (gamepad2.dpad_left) {
             frontIntake.Intake();
         }
-        else if (gamepad2.dpad_right) {
+        else if (gamepad2.dpad_down) {
             frontIntake.Stop();
+        } else if (gamepad2.dpad_right) {
+            frontIntake.Outtake();
         }
 
         // SLIDE CONDITIONS
         if (gamepad1.y || gamepad2.y) {
             // Go to the high position
-            slide.slidePositionHigh();
+            //slide.slidePositionHigh();
         }
         else if(gamepad1.a || gamepad2.a){
             // Go to low position
-            if ((intakeArmServo.getARMState() == ArmMechanism.ARM_STATES.ARM_LOW_POS) || (intakeArmServo.getARMState() == ArmMechanism.ARM_STATES.ARM_INTAKE_POS)) {
-                slide.slidePositionLow();
+            if (intakeArmServo.getARMState() == IntakeArm.INTAKE_ARM_STATES.INTAKE_ARM_INTAKE_POS) {
+                //slide.slidePositionLow();
             }
         }
         else if(gamepad1.b || gamepad2.b){
             // Go to middle position
-            slide.slidePositionMiddle();
+            //slide.slidePositionMiddle();
         }
 
         if (gamepad2.dpad_up) {
-            slide.slidePositionDrive();
-            while (slide.getSlideState() == SlideMechanism.SLIDE_STATES.SLIDE_LOW_POS) {
+            //slide.slidePositionDrive();
+            //while (slide.getSlideState() == SlideMechanism.SLIDE_STATES.SLIDE_LOW_POS) {
 
-            }
+            //}
             intakeArmServo.armPositionDrive();
         }
         else if (gamepad2.dpad_down) {
             intakeArmServo.armPositionIntake();
-            while ((intakeArmServo.getARMState() != ArmMechanism.ARM_STATES.ARM_INTAKE_POS) && (intakeArmServo.getARMState() != ArmMechanism.ARM_STATES.ARM_LOW_POS)) {
+            while (intakeArmServo.getARMState() != IntakeArm.INTAKE_ARM_STATES.INTAKE_ARM_INTAKE_POS)  {
 
             }
-            slide.slidePositionLow();
+            //slide.slidePositionLow();
         }
 
         // ARM CONDITIONS
         if (gamepad2.left_bumper || gamepad2.right_bumper) {
             // Go to dumping position
             //if(slide.getSlideState() != SlideMechanism.SLIDE_STATES.SLIDE_LOW_POS) {
-                intakeArmServo.armPositionDump();
+                intakeArmServo.armPositionTransfer();
             //}
         }
         else {
             // Go to drive position
-            if((slide.getSlideState() != SlideMechanism.SLIDE_STATES.SLIDE_LOW_POS) && (slide.getNextSlideState() != SlideMechanism.SLIDE_STATES.SLIDE_LOW_POS)) {
+            /*if((slide.getSlideState() != SlideMechanism.SLIDE_STATES.SLIDE_LOW_POS) && (slide.getNextSlideState() != SlideMechanism.SLIDE_STATES.SLIDE_LOW_POS)) {
                 intakeArmServo.armPositionDrive();
-            }
+            }*/
         }
 
         updateTelemetry();
@@ -215,7 +228,7 @@ public class TuesdaySummerTest_Teleop extends OpMode{
     }
 
     public void updateTelemetry(){
-        telemetry.addData("Slide State: ", slide.getSlideState());
+        //telemetry.addData("Slide State: ", slide.getSlideState());
         telemetry.addData("Arm State: ", intakeArmServo.getARMState());
         telemetry.addData("Intake Detect Dist(mm):", intakeBoxColorSensor.objectDistance());
 

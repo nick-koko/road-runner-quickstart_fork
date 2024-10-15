@@ -11,7 +11,7 @@ public class IntakeSlide {
     private static final int AUTON_POSITION = 1200;
     private static final int TOP_POSITION = 2000;
     private static final int STARTING_POSITION = 0;
-
+    private static final int MIDDLE_POSITION = 500;
     public enum SLIDE_STATES{
         SLIDE_INTAKE_POS, SLIDE_STARTING_POS, SLIDE_DRIVE_POS, SLIDE_MIDDLE_POS, SLIDE_HIGH_POS
     }
@@ -25,8 +25,8 @@ public class IntakeSlide {
         this.slideMotor.setDirection(DcMotor.Direction.REVERSE);
         this.slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         this.slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        curSlideState = SLIDE_STATES.SLIDE_LOW_POS;
-        nextSlideState = SLIDE_STATES.SLIDE_LOW_POS;
+        curSlideState = SLIDE_STATES.SLIDE_STARTING_POS;
+        nextSlideState = SLIDE_STATES.SLIDE_STARTING_POS;
     }
 
 
@@ -51,12 +51,6 @@ public class IntakeSlide {
         this.slideMotor.setPower(0);
     }
 
-    // Method to move the slide to the low position
-    public void slidePositionLow() {
-        nextSlideState = SLIDE_STATES.SLIDE_LOW_POS;
-        moveToPosition(LOW_POSITION);
-    }
-
     // Method to move the slide to the middle position
     public void slidePositionMiddle() {
 
@@ -68,15 +62,9 @@ public class IntakeSlide {
     public void slidePositionHigh() {
 
         nextSlideState = SLIDE_STATES.SLIDE_HIGH_POS;
-        moveToPosition(HIGH_POSITION);
+        moveToPosition(TOP_POSITION);
     }
 
-    // Method to move the slide to the drive position
-    public void slidePositionDrive() {
-
-        nextSlideState = SLIDE_STATES.SLIDE_DRIVE_POS;
-        moveToPosition(DRIVE_POSITION);
-    }
 
     // Private method to move the slide to a specific position
     private void moveToPosition(int position) {
@@ -94,12 +82,12 @@ public class IntakeSlide {
     }
 
     public SLIDE_STATES getSlideState() {
-        if (this.slideMotor.getCurrentPosition() < (DRIVE_POSITION - 100)) {
+      /*  if (this.slideMotor.getCurrentPosition() < (DRIVE_POSITION - 100)) {
             curSlideState = SLIDE_STATES.SLIDE_LOW_POS;
         }
         else {
             curSlideState = SLIDE_STATES.SLIDE_DRIVE_POS;
-        }
+        } */
         return curSlideState;
     }
 
