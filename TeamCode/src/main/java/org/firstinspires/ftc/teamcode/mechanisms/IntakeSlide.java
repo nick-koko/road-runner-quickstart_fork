@@ -8,12 +8,12 @@ public class IntakeSlide {
     private DcMotor slideMotor;
 
     // Target positions for the slide mechanism
-    private static final int AUTON_POSITION = 1200;
-    private static final int TOP_POSITION = 2000;
+    private static final int AUTON_POSITION = 100;
+    private static final int TOP_POSITION = 500;
     private static final int STARTING_POSITION = 0;
-    private static final int MIDDLE_POSITION = 500;
+    private static final int TRANSFER_POSITION = 50;
     public enum SLIDE_STATES{
-        SLIDE_INTAKE_POS, SLIDE_STARTING_POS, SLIDE_DRIVE_POS, SLIDE_MIDDLE_POS, SLIDE_HIGH_POS
+        SLIDE_INTAKE_POS, SLIDE_STARTING_POS, SLIDE_AUTON_POS, SLIDE_TRANSFER_POS, SLIDE_HIGH_POS
     }
 
     private SLIDE_STATES curSlideState = null;
@@ -22,7 +22,7 @@ public class IntakeSlide {
     public void init(HardwareMap hwMap) {
 
         slideMotor = hwMap.get(DcMotor.class, "intake_slide_motor");
-        this.slideMotor.setDirection(DcMotor.Direction.REVERSE);
+        this.slideMotor.setDirection(DcMotor.Direction.FORWARD);
         this.slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         this.slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         curSlideState = SLIDE_STATES.SLIDE_STARTING_POS;
@@ -32,16 +32,36 @@ public class IntakeSlide {
 
     // Method to extend the slide
     public void extendSlide() {
-        // Set the motor power to a positive value to extend the slide
         this.slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        this.slideMotor.setPower(0.4);
+
+        // Check if we are close to reaching the maximum slide extension (TOP_Position)
+        // If not we haven't yet, then set the power to a positive value
+        if (this.slideMotor.getCurrentPosition() < (TOP_POSITION - 100)) {
+            this.slideMotor.setPower(0.4);
+        }
+        // If we are close to reaching the max slide extension (TOP_POSITION - 100)
+        // then stop the slide by setting power to 0 to make sure to not break anything
+        else {
+            this.slideMotor.setPower(0.0);
+        }
     }
 
     // Method to retract the slide
     public void retractSlide() {
         // Set the motor power to a negative value to retract the slide
         this.slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        this.slideMotor.setPower(-0.4);
+
+        // Check if we are close to reaching the zero point while retracting
+        // 0 is the farthest we can go, but we want to stop before that to not break anything
+        // If not we haven't yet, then set the power to a negative value
+        if (this.slideMotor.getCurrentPosition() > (0)) {
+            this.slideMotor.setPower(-0.4);
+        }
+        // If we are close to reaching the zero point
+        // then stop the slide by setting power to 0 to make sure to not break anything
+        else {
+            this.slideMotor.setPower(0.0);
+        }
     }
 
     // Method to stop the slide
@@ -52,10 +72,10 @@ public class IntakeSlide {
     }
 
     // Method to move the slide to the middle position
-    public void slidePositionMiddle() {
+    public void slidePositionTransfer() {
 
-        nextSlideState = SLIDE_STATES.SLIDE_MIDDLE_POS;
-        moveToPosition(MIDDLE_POSITION);
+        nextSlideState = SLIDE_STATES.SLIDE_TRANSFER_POS;
+        moveToPosition(TRANSFER_POSITION);
     }
 
     // Method to move the slide to the high position
@@ -70,28 +90,24 @@ public class IntakeSlide {
     private void moveToPosition(int position) {
         this.slideMotor.setTargetPosition(position);
         this.slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        this.slideMotor.setPower(0.4);
+        this.slideMotor.setPower(0.8);
 
-        // Wait until the motor reaches the target position
-        /*while (this.slideMotor.isBusy()) {
-            // Optional: Add any telemetry or logging here
-        }*/
-
-        // Stop the motor once the target position is reached
-        // this.slideMotor.setPower(0);
     }
 
     public SLIDE_STATES getSlideState() {
-      /*  if (this.slideMotor.getCurrentPosition() < (DRIVE_POSITION - 100)) {
-            curSlideState = SLIDE_STATES.SLIDE_LOW_POS;
+        int slidePos = this.slideMotor.getCurrentPosition();
+        if (Math.abs(slidePos - TRANSFER_POSITION) < (15)) {
+            curSlideState = SLIDE_STATES.SLIDE_TRANSFER_POS;
         }
-        else {
-            curSlideState = SLIDE_STATES.SLIDE_DRIVE_POS;
-        } */
+        else if(slidePos > TRANSFER_POSITION) {
+            curSlideState = SLIDE_STATES.SLIDE_INTAKE_POS;
+        } else {
+            curSlideState = SLIDE_STATES.SLIDE_STARTING_POS;
+        }
         return curSlideState;
     }
 
-    public SLIDE_STATES getNextSlideState() {
-        return nextSlideState;
+    public int getSlideMotorPos() {
+        return this.slideMotor.getCurrentPosition();
     }
 }
