@@ -9,8 +9,8 @@ public class OuttakeDumpMechanism {
     private Servo dumperServo;
 
     // Target positions for the servo arm
-    private static final double DOWN_POSITION = 0.25;
-    private static final double DUMP_POSITION = 1.0;
+    private static final double DOWN_POSITION = 0.1;
+    private static final double DUMP_POSITION = 0.8;
     private ElapsedTime dumperTimer = new ElapsedTime();
     public enum DUMPER_STATES{
         DUMPER_DUMP_POS, DUMPER_DOWN_POS
@@ -24,7 +24,7 @@ public class OuttakeDumpMechanism {
     public void init(HardwareMap hwMap) {
 
         dumperServo = hwMap.get(Servo.class, "dump_servo");
-        this.dumperServo.setDirection(Servo.Direction.FORWARD);
+        this.dumperServo.setDirection(Servo.Direction.REVERSE);
         curDUMPERState = DUMPER_STATES.DUMPER_DOWN_POS;
         nextDUMPERState = DUMPER_STATES.DUMPER_DOWN_POS;
     }
@@ -32,10 +32,11 @@ public class OuttakeDumpMechanism {
     // Method to move the dumper to the down position
     public void DumperPositionDown() {
 
+        dumperServo.setPosition(DOWN_POSITION);
+
         if (curDUMPERState != DUMPER_STATES.DUMPER_DOWN_POS) {
-            dumperServo.setPosition(DOWN_POSITION);
             dumperTimer.reset();
-            stateDelayTime = 1.0;
+            stateDelayTime = 0.5;
             nextDUMPERState = DUMPER_STATES.DUMPER_DOWN_POS;
         }
     }
@@ -44,8 +45,11 @@ public class OuttakeDumpMechanism {
     public void DumperPositionDump() {
 
         dumperServo.setPosition(DUMP_POSITION);
-        curDUMPERState = DUMPER_STATES.DUMPER_DUMP_POS;
-        nextDUMPERState = DUMPER_STATES.DUMPER_DUMP_POS;
+        if (curDUMPERState != DUMPER_STATES.DUMPER_DUMP_POS) {
+            dumperTimer.reset();
+            stateDelayTime = 0.5;
+            nextDUMPERState = DUMPER_STATES.DUMPER_DUMP_POS;
+        }
     }
     public DUMPER_STATES getDumperState() {
         if (nextDUMPERState != curDUMPERState) {

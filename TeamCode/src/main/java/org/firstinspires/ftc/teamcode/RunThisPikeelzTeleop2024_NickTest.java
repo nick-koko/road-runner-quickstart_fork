@@ -5,7 +5,6 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.NormalizedRGBA;
 
-import org.firstinspires.ftc.teamcode.mechanisms.ArmMechanism;
 import org.firstinspires.ftc.teamcode.mechanisms.ClawMechanism;
 import org.firstinspires.ftc.teamcode.mechanisms.DualSlideMechanism;
 import org.firstinspires.ftc.teamcode.mechanisms.IntakeArm;
@@ -17,7 +16,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.SlideMechanism;
 
 @TeleOp(name="RunThisPikeelzTeleop2024.com")
 // @Disabled
-public class RunThisPikeelzTeleop2024 extends OpMode{
+public class RunThisPikeelzTeleop2024_NickTest extends OpMode{
     
     private DcMotor frontLeftDriveMotor = null;
     private DcMotor frontRightDriveMotor = null;
@@ -101,8 +100,11 @@ public class RunThisPikeelzTeleop2024 extends OpMode{
      */
     @Override
     public void start() {
-        //Goto Intake Position
-        //intakeArmServo.armPositionDrive();
+        //Goto Start Position
+        dumper.DumperPositionDown();
+        intakeSlide.slidePositionTransfer();
+        intakeArmServo.armPositionDrive();
+        specimenClaw.clawOpen();
     }
     /*
      * Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
@@ -165,10 +167,33 @@ public class RunThisPikeelzTeleop2024 extends OpMode{
 
         // INTAKE CONDITIONS
 
-        if (gamepad2.dpad_left) {
+        if (gamepad2.dpad_up) {
+            intakeSlide.extendSlide();
+            if (intakeSlide.getSlideState() == IntakeSlide.SLIDE_STATES.SLIDE_INTAKE_POS) {
+                intakeArmServo.armPositionIntake();
+            }
             frontIntake.Intake();
         } else if (gamepad2.dpad_down) {
-            frontIntake.Stop();
+            if (intakeSlide.getSlideState() == IntakeSlide.SLIDE_STATES.SLIDE_INTAKE_POS) {
+                intakeArmServo.armPositionDrive();
+                frontIntake.Stop();
+                intakeSlide.retractSlide();
+            } else {
+                intakeSlide.slidePositionTransfer();
+                intakeArmServo.armPositionTransfer();
+                frontIntake.Outtake();
+            }
+        } else {
+            intakeSlide.stopSlide();
+            if (frontIntake.getIntakeState() != IntakeServoSpinner.INTAKE_SPINNER_STATES.SPINNER_INTAKING) {
+                frontIntake.Stop();
+            }
+        }
+
+        if (gamepad2.dpad_left) {
+            frontIntake.Intake();
+ //       } else if (gamepad2.dpad_down) {
+ //           frontIntake.Stop();
         } else if (gamepad2.dpad_right) {
             frontIntake.Outtake();
         }
@@ -183,7 +208,7 @@ public class RunThisPikeelzTeleop2024 extends OpMode{
 
         // SLIDE CONDITIONS
 
-        if (gamepad2.dpad_up) {
+ /*       if (gamepad2.dpad_up) {
             intakeSlide.extendSlide();
         }
         else if (gamepad2.dpad_down) {
@@ -191,7 +216,7 @@ public class RunThisPikeelzTeleop2024 extends OpMode{
         } else{
             intakeSlide.stopSlide();
         }
-
+*/
         if (gamepad2.y) {
             outtakeSlide.slidePositionHigh();
         }
@@ -249,5 +274,6 @@ public class RunThisPikeelzTeleop2024 extends OpMode{
                 .addData("Green", "%.3f", objectColor.green)
                 .addData("Blue", "%.3f", objectColor.blue); */
         telemetry.update();
+
     }
 }

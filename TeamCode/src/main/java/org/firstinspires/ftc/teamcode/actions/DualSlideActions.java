@@ -21,7 +21,7 @@ public class DualSlideActions extends DualSlideMechanism {
 
             SLIDE_STATES state = getSlideState();
             packet.put("liftstate", state);
-            if (state == SLIDE_STATES.SLIDE_DRIVE_POS) {
+            if (state == SLIDE_STATES.SLIDE_SPECIMENGRAB_POS) {
                 return false;
             } else {
                 return true;

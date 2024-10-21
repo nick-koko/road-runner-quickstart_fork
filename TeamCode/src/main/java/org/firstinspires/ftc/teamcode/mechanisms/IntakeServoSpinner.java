@@ -38,26 +38,38 @@ public class IntakeServoSpinner {
     // Define class members
     CRServo intakeServo;
     double  power   = 0.0;
-    //
+
+    public enum INTAKE_SPINNER_STATES{
+        SPINNER_INTAKING, SPINNER_OUTTAKING, SPINNER_STOP
+    }
+
+    private INTAKE_SPINNER_STATES curIntakeState = null;
+
     public void init(HardwareMap hwMap) {
         intakeServo = hwMap.get(CRServo.class, "intake_servo");   //TODONE 👌👌😎👌👌
+        curIntakeState = INTAKE_SPINNER_STATES.SPINNER_STOP;
     }
 
     public void Intake() {
 
-        power = 0.7 ;
+        power = 0.8 ;
 
-            // Set the motor to the new power
-            intakeServo.setPower(power);
+        // Set the motor to the new power
+        intakeServo.setPower(power);
+
+        curIntakeState = INTAKE_SPINNER_STATES.SPINNER_INTAKING;
 
     }
 
     public void Outtake() {
 
-        power = -0.7 ;
+        power = -0.4 ;
 
         // Set the motor to the new power
         intakeServo.setPower(power);
+
+        curIntakeState = INTAKE_SPINNER_STATES.SPINNER_OUTTAKING;
+
     }
 
     public void Stop() {
@@ -67,6 +79,12 @@ public class IntakeServoSpinner {
 
         // Set the motor to the new power;
         intakeServo.setPower(power);
+
+        curIntakeState = INTAKE_SPINNER_STATES.SPINNER_STOP;
+
+    }
+    public INTAKE_SPINNER_STATES getIntakeState() {
+        return curIntakeState;
     }
 
 }
