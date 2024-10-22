@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.OuttakeDumpMechanism;
 import org.firstinspires.ftc.teamcode.mechanisms.SensorColor;
 import org.firstinspires.ftc.teamcode.mechanisms.SlideMechanism;
 
-@TeleOp(name="RunThisPikeelzTeleop2024.com")
+@TeleOp(name="RunThisPikeelzTeleop2024.NICKTEST")
 // @Disabled
 public class RunThisPikeelzTeleop2024_NickTest extends OpMode{
     
@@ -40,8 +40,9 @@ public class RunThisPikeelzTeleop2024_NickTest extends OpMode{
 
     boolean halfSpeed = false;
     boolean quarterSpeed = true;
-    
-    
+
+    double intakeSlidePower = 0.0;
+
     @Override
     public void init() {
         
@@ -122,9 +123,9 @@ public class RunThisPikeelzTeleop2024_NickTest extends OpMode{
                 gamepad1.left_stick_x.toDouble()))
            Refer to LocalizationTest.java as an example
          */
-            double drive = -gamepad1.right_stick_y;
-            double strafe = gamepad1.right_stick_x;
-            double rotate = gamepad1.left_stick_x;
+            double drive = -gamepad1.left_stick_y;
+            double strafe = gamepad1.left_stick_x;
+            double rotate = gamepad1.right_stick_x;
             
             //Max speed stays at 1 or 100% (limited to) 😎👌👌
             double frontLeftSpeed = drive + strafe + rotate;
@@ -166,18 +167,33 @@ public class RunThisPikeelzTeleop2024_NickTest extends OpMode{
         backRightDriveMotor.setPower(backRightSpeed);
 
         // INTAKE CONDITIONS
+        intakeSlidePower = -(gamepad2.left_stick_y)/2;
 
-        if (gamepad2.dpad_up) {
-            intakeSlide.extendSlide();
-            if (intakeSlide.getSlideState() == IntakeSlide.SLIDE_STATES.SLIDE_INTAKE_POS) {
-                intakeArmServo.armPositionIntake();
-            }
+ /*        if (gamepad2.dpad_up) {
+            intakeSlide.extendSlide(0.3);
+            intakeArmServo.armPositionIntake();
             frontIntake.Intake();
         } else if (gamepad2.dpad_down) {
             if (intakeSlide.getSlideState() == IntakeSlide.SLIDE_STATES.SLIDE_INTAKE_POS) {
                 intakeArmServo.armPositionDrive();
                 frontIntake.Stop();
-                intakeSlide.retractSlide();
+                intakeSlide.retractSlide(-0.5);
+            } else {
+                intakeSlide.slidePositionTransfer();
+                intakeArmServo.armPositionTransfer();
+                frontIntake.Outtake();
+            }
+        } else */
+
+        if (intakeSlidePower > 0.05) {
+            intakeSlide.extendSlide(intakeSlidePower);
+            intakeArmServo.armPositionIntake();
+            frontIntake.Intake();
+        } else if (intakeSlidePower < -0.05) {
+            if (intakeSlide.getSlideState() == IntakeSlide.SLIDE_STATES.SLIDE_INTAKE_POS) {
+                intakeArmServo.armPositionDrive();
+                frontIntake.Stop();
+                intakeSlide.retractSlide(intakeSlidePower);
             } else {
                 intakeSlide.slidePositionTransfer();
                 intakeArmServo.armPositionTransfer();
@@ -208,15 +224,6 @@ public class RunThisPikeelzTeleop2024_NickTest extends OpMode{
 
         // SLIDE CONDITIONS
 
- /*       if (gamepad2.dpad_up) {
-            intakeSlide.extendSlide();
-        }
-        else if (gamepad2.dpad_down) {
-            intakeSlide.retractSlide();;
-        } else{
-            intakeSlide.stopSlide();
-        }
-*/
         if (gamepad2.y) {
             outtakeSlide.slidePositionHigh();
         }
@@ -258,6 +265,7 @@ public class RunThisPikeelzTeleop2024_NickTest extends OpMode{
         telemetry.addData("Dumper State: ", dumper.getDumperState());
         telemetry.addData("Outtake Slide State: ", outtakeSlide.getSlideState());
 
+        telemetry.addData("Intake Slide Power:", intakeSlidePower);
         telemetry.addData("Slide Motor Position:", intakeSlide.getSlideMotorPos());
         telemetry.addData("Slide Motor R Position:", outtakeSlide.getSlideRMotorPos());
         telemetry.addData("Slide Motor L Position:", outtakeSlide.getSlideLMotorPos());
