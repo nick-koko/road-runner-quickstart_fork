@@ -120,9 +120,9 @@ public class RunThisPikeelzTeleop2024 extends OpMode{
                 gamepad1.left_stick_x.toDouble()))
            Refer to LocalizationTest.java as an example
          */
-            double drive = -gamepad1.right_stick_y;
-            double strafe = gamepad1.right_stick_x;
-            double rotate = gamepad1.left_stick_x;
+            double drive = -gamepad1.left_stick_y;
+            double strafe = gamepad1.left_stick_x;
+            double rotate = gamepad1.right_stick_x;
             
             //Max speed stays at 1 or 100% (limited to) 😎👌👌
             double frontLeftSpeed = drive + strafe + rotate;
@@ -184,10 +184,10 @@ public class RunThisPikeelzTeleop2024 extends OpMode{
         // SLIDE CONDITIONS
 
         if (gamepad2.dpad_up) {
-            intakeSlide.extendSlide();
+            intakeSlide.extendSlide(0.3);
         }
         else if (gamepad2.dpad_down) {
-            intakeSlide.retractSlide();;
+            intakeSlide.retractSlide(-0.5);;
         } else{
             intakeSlide.stopSlide();
         }

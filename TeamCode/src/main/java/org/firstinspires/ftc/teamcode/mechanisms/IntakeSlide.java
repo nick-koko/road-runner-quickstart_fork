@@ -11,7 +11,7 @@ public class IntakeSlide {
     private static final int AUTON_POSITION = 100;
     private static final int TOP_POSITION = 500;
     private static final int STARTING_POSITION = 0;
-    private static final int TRANSFER_POSITION = 50;
+    private static final int TRANSFER_POSITION = 10;
     public enum SLIDE_STATES{
         SLIDE_INTAKE_POS, SLIDE_STARTING_POS, SLIDE_AUTON_POS, SLIDE_TRANSFER_POS, SLIDE_HIGH_POS
     }
@@ -31,13 +31,13 @@ public class IntakeSlide {
 
 
     // Method to extend the slide
-    public void extendSlide() {
+    public void extendSlide(double power) {
         this.slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Check if we are close to reaching the maximum slide extension (TOP_Position)
         // If not we haven't yet, then set the power to a positive value
         if (this.slideMotor.getCurrentPosition() < (TOP_POSITION - 100)) {
-            this.slideMotor.setPower(0.4);
+            this.slideMotor.setPower(power);
         }
         // If we are close to reaching the max slide extension (TOP_POSITION - 100)
         // then stop the slide by setting power to 0 to make sure to not break anything
@@ -47,7 +47,7 @@ public class IntakeSlide {
     }
 
     // Method to retract the slide
-    public void retractSlide() {
+    public void retractSlide(double power) {
         // Set the motor power to a negative value to retract the slide
         this.slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
@@ -55,7 +55,7 @@ public class IntakeSlide {
         // 0 is the farthest we can go, but we want to stop before that to not break anything
         // If not we haven't yet, then set the power to a negative value
         if (this.slideMotor.getCurrentPosition() > (0)) {
-            this.slideMotor.setPower(-0.4);
+            this.slideMotor.setPower(power);
         }
         // If we are close to reaching the zero point
         // then stop the slide by setting power to 0 to make sure to not break anything
@@ -96,7 +96,7 @@ public class IntakeSlide {
 
     public SLIDE_STATES getSlideState() {
         int slidePos = this.slideMotor.getCurrentPosition();
-        if (Math.abs(slidePos - TRANSFER_POSITION) < (15)) {
+        if (Math.abs(slidePos - TRANSFER_POSITION) < (10)) {
             curSlideState = SLIDE_STATES.SLIDE_TRANSFER_POS;
         }
         else if(slidePos > TRANSFER_POSITION) {

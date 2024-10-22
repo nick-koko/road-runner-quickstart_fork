@@ -9,7 +9,7 @@ public class OuttakeDumpMechanism {
     private Servo dumperServo;
 
     // Target positions for the servo arm
-    private static final double DOWN_POSITION = 0.1;
+    private static final double DOWN_POSITION = 0.15;
     private static final double DUMP_POSITION = 0.8;
     private ElapsedTime dumperTimer = new ElapsedTime();
     public enum DUMPER_STATES{
