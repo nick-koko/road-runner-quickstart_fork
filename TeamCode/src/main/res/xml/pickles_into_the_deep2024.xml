@@ -17,6 +17,7 @@
             <Servo name="intake_arm_servo" port="2" />
             <ControlHubImuBHI260AP name="imu" port="0" bus="0" />
             <RevColorSensorV3 name="intake_color_sensor" port="0" bus="1" />
+            <GoBildaPinpointDriverRR name="pinpoint" port="0" bus="2" />
         </LynxModule>
     </LynxUsbDevice>
 </Robot>
