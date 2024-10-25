@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.SensorColor;
 import org.firstinspires.ftc.teamcode.mechanisms.SlideMechanism;
 
 @TeleOp(name="TuesdaySummerTest_Teleop")
-// @Disabled
+@Disabled
 public class TuesdaySummerTest_Teleop extends OpMode{
     
     private DcMotor frontLeftDriveMotor = null;

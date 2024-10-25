@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -16,7 +17,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.SensorColor;
 import org.firstinspires.ftc.teamcode.mechanisms.SlideMechanism;
 
 @TeleOp(name="RunThisPikeelzTeleop2024.com")
-// @Disabled
+@Disabled
 public class RunThisPikeelzTeleop2024 extends OpMode{
     
     private DcMotor frontLeftDriveMotor = null;

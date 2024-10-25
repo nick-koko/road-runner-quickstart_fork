@@ -9,6 +9,7 @@ import com.acmerobotics.roadrunner.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.mechanisms.ClawMechanism;
 import org.firstinspires.ftc.teamcode.mechanisms.DualSlideMechanism;
 import org.firstinspires.ftc.teamcode.mechanisms.IntakeArm;
@@ -17,14 +18,16 @@ import org.firstinspires.ftc.teamcode.mechanisms.IntakeSlide;
 import org.firstinspires.ftc.teamcode.mechanisms.OuttakeDumpMechanism;
 import org.firstinspires.ftc.teamcode.mechanisms.SensorColor;
 
-@TeleOp(name="PikeelzFieldDriveYay")
+@TeleOp(name="Teleop_PikeelzFieldDriveYay_2024")
 public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
+        Pose2d startingPose = new Pose2d(9.25, 62, Math.toRadians(-90));
+        PinpointDrive robot = new PinpointDrive(hardwareMap, new Pose2d(9.25, 62, Math.toRadians(90)));
+
         //INTAKE SUBSYSTEM
         IntakeServoSpinner frontIntake = new IntakeServoSpinner();
-
         ClawMechanism specimenClaw = new ClawMechanism();
 
         //SLIDE SUBSYSTEM
@@ -32,13 +35,8 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
         IntakeSlide intakeSlide =  new IntakeSlide();  //Mr. Todone
         //ARM SUBSYSTEM
         IntakeArm intakeArmServo = new IntakeArm();
-
         OuttakeDumpMechanism dumper = new OuttakeDumpMechanism();
-
         SensorColor intakeBoxColorSensor = new SensorColor();
-
-        boolean halfSpeed = false;
-        boolean quarterSpeed = true;
 
         double intakeSlidePower = 0.0;
         //Intake
@@ -61,15 +59,43 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
         //ColorSensor
         intakeBoxColorSensor.init(hardwareMap);
 
-        PinpointDrive robot = new PinpointDrive(hardwareMap, new Pose2d(9.25, 62, Math.toRadians(90)));
-        boolean fieldCentric = false;
+        boolean fieldCentric = true;
         boolean goToTargetAngle;
         double targetAngleDeg = -135.0;
         double targetAngleRad;
         double propAngleGain = 0.5;
+        double minAnglePower = 0.075;
         double maxRotate = 0.8;
+        Alliance whichAlliance = Alliance.RED;
+        double angleAllianceOffset = 90.0;
 
-        waitForStart();
+        // Wait for the game to start (Display Gyro value while waiting)
+        while (opModeInInit()) {
+            if(gamepad1.x){
+                whichAlliance = Alliance.BLUE;
+                angleAllianceOffset = -90.0;
+                startingPose = new Pose2d(9.25, 62, Math.toRadians(90));
+            } else if (gamepad1.b){
+                whichAlliance = Alliance.RED;
+                angleAllianceOffset = 90.0;
+                startingPose = new Pose2d(-9.25, 6-2, Math.toRadians(-90));
+            }
+
+            telemetry.addLine("Hello Human of the robot");
+            telemetry.addLine("This is an AI Spoken from ChatGPT,");
+            telemetry.addLine("Before continuing, select ALLIANCE");
+            telemetry.addLine("press X to set ALLIANCE to BLUE and B for RED");
+            telemetry.addLine("----------------------------------------------");
+            if (whichAlliance == Alliance.RED) {
+                telemetry.addLine("RED ALLIANCE selected");
+            } else {
+                telemetry.addLine("BLUE ALLIANCE selected");
+            }
+
+            telemetry.update();
+        }
+        robot.pose = startingPose;
+
         dumper.DumperPositionDown();
         intakeSlide.slidePositionTransfer();
         intakeArmServo.armPositionDrive();
@@ -85,19 +111,19 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
             double botHeading = Math.toDegrees(botHeadingRad);
 
             if (gamepad1.left_bumper) {
-                targetAngleDeg = -135.0;
+                targetAngleDeg = -45.0 + angleAllianceOffset;
                 goToTargetAngle = true;
             } else if (gamepad1.dpad_down) {
-                targetAngleDeg = 180.0;
+                targetAngleDeg = 180.0 + angleAllianceOffset;
                 goToTargetAngle = true;
             } else if (gamepad1.dpad_right) {
-                targetAngleDeg = -90.0;
+                targetAngleDeg = -90.0 + angleAllianceOffset;
                 goToTargetAngle = true;
             } else if (gamepad1.dpad_left) {
-                targetAngleDeg = 90.0;
+                targetAngleDeg = 90.0 + angleAllianceOffset;
                 goToTargetAngle = true;
             } else if (gamepad1.dpad_up) {
-                targetAngleDeg = 0.0;
+                targetAngleDeg = 0.0 + angleAllianceOffset;
                 goToTargetAngle = true;
             } else {
                 goToTargetAngle = false;
@@ -113,11 +139,18 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
                     targetAngleDiff = (2 * (Math.PI) + targetAngleDiff);
                 }
                 rotate = targetAngleDiff * propAngleGain;
+                if (rotate > 0.0) {
+                    rotate = rotate + minAnglePower;
+                } else if (rotate < 0.0) {
+                    rotate = rotate - minAnglePower;
+                }
                 rotate = Math.max(Math.min(rotate, maxRotate), -maxRotate);
             }
 
-            double rotX = strafe * Math.cos(-botHeadingRad) - driving * Math.sin(-botHeadingRad);
-            double rotY = strafe * Math.sin(-botHeadingRad) + driving * Math.cos(-botHeadingRad);
+            double angleAllianceOffsetRad = Math.toRadians(angleAllianceOffset);
+
+            double rotX = strafe * Math.cos(-(botHeadingRad-angleAllianceOffsetRad)) - driving * Math.sin(-(botHeadingRad-angleAllianceOffsetRad));
+            double rotY = strafe * Math.sin(-(botHeadingRad-angleAllianceOffsetRad)) + driving * Math.cos(-(botHeadingRad-angleAllianceOffsetRad));
 
             if (gamepad1.y) {
                 fieldCentric = true;
@@ -164,14 +197,6 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
                 frontIntake.Outtake();
             }
 
-            if (gamepad1.dpad_left) {
-                intakeArmServo.armPositionTransfer();
-            } else if (gamepad1.dpad_up) {
-                intakeArmServo.armPositionDrive();
-            } else if (gamepad1.dpad_right) {
-                intakeArmServo.armPositionIntake();
-            }
-
             // SLIDE CONDITIONS
 
             if (gamepad2.y) {
@@ -197,6 +222,9 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
             }
 
             robot.updatePoseEstimate();
+
+            telemetry.addData("IsFieldCentric?", fieldCentric);
+            telemetry.addData("Which Alliance?", whichAlliance);
 
             telemetry.addData("Intake Arm State: ", intakeArmServo.getARMState());
             telemetry.addData("Intake Slide State: ", intakeSlide.getSlideState());
@@ -227,4 +255,9 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
             FtcDashboard.getInstance().sendTelemetryPacket(packet);
         }
     }
+    public enum Alliance {
+        RED,
+        BLUE
+    }
+
 }
