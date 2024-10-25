@@ -140,4 +140,8 @@ public class TestFieldCentricRR_Teleop extends LinearOpMode {
             FtcDashboard.getInstance().sendTelemetryPacket(packet);
         }
     }
+    public enum Alliance {
+        RED,
+        BLUE
+    }
 }
