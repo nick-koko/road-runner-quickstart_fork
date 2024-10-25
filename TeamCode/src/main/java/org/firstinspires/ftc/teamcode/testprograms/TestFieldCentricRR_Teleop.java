@@ -11,10 +11,6 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Drawing;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
-import org.firstinspires.ftc.teamcode.PikeelsFieldcentricDrivingIsBetter;
-import org.firstinspires.ftc.teamcode.PinpointDrive;
-import org.firstinspires.ftc.teamcode.TankDrive;
-import org.firstinspires.ftc.teamcode.tuning.TuningOpModes;
 
 @TeleOp(name="TestFieldCentricRR_Teleop")
 public class TestFieldCentricRR_Teleop extends LinearOpMode {
@@ -32,17 +28,17 @@ public class TestFieldCentricRR_Teleop extends LinearOpMode {
         double maxRotate = 0.8;
         double minAnglePower = 0.075;
 
-        PikeelsFieldcentricDrivingIsBetter.Alliance whichAlliance = PikeelsFieldcentricDrivingIsBetter.Alliance.RED;
+        Alliance whichAlliance = Alliance.RED;
         double angleAllianceOffset = 90.0;
 
         // Wait for the game to start (Display Gyro value while waiting)
         while (opModeInInit()) {
             if(gamepad1.x){
-                whichAlliance = PikeelsFieldcentricDrivingIsBetter.Alliance.BLUE;
+                whichAlliance = Alliance.BLUE;
                 angleAllianceOffset = -90.0;
                 startingPose = new Pose2d(9.25, 62, Math.toRadians(-90));
             } else if (gamepad1.b){
-                whichAlliance = PikeelsFieldcentricDrivingIsBetter.Alliance.RED;
+                whichAlliance = Alliance.RED;
                 angleAllianceOffset = 90.0;
                 startingPose = new Pose2d(-9.25, 6-2, Math.toRadians(90));
             }
@@ -52,7 +48,7 @@ public class TestFieldCentricRR_Teleop extends LinearOpMode {
             telemetry.addLine("Before continuing, select ALLIANCE");
             telemetry.addLine("press X to set ALLIANCE to BLUE and B for RED");
             telemetry.addLine("----------------------------------------------");
-            if (whichAlliance == PikeelsFieldcentricDrivingIsBetter.Alliance.RED) {
+            if (whichAlliance == Alliance.RED) {
                 telemetry.addLine("RED ALLIANCE selected");
             } else {
                 telemetry.addLine("BLUE ALLIANCE selected");
@@ -144,4 +140,8 @@ public class TestFieldCentricRR_Teleop extends LinearOpMode {
             FtcDashboard.getInstance().sendTelemetryPacket(packet);
             }
      }
+    public enum Alliance {
+        RED,
+        BLUE
+    }
 }
