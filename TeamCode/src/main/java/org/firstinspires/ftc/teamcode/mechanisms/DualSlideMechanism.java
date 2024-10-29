@@ -17,9 +17,11 @@ public class DualSlideMechanism {
     private static final int SPECIMENDROP_POSITION_RIGHT = 1000;
     private static final int HIGH_POSITION_RIGHT = 2300;
     private static final int SPECIMENGRAB_POSITION_RIGHT = 100;
+    private static final int CLIMB_POSITION_LEFT = 800;
+    private static final int CLIMB_POSITION_RIGHT = 800;
 //TODO
     public enum SLIDE_STATES{
-        SLIDE_INTAKE_POS, SLIDE_LOW_POS, SLIDE_SPECIMENGRAB_POS, SLIDE_SPECIMENDROP_POS, SLIDE_HIGH_POS
+        SLIDE_INTAKE_POS, SLIDE_LOW_POS, SLIDE_SPECIMENGRAB_POS, SLIDE_SPECIMENDROP_POS, SLIDE_HIGH_POS, SLIDE_CLIMB_POS
     }
 
     private SLIDE_STATES curSlideState = null;
@@ -99,6 +101,11 @@ public class DualSlideMechanism {
         moveToPosition(LOW_POSITION_LEFT, LOW_POSITION_RIGHT);
     }
 
+    public void slidePositionClimb() {
+        nextSlideState = SLIDE_STATES.SLIDE_CLIMB_POS;
+        moveToPosition(CLIMB_POSITION_LEFT, CLIMB_POSITION_RIGHT);
+    }
+
     // Method to move the slide to the specimen drop position
     public void slidePositionSpecimenDrop() {
 
@@ -124,10 +131,10 @@ public class DualSlideMechanism {
     private void moveToPosition(int leftPosition, int rightPosition) {
         this.slideMotorL.setTargetPosition(leftPosition);
         this.slideMotorL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        this.slideMotorL.setPower(0.4);
+        this.slideMotorL.setPower(1.0);
         this.slideMotorR.setTargetPosition(rightPosition);
         this.slideMotorR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        this.slideMotorR.setPower(0.4);
+        this.slideMotorR.setPower(1.0);
         
         // Wait until the motor reaches the target position
         /*while (this.slideMotor.isBusy()) {

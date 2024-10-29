@@ -8,6 +8,7 @@ import com.acmerobotics.roadrunner.PoseVelocity2d;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.mechanisms.ClawMechanism;
@@ -68,6 +69,8 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
         double maxRotate = 0.8;
         Alliance whichAlliance = Alliance.RED;
         double angleAllianceOffset = 90.0;
+        ElapsedTime intakeArmTime = new ElapsedTime();
+        double stateDelayTime = 0.0;
 
         // Wait for the game to start (Display Gyro value while waiting)
         while (opModeInInit()) {
@@ -166,11 +169,21 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
                     new Vector2d(driving, -strafe), -rotate));
 
             // INTAKE CONDITIONS
-            double intakeSlidePowerFactor = 0.35;
-            intakeSlidePower = -(gamepad2.left_stick_y * intakeSlidePowerFactor);
+            double intakeSlidePowerFactor = 0.2;
+            intakeSlidePower = -(gamepad2.right_stick_y * intakeSlidePowerFactor);
 
             if (intakeSlidePower > 0.05) {
-                intakeArmServo.armPositionIntake();
+                if ((intakeArmServo.getARMState() == IntakeArm.INTAKE_ARM_STATES.INTAKE_ARM_TRANSFER_POS) ||
+                        (intakeArmServo.getARMState() == IntakeArm.INTAKE_ARM_STATES.INTAKE_ARM_DRIVE_POS)) {
+                        intakeArmTime.reset();
+                        stateDelayTime = 0.5;
+                    }
+                if (intakeArmTime.time() > stateDelayTime) {
+                    intakeArmServo.armPositionIntake();
+                } else {
+                    intakeArmServo.armPositionAbyss();
+                }
+                //intakeArmServo.armPositionIntake();
                 frontIntake.Intake();
                 intakeSlide.extendSlide(intakeSlidePower);
             } else if (intakeSlidePower < -0.05) {
@@ -180,8 +193,8 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
                     intakeSlide.retractSlide(intakeSlidePower);
                 } else {
                     intakeSlide.slidePositionTransfer();
-                    intakeArmServo.armPositionTransfer();
-                    frontIntake.Outtake();
+                    intakeArmServo.armPositionAbyss();
+                    //frontIntake.Outtake();
                 }
             } else {
                 if (intakeSlide.getSlideState() == IntakeSlide.SLIDE_STATES.SLIDE_TRANSFER_POS)
@@ -207,16 +220,24 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
             // SLIDE CONDITIONS
 
             if (gamepad2.y) {
+                intakeArmServo.armPositionDrive();
                 outtakeSlide.slidePositionHigh();
             }
             else if (gamepad2.a) {
+                intakeArmServo.armPositionDrive();
                 outtakeSlide.slidePositionLow();
             }
             else if (gamepad2.x) {
+                intakeArmServo.armPositionDrive();
                 outtakeSlide.slidePositionSpecimenGrab();
             }
             else if (gamepad2.b) {
+                intakeArmServo.armPositionDrive();
                 outtakeSlide.slidePositionSpecimenDrop();
+            }
+            else if (gamepad2.start) {
+                intakeArmServo.armPositionDrive();
+                outtakeSlide.slidePositionClimb();
             }
 
             // ARM CONDITIONS
@@ -227,7 +248,11 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
             } else {
                 dumper.DumperPositionDown();
             }
-
+            if (gamepad2.left_bumper) {
+                frontIntake.Outtake();
+            } else if (frontIntake.getIntakeState() != IntakeServoSpinner.INTAKE_SPINNER_STATES.SPINNER_INTAKING){
+                frontIntake.Stop();
+            }
             robot.updatePoseEstimate();
 
             telemetry.addData("IsFieldCentric?", fieldCentric);
