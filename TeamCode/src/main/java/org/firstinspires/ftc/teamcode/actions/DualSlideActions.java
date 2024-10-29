@@ -9,30 +9,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.DualSlideMechanism;
 
 public class DualSlideActions extends DualSlideMechanism {
 
-    public class LiftUp implements Action {
-        private boolean initialized = false;
-
-        @Override
-        public boolean run(@NonNull TelemetryPacket packet) {
-            if (!initialized) {
-                slidePositionHigh();
-                initialized = true;
-            }
-
-            SLIDE_STATES state = getSlideState();
-            packet.put("liftstate", state);
-            if (state == SLIDE_STATES.SLIDE_SPECIMENGRAB_POS) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-    }
-    public Action liftUp() {
-        return new LiftUp();
-    }
-
-    public class LiftDown implements Action {
+    public class Low implements Action {
         private boolean initialized = false;
 
         @Override
@@ -49,11 +26,80 @@ public class DualSlideActions extends DualSlideMechanism {
             } else {
                 return true;
             }
+        }
+    }
+    public Action low() {
+        return new Low();
+    }
+
+    public class SpecimenGrab implements Action {
+        private boolean initialized = false;
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (!initialized) {
+                slidePositionSpecimenGrab();
+                initialized = true;
+            }
+
+            SLIDE_STATES state = getSlideState();
+            packet.put("liftstate", state);
+            if (state == SLIDE_STATES.SLIDE_SPECIMENGRAB_POS) {
+                return false;
+            } else {
+                return true;
+            }
        }
     }
-    public Action liftDown() {
-        return new LiftDown();
+    public Action specimenGrab() {
+        return new SpecimenGrab();       //todone
+    }
+    public class SpecimenDrop implements Action {
+        private boolean initialized = false;
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (!initialized) {
+                slidePositionSpecimenDrop();
+                initialized = true;
+            }
+
+            SLIDE_STATES state = getSlideState();
+            packet.put("liftstate", state);
+            if (state == SLIDE_STATES.SLIDE_SPECIMENDROP_POS) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+    public Action specimenDrop() {
+        return new SpecimenDrop();
     }
 
+    public class High implements Action {
+        private boolean initialized = false;
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (!initialized) {
+                slidePositionHigh();
+                initialized = true;
+            }
+
+            SLIDE_STATES state = getSlideState();
+            packet.put("liftstate", state);
+            if (state == SLIDE_STATES.SLIDE_HIGH_POS) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+    public Action high() {
+        return new High();
+    }
 
 }
+
+//todone emoji glasses cool peace sign peace sign

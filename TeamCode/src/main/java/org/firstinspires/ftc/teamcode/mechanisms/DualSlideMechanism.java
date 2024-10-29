@@ -11,11 +11,11 @@ public class DualSlideMechanism {
     // Target positions for the slide mechanism
     private static final int LOW_POSITION_LEFT = 0;
     private static final int SPECIMENDROP_POSITION_LEFT = 1000;
-    private static final int HIGH_POSITION_LEFT = 2200;
+    private static final int HIGH_POSITION_LEFT = 2300;
     private static final int SPECIMENGRAB_POSITION_LEFT = 100;
     private static final int LOW_POSITION_RIGHT = 0;
     private static final int SPECIMENDROP_POSITION_RIGHT = 1000;
-    private static final int HIGH_POSITION_RIGHT = 2200;
+    private static final int HIGH_POSITION_RIGHT = 2300;
     private static final int SPECIMENGRAB_POSITION_RIGHT = 100;
 //TODO
     public enum SLIDE_STATES{
@@ -145,11 +145,17 @@ public class DualSlideMechanism {
         }
         else if(slidePos > (HIGH_POSITION_LEFT - 20)) {
             curSlideState = SLIDE_STATES.SLIDE_HIGH_POS;
-        } else {
+        } else if(slidePos < (LOW_POSITION_LEFT + 20)){
             curSlideState = SLIDE_STATES.SLIDE_LOW_POS;
+        } else if(Math.abs(slidePos - SPECIMENGRAB_POSITION_LEFT) < (15)){
+            curSlideState = SLIDE_STATES.SLIDE_SPECIMENGRAB_POS;
         }
         return curSlideState;
     }
+
+
+
+
 
     public SLIDE_STATES getNextSlideState() {
         return nextSlideState;

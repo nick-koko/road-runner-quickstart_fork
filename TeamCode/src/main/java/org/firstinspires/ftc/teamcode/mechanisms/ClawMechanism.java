@@ -2,11 +2,12 @@ package org.firstinspires.ftc.teamcode.mechanisms;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.ServoImplEx;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class ClawMechanism {
     // Assuming some motor control library is used, e.g., FTC SDK, but this can be customized
-    private Servo clawServo;
+    private ServoImplEx clawServo;
 
     // Target positions for the servo claw
     private static final double OPEN_POSITION = 0.5;
@@ -23,7 +24,7 @@ public class ClawMechanism {
 
     public void init(HardwareMap hwMap) {
 
-        clawServo = hwMap.get(Servo.class, "claw_servo");
+        clawServo = hwMap.get(ServoImplEx.class, "claw_servo");
         this.clawServo.setDirection(Servo.Direction.FORWARD);
         curClawState = CLAW_STATES.CLAW_OPEN_POS;
     }
@@ -42,5 +43,10 @@ public class ClawMechanism {
 
     public CLAW_STATES getClawState() {
         return curClawState;
+    }
+
+    public void clawOff() {
+        clawServo.setPwmDisable();
+
     }
 }

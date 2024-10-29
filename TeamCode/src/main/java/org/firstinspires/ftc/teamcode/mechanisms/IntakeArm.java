@@ -10,9 +10,9 @@ public class IntakeArm {
     private Servo intakeArmServo;
 
     // Target positions for the servo arm
-    private static final double INTAKE_POSITION = 0.16; //above group... will kill power
-    private static final double DRIVE_POSITION = 0.9; //perpindicuar
-    private static final double TRANSFER_POSITION = 1.0; //servo towards slides
+    private static final double INTAKE_POSITION = 0.25; //above group... will kill power
+    private static final double DRIVE_POSITION = 0.8; //perpindicuar
+    private static final double TRANSFER_POSITION = 0.9; //servo towards slides
     private ElapsedTime armTimer = new ElapsedTime();
     public enum INTAKE_ARM_STATES{
         INTAKE_ARM_INTAKE_POS, INTAKE_ARM_DRIVE_POS, INTAKE_ARM_TRANSFER_POS

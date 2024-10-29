@@ -52,7 +52,7 @@ public class IntakeServoSpinner {
 
     public void Intake() {
 
-        power = 0.8 ;
+        power = 0.9 ;
 
         // Set the motor to the new power
         intakeServo.setPower(power);

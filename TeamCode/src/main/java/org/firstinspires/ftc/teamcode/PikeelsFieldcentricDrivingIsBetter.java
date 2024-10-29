@@ -166,16 +166,17 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
                     new Vector2d(driving, -strafe), -rotate));
 
             // INTAKE CONDITIONS
-            intakeSlidePower = -(gamepad2.left_stick_y)/2;
+            double intakeSlidePowerFactor = 0.35;
+            intakeSlidePower = -(gamepad2.left_stick_y * intakeSlidePowerFactor);
 
             if (intakeSlidePower > 0.05) {
-                intakeSlide.extendSlide(intakeSlidePower);
                 intakeArmServo.armPositionIntake();
                 frontIntake.Intake();
+                intakeSlide.extendSlide(intakeSlidePower);
             } else if (intakeSlidePower < -0.05) {
-                if (intakeSlide.getSlideState() == IntakeSlide.SLIDE_STATES.SLIDE_INTAKE_POS) {
-                    intakeArmServo.armPositionDrive();
-                    frontIntake.Stop();
+                if (intakeSlide.getSlideState() != IntakeSlide.SLIDE_STATES.SLIDE_INTAKE_POS){
+                    intakeArmServo.armPositionTransfer();
+                    //frontIntake.Stop();
                     intakeSlide.retractSlide(intakeSlidePower);
                 } else {
                     intakeSlide.slidePositionTransfer();
@@ -183,7 +184,13 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
                     frontIntake.Outtake();
                 }
             } else {
-                intakeSlide.stopSlide();
+                if (intakeSlide.getSlideState() == IntakeSlide.SLIDE_STATES.SLIDE_TRANSFER_POS)
+                {
+                    intakeSlide.slidePositionTransfer();
+                } else {
+                    intakeSlide.stopSlide();
+                }
+
                 if (frontIntake.getIntakeState() != IntakeServoSpinner.INTAKE_SPINNER_STATES.SPINNER_INTAKING) {
                     frontIntake.Stop();
                 }

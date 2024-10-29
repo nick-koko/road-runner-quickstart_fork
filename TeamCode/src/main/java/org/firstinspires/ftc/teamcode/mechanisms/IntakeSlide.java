@@ -11,7 +11,7 @@ public class IntakeSlide {
     private static final int AUTON_POSITION = 100;
     private static final int TOP_POSITION = 500;
     private static final int STARTING_POSITION = 0;
-    private static final int TRANSFER_POSITION = 10;
+    private static final int TRANSFER_POSITION = 0;
     public enum SLIDE_STATES{
         SLIDE_INTAKE_POS, SLIDE_STARTING_POS, SLIDE_AUTON_POS, SLIDE_TRANSFER_POS, SLIDE_HIGH_POS
     }
@@ -25,8 +25,8 @@ public class IntakeSlide {
         this.slideMotor.setDirection(DcMotor.Direction.FORWARD);
         this.slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         this.slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        curSlideState = SLIDE_STATES.SLIDE_STARTING_POS;
-        nextSlideState = SLIDE_STATES.SLIDE_STARTING_POS;
+        curSlideState = SLIDE_STATES.SLIDE_TRANSFER_POS;
+        nextSlideState = SLIDE_STATES.SLIDE_TRANSFER_POS;
     }
 
 
@@ -96,13 +96,13 @@ public class IntakeSlide {
 
     public SLIDE_STATES getSlideState() {
         int slidePos = this.slideMotor.getCurrentPosition();
-        if (Math.abs(slidePos - TRANSFER_POSITION) < (10)) {
+        if (Math.abs(slidePos - TRANSFER_POSITION) < (15)) {
             curSlideState = SLIDE_STATES.SLIDE_TRANSFER_POS;
         }
         else if(slidePos > TRANSFER_POSITION) {
             curSlideState = SLIDE_STATES.SLIDE_INTAKE_POS;
         } else {
-            curSlideState = SLIDE_STATES.SLIDE_STARTING_POS;
+            curSlideState = SLIDE_STATES.SLIDE_TRANSFER_POS;
         }
         return curSlideState;
     }
