@@ -46,7 +46,7 @@ public class IntakeServoSpinner {
     private INTAKE_SPINNER_STATES curIntakeState = null;
 
     public void init(HardwareMap hwMap) {
-        intakeServo = hwMap.get(CRServo.class, "intake_servo");   //TODONE 👌👌😎👌👌
+        intakeServo = hwMap.get(CRServo.class, "intake_servo");   //TODONE 👌👌😎👌👌kirbyrules.
         curIntakeState = INTAKE_SPINNER_STATES.SPINNER_STOP;
     }
 
