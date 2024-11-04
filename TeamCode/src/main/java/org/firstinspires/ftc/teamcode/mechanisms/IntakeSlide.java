@@ -8,12 +8,12 @@ public class IntakeSlide {
     private DcMotor slideMotor;
 
     // Target positions for the slide mechanism
-    private static final int AUTON_POSITION = 100;
-    private static final int TOP_POSITION = 500;
+    protected static final int AUTON_POSITION = 100;
+    private static final int TOP_POSITION = 400;
     private static final int STARTING_POSITION = 0;
     private static final int TRANSFER_POSITION = 0;
     public enum SLIDE_STATES{
-        SLIDE_INTAKE_POS, SLIDE_STARTING_POS, SLIDE_AUTON_POS, SLIDE_TRANSFER_POS, SLIDE_HIGH_POS
+        SLIDE_INTAKE_POS, SLIDE_STARTING_POS, SLIDE_AUTON_POS, SLIDE_TRANSFER_POS
     }
 
     private SLIDE_STATES curSlideState = null;
@@ -36,7 +36,7 @@ public class IntakeSlide {
 
         // Check if we are close to reaching the maximum slide extension (TOP_Position)
         // If not we haven't yet, then set the power to a positive value
-        if (this.slideMotor.getCurrentPosition() < (TOP_POSITION - 100)) {
+        if (this.slideMotor.getCurrentPosition() < (TOP_POSITION - 20)) {
             this.slideMotor.setPower(power);
         }
         // If we are close to reaching the max slide extension (TOP_POSITION - 100)
@@ -71,7 +71,7 @@ public class IntakeSlide {
         this.slideMotor.setPower(0);
     }
 
-    // Method to move the slide to the middle position
+    // Method to move the slide to the Transfer position
     public void slidePositionTransfer() {
 
         nextSlideState = SLIDE_STATES.SLIDE_TRANSFER_POS;
@@ -79,10 +79,10 @@ public class IntakeSlide {
     }
 
     // Method to move the slide to the high position
-    public void slidePositionHigh() {
+    public void slidePositionAuton() {
 
-        nextSlideState = SLIDE_STATES.SLIDE_HIGH_POS;
-        moveToPosition(TOP_POSITION);
+        nextSlideState = SLIDE_STATES.SLIDE_AUTON_POS;
+        moveToPosition(AUTON_POSITION);
     }
 
 

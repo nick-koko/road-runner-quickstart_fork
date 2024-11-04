@@ -10,7 +10,7 @@ public class IntakeArm {
     private Servo intakeArmServo;
 
     // Target positions for the servo arm
-    private static final double INTAKE_POSITION = 0.25; //above group... will kill power
+    private static final double INTAKE_POSITION = 0.245; //above group... will kill power
     private static final double DRIVE_POSITION = 0.8; //perpindicuar
     private static final double TRANSFER_POSITION = 0.88; //servo towards slides
     private static final double ABYSS_POSITION = 0.4; //servo towards slides

@@ -33,6 +33,32 @@ public class IntakeSlideAction extends IntakeSlide {
         return new Transfer();
     }
 
+    public class AutonAction implements Action {
+        private boolean initialized = false;
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (!initialized) {
+                slidePositionAuton();
+                initialized = true;
+            }
+
+            //SLIDE_STATES state = getSlideState();
+            int slidePos = getSlideMotorPos();
+
+            if (Math.abs(slidePos - AUTON_POSITION) < (15)) {
+                packet.put("IntakeSlidestate", SLIDE_STATES.SLIDE_AUTON_POS);
+                return false;
+            } else {
+                packet.put("IntakeSlidestate", getSlideState());
+                return true;
+            }
+        }
+    }
+    public Action autonAction() {
+        return new AutonAction();
+    }
+
     public class StopSlide implements Action {
         private boolean initialized = false;
 

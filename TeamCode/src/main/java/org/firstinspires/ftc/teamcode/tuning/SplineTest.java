@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.TankDrive;
 public final class SplineTest extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
-        Pose2d beginPose = new Pose2d(0, 0, 0);
+        Pose2d beginPose = new Pose2d(-60.77, -48, Math.toRadians(0));
 //        if (TuningOpModes.DRIVE_CLASS.equals(MecanumDrive.class)) {
 //            MecanumDrive drive = new MecanumDrive(hardwareMap, beginPose);
             PinpointDrive drive = new PinpointDrive(hardwareMap, beginPose);
@@ -21,8 +21,8 @@ public final class SplineTest extends LinearOpMode {
 
             Actions.runBlocking(
                 drive.actionBuilder(beginPose)
-                        .splineTo(new Vector2d(20, 30), Math.PI / 2)
-                        .splineTo(new Vector2d(0, 60), Math.PI)
+                        .splineTo(new Vector2d(-40.25, -18), Math.toRadians(90))
+                        .splineTo(new Vector2d(-60.77, 12), Math.toRadians(180))
                         .build());
 /*        } else if (TuningOpModes.DRIVE_CLASS.equals(TankDrive.class)) {
             TankDrive drive = new TankDrive(hardwareMap, beginPose);

@@ -10,18 +10,21 @@ public class DualSlideMechanism {
     DcMotor slideMotorR;
     // Target positions for the slide mechanism
     private static final int LOW_POSITION_LEFT = 0;
-    private static final int SPECIMENDROP_POSITION_LEFT = 1000;
-    private static final int HIGH_POSITION_LEFT = 2300;
-    private static final int SPECIMENGRAB_POSITION_LEFT = 100;
+    private static final int SPECIMENDROP_POSITION_LEFT = 1316;
+    private static final int HIGH_POSITION_LEFT = 1900;
+    private static final int SPECIMENGRAB_POSITION_LEFT = 0;
     private static final int LOW_POSITION_RIGHT = 0;
-    private static final int SPECIMENDROP_POSITION_RIGHT = 1000;
-    private static final int HIGH_POSITION_RIGHT = 2300;
-    private static final int SPECIMENGRAB_POSITION_RIGHT = 100;
-    private static final int CLIMB_POSITION_LEFT = 800;
-    private static final int CLIMB_POSITION_RIGHT = 800;
-//TODO
+    private static final int SPECIMENDROP_POSITION_RIGHT = 1316;
+    private static final int HIGH_POSITION_RIGHT = 1900;
+    private static final int SPECIMENGRAB_POSITION_RIGHT = 0;
+    private static final int CLIMB_POSITION_LEFT = 1550;
+    private static final int CLIMB_POSITION_RIGHT = 1550; //😎👌👌 🐽🐖🐈🦕🐉🐍🦖🦎🐊
+    private static final int END_HANG_POSITION_LEFT = 1250;
+    private static final int END_HANG_POSITION_RIGHT = 1250; //😎👌👌 🐽🐖🐈🦕🐉🐍🦖🦎🐊
+
+    //TODONE 😎👌👌
     public enum SLIDE_STATES{
-        SLIDE_INTAKE_POS, SLIDE_LOW_POS, SLIDE_SPECIMENGRAB_POS, SLIDE_SPECIMENDROP_POS, SLIDE_HIGH_POS, SLIDE_CLIMB_POS
+        SLIDE_INTAKE_POS, SLIDE_LOW_POS, SLIDE_SPECIMENGRAB_POS, SLIDE_SPECIMENDROP_POS, SLIDE_HIGH_POS, SLIDE_CLIMB_POS, SLIDE_END_HANG
     }
 
     private SLIDE_STATES curSlideState = null;
@@ -106,6 +109,11 @@ public class DualSlideMechanism {
         moveToPosition(CLIMB_POSITION_LEFT, CLIMB_POSITION_RIGHT);
     }
 
+    public void slidePositionEndHang() {
+        nextSlideState = SLIDE_STATES.SLIDE_END_HANG;
+        moveToPosition(END_HANG_POSITION_LEFT, END_HANG_POSITION_RIGHT);
+    }
+
     // Method to move the slide to the specimen drop position
     public void slidePositionSpecimenDrop() {
 
@@ -149,13 +157,12 @@ public class DualSlideMechanism {
         int slidePos = this.slideMotorL.getCurrentPosition();
         if (Math.abs(slidePos - SPECIMENDROP_POSITION_LEFT) < (15)) {
             curSlideState = SLIDE_STATES.SLIDE_SPECIMENDROP_POS;
-        }
-        else if(slidePos > (HIGH_POSITION_LEFT - 20)) {
+        } else if(slidePos > (HIGH_POSITION_LEFT - 20)) {
             curSlideState = SLIDE_STATES.SLIDE_HIGH_POS;
         } else if(slidePos < (LOW_POSITION_LEFT + 20)){
             curSlideState = SLIDE_STATES.SLIDE_LOW_POS;
-        } else if(Math.abs(slidePos - SPECIMENGRAB_POSITION_LEFT) < (15)){
-            curSlideState = SLIDE_STATES.SLIDE_SPECIMENGRAB_POS;
+        } else if(Math.abs(slidePos - CLIMB_POSITION_LEFT) < (15)){
+            curSlideState = SLIDE_STATES.SLIDE_CLIMB_POS;
         }
         return curSlideState;
     }

@@ -71,6 +71,7 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
         double angleAllianceOffset = 90.0;
         ElapsedTime intakeArmTime = new ElapsedTime();
         double stateDelayTime = 0.0;
+        boolean clawopen = true;
 
         // Wait for the game to start (Display Gyro value while waiting)
         while (opModeInInit()) {
@@ -108,7 +109,7 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
         while (opModeIsActive()) {
             double driving = -gamepad1.right_stick_y;
             double strafe = gamepad1.right_stick_x;
-            double rotate = gamepad1.left_stick_x;
+            double rotate = (gamepad1.left_stick_x) * 0.5;
 
             double botHeadingRad = robot.pose.heading.toDouble();
             double botHeading = Math.toDegrees(botHeadingRad);
@@ -217,6 +218,12 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
                 frontIntake.Outtake();
             }
 
+            if (gamepad2.left_trigger > 0.05) {
+               // if (clawopen = true) {
+
+              //  }
+            }
+
             // SLIDE CONDITIONS
 
             if (gamepad2.y) {
@@ -229,7 +236,7 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
             }
             else if (gamepad2.x) {
                 intakeArmServo.armPositionDrive();
-                outtakeSlide.slidePositionSpecimenGrab();
+                outtakeSlide.slidePositionClimb();
             }
             else if (gamepad2.b) {
                 intakeArmServo.armPositionDrive();
@@ -237,7 +244,7 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
             }
             else if (gamepad2.start) {
                 intakeArmServo.armPositionDrive();
-                outtakeSlide.slidePositionClimb();
+                outtakeSlide.slidePositionEndHang();
             }
 
             // ARM CONDITIONS

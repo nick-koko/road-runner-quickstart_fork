@@ -9,8 +9,8 @@ public class OuttakeDumpMechanism {
     private Servo dumperServo;
 
     // Target positions for the servo arm
-    private static final double DOWN_POSITION = 0.15;
-    private static final double DUMP_POSITION = 0.8;
+    private static final double DOWN_POSITION = 0.23;
+    private static final double DUMP_POSITION = 0.96;
     private ElapsedTime dumperTimer = new ElapsedTime();
     public enum DUMPER_STATES{
         DUMPER_DUMP_POS, DUMPER_DOWN_POS
@@ -24,7 +24,7 @@ public class OuttakeDumpMechanism {
     public void init(HardwareMap hwMap) {
 
         dumperServo = hwMap.get(Servo.class, "dump_servo");
-        this.dumperServo.setDirection(Servo.Direction.REVERSE);
+        this.dumperServo.setDirection(Servo.Direction.FORWARD);
         curDUMPERState = DUMPER_STATES.DUMPER_DOWN_POS;
         nextDUMPERState = DUMPER_STATES.DUMPER_DOWN_POS;
     }

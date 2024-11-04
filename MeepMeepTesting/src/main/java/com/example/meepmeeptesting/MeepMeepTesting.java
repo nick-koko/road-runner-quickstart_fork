@@ -14,14 +14,14 @@ public class MeepMeepTesting {
     public static void main(String[] args) {
         MeepMeep meepMeep = new MeepMeep(900);
 
-        int autonChoice = 4;
+        int autonChoice = 8;
         Action blueCloseSideLeftLine;
         Action blueCloseSideCenterLine;
         Action blueCloseSideRightLine;
 
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                .setConstraints(55, 50, Math.toRadians(180), Math.toRadians(180), 15)
+                .setConstraints(50, 40, Math.toRadians(180), Math.toRadians(180), 14)
                 .build();
         if (autonChoice == 1) {
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(11.8, 61.7, Math.toRadians(270)))
@@ -77,13 +77,14 @@ public class MeepMeepTesting {
         } else if (autonChoice == 4) {
 
             TrajectoryActionBuilder trajToBlueBars = myBot.getDrive().actionBuilder(new Pose2d(11.8, 61.7, Math.toRadians(90)))
-                    .lineToY(34);
+                    .lineToY(34)
+                    .waitSeconds(.001);
             Action trajectoryActionCloseOut = trajToBlueBars.fresh()
                     .strafeTo(new Vector2d(48, 12))
                     .build();
 
             Action run1 = trajToBlueBars.build();
-            //myBot.runAction(run1);
+            myBot.runAction(run1);
             myBot.runAction(trajectoryActionCloseOut);
 
             //myBot.runAction(trajectoryActionCloseOut);
@@ -122,52 +123,107 @@ public class MeepMeepTesting {
             myBot.runAction(blueCloseSideLeftLine);
         }  else if (autonChoice == 7) {
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(9.25, 62, Math.toRadians(90)))
-                                .lineToY(34)
-                                .waitSeconds(0.99)
-                                .setTangent(Math.toRadians(60))
-                                .splineToLinearHeading(new Pose2d(48.5, 37.5, Math.toRadians(-90)), Math.toRadians(0))
-                                .waitSeconds(0.99)
-                                 .splineToLinearHeading(new Pose2d(56, 54, Math.toRadians(-135)), Math.toRadians(0))
-                                 .waitSeconds(0.99)
-                                .splineToLinearHeading(new Pose2d(58, 37.5, Math.toRadians(-90)), Math.toRadians(0))
-                                 .waitSeconds(0.99)
-                                  .splineToLinearHeading(new Pose2d(56, 54, Math.toRadians(-135)), Math.toRadians(0))
-                                 .waitSeconds(0.99)
-                                 .splineToLinearHeading(new Pose2d(57, 37.5, Math.toRadians(-45)), Math.toRadians(0))
-                                .waitSeconds(0.99)
-                .setTangent(Math.toRadians(90))
-                .splineToLinearHeading(new Pose2d(56, 54, Math.toRadians(-135)), Math.toRadians(0))
-                .waitSeconds(0.99)
-                .splineToLinearHeading(new Pose2d(25, 0, Math.toRadians(-180)), Math.toRadians(180))
 
-                        //.splineTo(new Vector2d(20, 30), Math.toRadians(90))
-                        //.splineTo(new Vector2d(0, 60), Math.toRadians(180))
-                        .build());
+//                .afterTime(0.1, outtakeSlide.specimenDrop())
+                .lineToY(32)
+                .waitSeconds((1.0))
+//                .stopAndAdd(outtakeClaw.off())
+//                .stopAndAdd(outtakeSlide.low())
+                .setTangent(Math.toRadians(60))
+//                .afterTime(1.5, intakeArm.armIntake())
+//                .afterTime(1.75, intakeSpinner.intakePosition())
+                .splineToLinearHeading(new Pose2d(38.5, 25.5, Math.toRadians(0)), Math.toRadians(-61.9))
+                .setTangent(0)
+                .lineToX(48.5)
+                // PICKUP 1st Yellow Sample
+//                .afterTime(0.01, intakeArm.armTransfer())
+//                .afterTime(0.25, intakeSpinner.outtakePosition())
+                .lineToX(44.5)
+//                .afterTime(0.1, outtakeSlide.high())
+//                .afterTime(0.25, intakeSpinner.stopPosition())
+//                .afterTime(2.0, outtakeDump.dumpPosition())
+                .splineToLinearHeading(new Pose2d(57, 55, Math.toRadians(-135)), Math.toRadians(0))
+                .waitSeconds(0.2)
+//                .afterTime(0.01,outtakeDump.downPosition())
+//                .afterTime(0.1,outtakeSlide.low())
+//                .afterTime(0.5,intakeArm.armIntake())
+//                .afterTime(0.5,intakeSpinner.intakePosition())
+                .setTangent(180)
+                .splineToLinearHeading(new Pose2d(41.5, 25.5, Math.toRadians(0)), Math.toRadians(10))
+                .setTangent(0)
+                // PICKUP 2nd Yellow Sample
+                .lineToX(51.5)
+//                .afterTime(0.01, intakeArm.armTransfer())
+//                .afterTime(0.25, intakeSpinner.outtakePosition())
+                .waitSeconds(0.2)
+                .lineToX(49.0)
+//                .afterTime(0.1, outtakeSlide.high())
+//                .afterTime(0.25, intakeSpinner.stopPosition())
+//                .afterTime(2.0, outtakeDump.dumpPosition())
+                .splineToLinearHeading(new Pose2d(57, 55, Math.toRadians(-135)), Math.toRadians(0))
+                .waitSeconds(0.2)
+//                .afterTime(0.01,outtakeDump.downPosition())
+//                .afterTime(0.1,outtakeSlide.low())
+//                .afterTime(0.5,intakeArm.armIntake())
+//                .afterTime(0.5,intakeSpinner.intakePosition())
+                .splineToLinearHeading(new Pose2d(49, 25.5, Math.toRadians(0)), Math.toRadians(0))
+                // PICKUP 3rd sample
+                .lineToX(57.0)
+//                .afterTime(0.01, intakeArm.armTransfer())
+                .lineToX(54.0)
+//                .stopAndAdd(intakeSpinner.outtakePosition())
+                .setTangent(-180)
+//                .afterTime(0.5, outtakeSlide.high())
+//                .afterTime(0.25, intakeSpinner.stopPosition())
+//                .afterTime(1.8, outtakeDump.dumpPosition())
+                .splineToLinearHeading(new Pose2d(57, 55, Math.toRadians(-135)), Math.toRadians(110))
+                .waitSeconds(0.2)
+//                .afterTime(0.01,outtakeDump.downPosition())
+//                .afterTime(0.1,outtakeSlide.low())
+//                .afterTime(0.5,outtakeSlide.specimenDrop())
+                .splineToLinearHeading(new Pose2d(21, 0, Math.toRadians(0)), Math.toRadians(180))
+
+                .build());
          }  else if (autonChoice == 8) {
-            myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(9.25, 62, Math.toRadians(90)))
-                    .lineToY(34)
-                    .waitSeconds(1)
+            myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-9.25, 62, Math.toRadians(90)))
+
+                    .lineToY(32)
+                    .waitSeconds((1.0))
+                    .setTangent(Math.toRadians(120))
+                    .splineToSplineHeading(new Pose2d(-28, 36,Math.toRadians(180)), Math.toRadians(180))
+                    .splineToConstantHeading(new Vector2d(-40, 10), Math.toRadians(180))
+                    .splineToSplineHeading(new Pose2d(-44, 11, Math.toRadians(-90)), Math.toRadians(120))
+                    .splineToConstantHeading(new Vector2d(-48, 50), Math.toRadians(120))
+                    .splineToConstantHeading(new Vector2d(-50, 12), Math.toRadians(200))
+                    .splineToConstantHeading(new Vector2d(-50, 45), Math.toRadians(90))
+                    .splineToConstantHeading(new Vector2d(-47, 50), Math.toRadians(80))
+                    .waitSeconds(.02)
                     .setTangent(Math.toRadians(90))
-                    .splineToLinearHeading(new Pose2d(33.1, 34.6, Math.toRadians(-35)), Math.toRadians(0))
-                    .waitSeconds(1)
-                    .splineToLinearHeading(new Pose2d(52.6, 52.6, Math.toRadians(-135)), Math.toRadians(0))
-                    .waitSeconds(1)
-                    .splineToLinearHeading(new Pose2d(42.0, 27.6, Math.toRadians(-5)), Math.toRadians(0))
-                    .waitSeconds(1)
-                    .splineToLinearHeading(new Pose2d(52.6, 52.6, Math.toRadians(-135)), Math.toRadians(0))
-                    .waitSeconds(1)
-                    .splineToLinearHeading(new Pose2d(52.0, 27.6, Math.toRadians(-5)), Math.toRadians(0))
-                    .waitSeconds(1)
-                    .splineToLinearHeading(new Pose2d(52.6, 52.6, Math.toRadians(-135)), Math.toRadians(0))
-                    .waitSeconds(1)
-                    .splineToLinearHeading(new Pose2d(23.3, 0.3, Math.toRadians(0)), Math.toRadians(180))
+                    .lineToY(62)
+                    .waitSeconds(.75)
+                    .setTangent(Math.toRadians(-40))
+                    .splineToLinearHeading(new Pose2d(-10.25, 32,Math.toRadians(90)),Math.toRadians(-48))
+                    .waitSeconds(1.0)
+                    .setTangent(Math.toRadians(120))
+                    .splineToLinearHeading(new Pose2d(-47, 50,Math.toRadians(-90)),Math.toRadians(120))
+                    .waitSeconds(.02)
+                    .setTangent(Math.toRadians(90))
+                    .lineToY(62)
+                    .waitSeconds(.75)
+                    .setTangent(Math.toRadians(-40))
+                    .splineToLinearHeading(new Pose2d(-11.25, 32,Math.toRadians(90)),Math.toRadians(-48))
+                    .waitSeconds(1.0)
+                    .setTangent(Math.toRadians(120))
+                    .splineToLinearHeading(new Pose2d(-47, 50,Math.toRadians(-90)),Math.toRadians(120))
 
-
-
-                    //.splineTo(new Vector2d(20, 30), Math.toRadians(90))
-                    //.splineTo(new Vector2d(0, 60), Math.toRadians(180))
                     .build());
-        }
+        }   else if (autonChoice == 9) {
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-60.77, -48, Math.toRadians(0)))
+                .splineTo(new Vector2d(-40.25, -18), Math.toRadians(90))
+                .splineTo(new Vector2d(-60.77, 12), Math.toRadians(180))
+                .build());
+    }
+
 
                 meepMeep.setBackground(MeepMeep.Background.FIELD_INTO_THE_DEEP_JUICE_DARK)
                 .setDarkMode(true)
