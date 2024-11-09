@@ -10,14 +10,16 @@ public class IntakeArm {
     private Servo intakeArmServo;
 
     // Target positions for the servo arm
-    private static final double INTAKE_POSITION = 0.245; //above group... will kill power
-    private static final double DRIVE_POSITION = 0.8; //perpindicuar
-    private static final double TRANSFER_POSITION = 0.88; //servo towards slides
-    private static final double ABYSS_POSITION = 0.4; //servo towards slides
+    private static final double INTAKE_POSITION = 0.208; //above group... will kill power .245
+    private static final double INTAKE_TELEOP_POSITION = 0.211;
+    private static final double DRIVE_POSITION = 0.77; //perpindicuar .8
+    private static final double TRANSFER_POSITION = 0.85; //servo towards slides .88
+    private static final double ABYSS_POSITION = 0.37; //servo towards slides .4
+    private static final double INTAKE_FAR_POSITION = 0.225; //above group... will kill power .245
 
     private ElapsedTime armTimer = new ElapsedTime();
     public enum INTAKE_ARM_STATES{
-        INTAKE_ARM_INTAKE_POS, INTAKE_ARM_DRIVE_POS, INTAKE_ARM_TRANSFER_POS, INTAKE_ARM_ABYSS_POS
+        INTAKE_ARM_INTAKE_POS, INTAKE_ARM_DRIVE_POS, INTAKE_ARM_TRANSFER_POS, INTAKE_ARM_ABYSS_POS, INTAKE_ARM_INTAKE_FAR_POS
     }
 
     private INTAKE_ARM_STATES curARMState = null;
@@ -39,7 +41,12 @@ public class IntakeArm {
             curARMState = INTAKE_ARM_STATES.INTAKE_ARM_INTAKE_POS;
             nextARMState = INTAKE_ARM_STATES.INTAKE_ARM_INTAKE_POS;
     }
-
+    // Method to move the arm to the intake position
+    public void armPositionFarIntake() {
+        intakeArmServo.setPosition(INTAKE_FAR_POSITION);
+        curARMState = INTAKE_ARM_STATES.INTAKE_ARM_INTAKE_FAR_POS;
+        nextARMState = INTAKE_ARM_STATES.INTAKE_ARM_INTAKE_FAR_POS;
+    }
     public void armPositionAbyss() {
         intakeArmServo.setPosition(ABYSS_POSITION);
         curARMState = INTAKE_ARM_STATES.INTAKE_ARM_ABYSS_POS;

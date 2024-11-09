@@ -19,8 +19,8 @@ public class DualSlideMechanism {
     private static final int SPECIMENGRAB_POSITION_RIGHT = 0;
     private static final int CLIMB_POSITION_LEFT = 1550;
     private static final int CLIMB_POSITION_RIGHT = 1550; //😎👌👌 🐽🐖🐈🦕🐉🐍🦖🦎🐊
-    private static final int END_HANG_POSITION_LEFT = 1250;
-    private static final int END_HANG_POSITION_RIGHT = 1250; //😎👌👌 🐽🐖🐈🦕🐉🐍🦖🦎🐊
+    private static final int END_HANG_POSITION_LEFT = 1150;
+    private static final int END_HANG_POSITION_RIGHT = 1150; //😎👌👌 🐽🐖🐈🦕🐉🐍🦖🦎🐊
 
     //TODONE 😎👌👌
     public enum SLIDE_STATES{
@@ -34,16 +34,21 @@ public class DualSlideMechanism {
 //stop don't rock to me, boulder pebble wannabe like oh, concrete.
         slideMotorL = hwMap.get(DcMotor.class, "slide_motor_left");
         this.slideMotorL.setDirection(DcMotor.Direction.FORWARD);
-        this.slideMotorL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        this.slideMotorL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); //TODO
         this.slideMotorL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         slideMotorR = hwMap.get(DcMotor.class, "slide_motor_right"); //Mr. Todone-->😎👌👌kitrbywudywgdddddddddddddd
         this.slideMotorR.setDirection(DcMotor.Direction.REVERSE);
-        this.slideMotorR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        this.slideMotorR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); //TODO
         this.slideMotorR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        curSlideState = SLIDE_STATES.SLIDE_LOW_POS;
-        nextSlideState = SLIDE_STATES.SLIDE_LOW_POS;
+        curSlideState = SLIDE_STATES.SLIDE_SPECIMENDROP_POS;
+        nextSlideState = SLIDE_STATES.SLIDE_SPECIMENDROP_POS;
     }
 
+
+    public void resetSlide() {
+        this.slideMotorL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        this.slideMotorR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    }
 
     // Method to extend the slide
     public void extendSlide() {
@@ -102,6 +107,12 @@ public class DualSlideMechanism {
     public void slidePositionLow() {
         nextSlideState = SLIDE_STATES.SLIDE_LOW_POS;
         moveToPosition(LOW_POSITION_LEFT, LOW_POSITION_RIGHT);
+    }
+
+    // Method to move the slide to any position
+    public void slidePositionAny(int leftPos, int rightPos) {
+//        nextSlideState = SLIDE_STATES.SLIDE_LOW_POS;
+        moveToPosition(leftPos, rightPos);
     }
 
     public void slidePositionClimb() {

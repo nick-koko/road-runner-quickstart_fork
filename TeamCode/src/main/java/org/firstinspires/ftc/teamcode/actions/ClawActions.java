@@ -46,6 +46,24 @@ public class ClawActions extends ClawMechanism {
         return new Close();
     }
 
+    public class DropPosition implements Action {
+        private boolean initialized = false;
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (!initialized) {
+                clawDropPosition();
+                initialized = true;
+                return true;
+            }
+            return false;
+        }
+    }
+
+    public Action dropPosition() {
+        return new DropPosition();
+    }
+
     public class Off implements Action {
         private boolean initialized = false;
 

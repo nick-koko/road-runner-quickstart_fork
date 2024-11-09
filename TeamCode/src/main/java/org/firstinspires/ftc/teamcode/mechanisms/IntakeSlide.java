@@ -23,12 +23,15 @@ public class IntakeSlide {
 
         slideMotor = hwMap.get(DcMotor.class, "intake_slide_motor");
         this.slideMotor.setDirection(DcMotor.Direction.FORWARD);
-        this.slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+ //       this.slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); //TODO
         this.slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         curSlideState = SLIDE_STATES.SLIDE_TRANSFER_POS;
         nextSlideState = SLIDE_STATES.SLIDE_TRANSFER_POS;
     }
 
+    public void resetSlide() {
+        this.slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    }
 
     // Method to extend the slide
     public void extendSlide(double power) {

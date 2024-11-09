@@ -33,6 +33,23 @@ public class IntakeSlideAction extends IntakeSlide {
         return new Transfer();
     }
 
+    public class ResetEncoders implements Action {
+        private boolean initialized = false;
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (!initialized) {
+                resetSlide();
+                initialized = true;
+                return true;
+            }
+            return false;
+        }
+    }
+    public Action resetEncoders() {
+        return new ResetEncoders();
+    }
+
     public class AutonAction implements Action {
         private boolean initialized = false;
 

@@ -4,6 +4,7 @@ import static java.lang.Thread.sleep;
 
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
+import com.acmerobotics.roadrunner.SequentialAction;
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.noahbres.meepmeep.MeepMeep;
@@ -14,25 +15,68 @@ public class MeepMeepTesting {
     public static void main(String[] args) {
         MeepMeep meepMeep = new MeepMeep(900);
 
-        int autonChoice = 8;
+        int autonChoice = 1;
         Action blueCloseSideLeftLine;
         Action blueCloseSideCenterLine;
         Action blueCloseSideRightLine;
+        Action specimenAuton;
+        Action sampleAuton;
+        Action getOneMoreSpecimen;
 
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
                 .setConstraints(50, 40, Math.toRadians(180), Math.toRadians(180), 14)
                 .build();
         if (autonChoice == 1) {
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(11.8, 61.7, Math.toRadians(270)))
-                .lineToYSplineHeading(33, Math.toRadians(0))
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(32.875, 62, Math.toRadians(90)))
+                                .setTangent(Math.toRadians(-80))
+          //      .stopAndAdd(intakeArm.armTransfer())
+          //      .stopAndAdd(intakeSpinner.outtakePosition())
+                .waitSeconds(.2)
+          //      .afterTime(0.1, outtakeSlide.high())
+           //     .afterTime(0.25, intakeSpinner.stopPosition())
+           //     .afterTime(2.0, outtakeDump.dumpPosition())
+                .splineToLinearHeading(new Pose2d(57, 55, Math.toRadians(-135)), Math.toRadians(0))
+                .waitSeconds(0.5)
+//                .afterTime(0.01,outtakeDump.downPosition())
+//                .afterTime(0.1,outtakeSlide.low())
+//                .afterTime(0.5,intakeArm.armIntake())
+//                .afterTime(0.5,intakeSpinner.intakePosition())
+                .splineToLinearHeading(new Pose2d(38.5, 25.5, Math.toRadians(0)), Math.toRadians(-100))
+                // PICKUP 3rd sample
+                .setTangent(0)
+                .lineToX(48.0)
+//                .afterTime(0.01, intakeArm.armTransfer())
+                .lineToX(43.0)
+//                .stopAndAdd(intakeSpinner.outtakePosition())
+                .setTangent(-180)
+ //               .afterTime(0.5, outtakeSlide.high())
+ //               .afterTime(0.25, intakeSpinner.stopPosition())
+ //               .afterTime(1.8, outtakeDump.dumpPosition())
+                .splineToLinearHeading(new Pose2d(57, 55, Math.toRadians(-135)), Math.toRadians(110))
+
+/*
+
+
+
+
+  //              .afterTime(0.01,outtakeDump.downPosition())
+  //              .afterTime(0.1,outtakeSlide.low())
+  //              .afterTime(0.5,intakeArm.armIntake())
+  //              .afterTime(0.5,intakeSpinner.intakePosition())
+                .setTangent(Math.toRadians(180))
+                .splineToLinearHeading(new Pose2d(38.5, 25.5, Math.toRadians(0)), Math.toRadians(10))
+                .setTangent(0)
+
+
+                /*               .lineToYSplineHeading(33, Math.toRadians(0))
                 .waitSeconds(2)
                  .setTangent(Math.toRadians(90))
                 .splineToConstantHeading(new Vector2d(15, 48), Math.toRadians(0))
                 .splineToConstantHeading(new Vector2d(32, 48), Math.toRadians(0))
                 .splineToSplineHeading(new Pose2d(44.5, 30,Math.toRadians(180)), Math.toRadians(0))
                 .lineToX(47.5)
-                .waitSeconds(3)
+                .waitSeconds(3) */
                 .build());
 
         } else if (autonChoice == 2) {
@@ -122,8 +166,8 @@ public class MeepMeepTesting {
 
             myBot.runAction(blueCloseSideLeftLine);
         }  else if (autonChoice == 7) {
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(9.25, 62, Math.toRadians(90)))
 
+            sampleAuton = myBot.getDrive().actionBuilder(new Pose2d(9.25, 62, Math.toRadians(90)))
 //                .afterTime(0.1, outtakeSlide.specimenDrop())
                 .lineToY(32)
                 .waitSeconds((1.0))
@@ -183,40 +227,92 @@ public class MeepMeepTesting {
 //                .afterTime(0.5,outtakeSlide.specimenDrop())
                 .splineToLinearHeading(new Pose2d(21, 0, Math.toRadians(0)), Math.toRadians(180))
 
-                .build());
+                .build();
+
+            myBot.runAction(sampleAuton);
+
          }  else if (autonChoice == 8) {
-            myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-9.25, 62, Math.toRadians(90)))
 
-                    .lineToY(32)
+            specimenAuton = myBot.getDrive().actionBuilder(new Pose2d(-9.25, 62, Math.toRadians(90)))
+
+            //        .afterTime(0.1, outtakeSlide.specimenDrop())
+                    .strafeTo(new Vector2d(-9.25,32))
                     .waitSeconds((1.0))
+             //       .stopAndAdd(outtakeClaw.off())
+             //       .stopAndAdd(outtakeSlide.low())
                     .setTangent(Math.toRadians(120))
-                    .splineToSplineHeading(new Pose2d(-28, 36,Math.toRadians(180)), Math.toRadians(180))
-                    .splineToConstantHeading(new Vector2d(-40, 10), Math.toRadians(180))
-                    .splineToSplineHeading(new Pose2d(-44, 11, Math.toRadians(-90)), Math.toRadians(120))
-                    .splineToConstantHeading(new Vector2d(-48, 50), Math.toRadians(120))
-                    .splineToConstantHeading(new Vector2d(-50, 12), Math.toRadians(200))
-                    .splineToConstantHeading(new Vector2d(-50, 45), Math.toRadians(90))
-                    .splineToConstantHeading(new Vector2d(-47, 50), Math.toRadians(80))
-                    .waitSeconds(.02)
+                    .splineToSplineHeading(new Pose2d(-22, 36,Math.toRadians(180)), Math.toRadians(180))
+                    .splineToConstantHeading(new Vector2d(-33, 17), Math.toRadians(-90))
+                    .splineToSplineHeading(new Pose2d(-42, 16, Math.toRadians(-90)), Math.toRadians(120))
+                    .splineToConstantHeading(new Vector2d(-44, 46), Math.toRadians(90))
+                    .splineToConstantHeading(new Vector2d(-55, 18), Math.toRadians(200))
+                    .splineToConstantHeading(new Vector2d(-57, 43), Math.toRadians(60))
+             //       .afterTime(.1, outtakeClaw.open())
+                    .splineToConstantHeading(new Vector2d(-46.5, 46), Math.toRadians(80))
+                    .waitSeconds(.5)
                     .setTangent(Math.toRadians(90))
-                    .lineToY(62)
-                    .waitSeconds(.75)
+                    .strafeTo(new Vector2d(-46.5,62.5))
+                    .waitSeconds(.1)
+//                    .stopAndAdd(outtakeClaw.close())
+//                    .stopAndAdd(outtakeSlide.extendAction())
                     .setTangent(Math.toRadians(-40))
-                    .splineToLinearHeading(new Pose2d(-10.25, 32,Math.toRadians(90)),Math.toRadians(-48))
+//                    .afterTime(.01, outtakeSlide.specimenDrop())
+                    .splineToLinearHeading(new Pose2d(-10.25, 31,Math.toRadians(90)),Math.toRadians(-90))
+//                    .strafeTo(new Vector2d(-10.25,32))
                     .waitSeconds(1.0)
+//                    .stopAndAdd(outtakeClaw.off())
+//                    .stopAndAdd(outtakeSlide.low())
                     .setTangent(Math.toRadians(120))
-                    .splineToLinearHeading(new Pose2d(-47, 50,Math.toRadians(-90)),Math.toRadians(120))
-                    .waitSeconds(.02)
+//                    .afterTime(.1, outtakeClaw.open())
+                    .splineToLinearHeading(new Pose2d(-46.5, 46,Math.toRadians(-90)),Math.toRadians(120))
+//                    .waitSeconds(.2)
                     .setTangent(Math.toRadians(90))
-                    .lineToY(62)
-                    .waitSeconds(.75)
+                    .strafeTo(new Vector2d(-46.5,62.5))
+                    .waitSeconds(.1)
+//                    .stopAndAdd(outtakeClaw.close())
+//                    .stopAndAdd(outtakeSlide.extendAction())
                     .setTangent(Math.toRadians(-40))
-                    .splineToLinearHeading(new Pose2d(-11.25, 32,Math.toRadians(90)),Math.toRadians(-48))
+//                    .afterTime(.01, outtakeSlide.specimenDrop())
+                    .splineToLinearHeading(new Pose2d(-11.25, 31,Math.toRadians(90)),Math.toRadians(-90))
+//                    .strafeTo(new Vector2d(-11.25,32))
                     .waitSeconds(1.0)
+ //                   .stopAndAdd(outtakeClaw.off())
+ //                   .stopAndAdd(outtakeSlide.low())
                     .setTangent(Math.toRadians(120))
-                    .splineToLinearHeading(new Pose2d(-47, 50,Math.toRadians(-90)),Math.toRadians(120))
+ //                   .afterTime(.1, outtakeClaw.open())
+                    .splineToLinearHeading(new Pose2d(-46.5, 46,Math.toRadians(-90)),Math.toRadians(120))
+ //                   .waitSeconds(.2)
+                    .setTangent(Math.toRadians(90))
+                    .strafeTo(new Vector2d(-46.5,62.5))
+                    .waitSeconds(.1)
+//                    .stopAndAdd(outtakeClaw.close())
+//                    .stopAndAdd(outtakeSlide.extendAction())
+            /*        .setTangent(Math.toRadians(-40))
+//                    .afterTime(.01, outtakeSlide.specimenDrop())
+                    .splineToLinearHeading(new Pose2d(-7.0, 31,Math.toRadians(90)),Math.toRadians(-90))
+//                    .strafeTo(new Vector2d(-11.75,32))
+                    .waitSeconds(1.0)
+//                    .stopAndAdd(outtakeClaw.off())
+//                    .stopAndAdd(outtakeSlide.low()) */
+                    .build();
+            getOneMoreSpecimen = myBot.getDrive().actionBuilder(new Pose2d(-46.5, 62.5, Math.toRadians(-90)))
+//                    .stopAndAdd(outtakeSlide.extendAction())
+                    .setTangent(Math.toRadians(-40))
+//                    .afterTime(.01, outtakeSlide.specimenDrop())
+                    .splineToLinearHeading(new Pose2d(-7.0, 31,Math.toRadians(90)),Math.toRadians(-90))
+//                    .strafeTo(new Vector2d(-11.75,32))
+                    .waitSeconds(1.0)
+//                    .stopAndAdd(outtakeClaw.off())
+//                    .stopAndAdd(outtakeSlide.low())
+                    .build();
 
-                    .build());
+            Action runBoth = new SequentialAction(
+                    specimenAuton
+                   , getOneMoreSpecimen
+            );
+
+            myBot.runAction(runBoth);
+
         }   else if (autonChoice == 9) {
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-60.77, -48, Math.toRadians(0)))
                 .splineTo(new Vector2d(-40.25, -18), Math.toRadians(90))

@@ -10,12 +10,13 @@ public class ClawMechanism {
     private ServoImplEx clawServo;
 
     // Target positions for the servo claw
-    private static final double OPEN_POSITION = 0.5;
-    private static final double CLOSE_POSITION = 0.25;
+    private static final double OPEN_POSITION = 0.6;
+    private static final double DROP_POSITION = 0.365;
+    private static final double CLOSE_POSITION = 0.34;
     private ElapsedTime clawTimer = new ElapsedTime();
 
     public enum CLAW_STATES {
-        CLAW_OPEN_POS, CLAW_CLOSE_POS
+        CLAW_OPEN_POS, CLAW_CLOSE_POS, CLAW_DROP_POS
     }
 
     private CLAW_STATES curClawState = null;
@@ -25,7 +26,7 @@ public class ClawMechanism {
     public void init(HardwareMap hwMap) {
 
         clawServo = hwMap.get(ServoImplEx.class, "claw_servo");
-        this.clawServo.setDirection(Servo.Direction.FORWARD);
+        this.clawServo.setDirection(Servo.Direction.REVERSE);
         curClawState = CLAW_STATES.CLAW_OPEN_POS;
     }
 
@@ -33,6 +34,11 @@ public class ClawMechanism {
     public void clawOpen() {
         clawServo.setPosition(OPEN_POSITION);
         curClawState = CLAW_STATES.CLAW_OPEN_POS;
+    }
+
+    public void clawDropPosition() {
+        clawServo.setPosition(DROP_POSITION);
+        curClawState = CLAW_STATES.CLAW_DROP_POS;
     }
 
     // Method to move the claw to the close position
