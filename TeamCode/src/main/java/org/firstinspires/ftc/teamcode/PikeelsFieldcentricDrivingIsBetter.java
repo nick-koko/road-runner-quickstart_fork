@@ -95,8 +95,9 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
             double botHeadingRad = robot.pose.heading.toDouble();
             double botHeading = Math.toDegrees(botHeadingRad);
 
-            if (gamepad2.back) {
+            if (gamepad1.back) {
 //TODO add reset of pose here
+                robot.pose = new Pose2d(9.25, 62, Math.toRadians(90));
             }
             if (gamepad1.left_bumper) {
                 targetAngleDeg = -45.0 + angleAllianceOffset;
