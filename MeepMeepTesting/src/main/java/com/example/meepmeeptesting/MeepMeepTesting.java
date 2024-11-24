@@ -15,7 +15,7 @@ public class MeepMeepTesting {
     public static void main(String[] args) {
         MeepMeep meepMeep = new MeepMeep(900);
 
-        int autonChoice = 1;
+        int autonChoice = 8;
         Action blueCloseSideLeftLine;
         Action blueCloseSideCenterLine;
         Action blueCloseSideRightLine;
@@ -243,12 +243,14 @@ public class MeepMeepTesting {
                     .setTangent(Math.toRadians(120))
                     .splineToSplineHeading(new Pose2d(-22, 36,Math.toRadians(180)), Math.toRadians(180))
                     .splineToConstantHeading(new Vector2d(-33, 17), Math.toRadians(-90))
-                    .splineToSplineHeading(new Pose2d(-42, 16, Math.toRadians(-90)), Math.toRadians(120))
+                    .splineToSplineHeading(new Pose2d(-42, 16, Math.toRadians(180)), Math.toRadians(120))
                     .splineToConstantHeading(new Vector2d(-44, 46), Math.toRadians(90))
                     .splineToConstantHeading(new Vector2d(-55, 18), Math.toRadians(200))
                     .splineToConstantHeading(new Vector2d(-57, 43), Math.toRadians(60))
              //       .afterTime(.1, outtakeClaw.open())
-                    .splineToConstantHeading(new Vector2d(-46.5, 46), Math.toRadians(80))
+//                    .splineToSplineHeading(new Pose2d(-46.5, 56, Math.toRadians(-90)), Math.toRadians(70))
+
+                    .splineToConstantHeading(new Vector2d(-46.5, 56), Math.toRadians(80))
                     .waitSeconds(.5)
                     .setTangent(Math.toRadians(90))
                     .strafeTo(new Vector2d(-46.5,62.5))
@@ -264,7 +266,7 @@ public class MeepMeepTesting {
 //                    .stopAndAdd(outtakeSlide.low())
                     .setTangent(Math.toRadians(120))
 //                    .afterTime(.1, outtakeClaw.open())
-                    .splineToLinearHeading(new Pose2d(-46.5, 46,Math.toRadians(-90)),Math.toRadians(120))
+                    .splineToLinearHeading(new Pose2d(-46.5, 56,Math.toRadians(-90)),Math.toRadians(120))
 //                    .waitSeconds(.2)
                     .setTangent(Math.toRadians(90))
                     .strafeTo(new Vector2d(-46.5,62.5))
@@ -280,7 +282,7 @@ public class MeepMeepTesting {
  //                   .stopAndAdd(outtakeSlide.low())
                     .setTangent(Math.toRadians(120))
  //                   .afterTime(.1, outtakeClaw.open())
-                    .splineToLinearHeading(new Pose2d(-46.5, 46,Math.toRadians(-90)),Math.toRadians(120))
+                    .splineToLinearHeading(new Pose2d(-46.5, 56,Math.toRadians(-90)),Math.toRadians(120))
  //                   .waitSeconds(.2)
                     .setTangent(Math.toRadians(90))
                     .strafeTo(new Vector2d(-46.5,62.5))

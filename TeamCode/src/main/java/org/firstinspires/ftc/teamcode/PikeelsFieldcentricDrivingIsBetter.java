@@ -20,44 +20,42 @@ import org.firstinspires.ftc.teamcode.mechanisms.OuttakeDumpMechanism;
 
 @TeleOp(name="Teleop_PikeelzFieldDriveYay_2024")
 public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
-    private double intakeSlidePowerFactor = 0.2;
     @Override
     public void runOpMode() throws InterruptedException {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
+
+        // Odometry Intitialization
         Pose2d startingPose = new Pose2d(9.25, 62, Math.toRadians(90));
-        PinpointDrive robot = new PinpointDrive(hardwareMap, new Pose2d(9.25, 62, Math.toRadians(90)));
 
-        //INTAKE SUBSYSTEM
+        if (globalRobotData.hasAutonRun){
+            startingPose = globalRobotData.autonPose;
+            globalRobotData.hasAutonRun = false;
+        }
+
+        PinpointDrive robot = new PinpointDrive(hardwareMap, startingPose);
+
+        //Mechanisim Initialization
         IntakeServoSpinner frontIntake = new IntakeServoSpinner();
-        ClawMechanism specimenClaw = new ClawMechanism();
-
-        //SLIDE SUBSYSTEM
-        DualSlideMechanism outtakeSlide =  new DualSlideMechanism();  //Mr. Todone
-        IntakeSlide intakeSlide =  new IntakeSlide();  //Mr. Todone
-        //ARM SUBSYSTEM
-        IntakeArm intakeArmServo = new IntakeArm();
-        OuttakeDumpMechanism dumper = new OuttakeDumpMechanism();
-
-        double intakeSlidePower = 0.0;
-        //Intake
         frontIntake.init(hardwareMap);
 
-        //Intake slide
-        intakeSlide.init(hardwareMap);
-
-        //Outtake slide
-        outtakeSlide.init(hardwareMap);
-
-        //Arm
-        intakeArmServo.init(hardwareMap);
-
-        dumper.init(hardwareMap);
-
-        //Claw
+        ClawMechanism specimenClaw = new ClawMechanism();
         specimenClaw.init(hardwareMap);
 
-        //ColorSensor
+        DualSlideMechanism outtakeSlide =  new DualSlideMechanism();  //Mr. Todone
+        outtakeSlide.init(hardwareMap);
 
+        IntakeSlide intakeSlide =  new IntakeSlide();  //Mr. Todone
+        intakeSlide.init(hardwareMap);
+
+        IntakeArm intakeArmServo = new IntakeArm();
+        intakeArmServo.init(hardwareMap);
+
+        OuttakeDumpMechanism dumper = new OuttakeDumpMechanism();
+        dumper.init(hardwareMap);
+
+
+        double intakeSlidePower = 0.0;
+        double intakeSlidePowerFactor;
         boolean fieldCentric = true;
         boolean goToTargetAngle;
         double targetAngleDeg = -135.0;
@@ -73,10 +71,6 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
 
         // Wait for the game to start (Display Gyro value while waiting)
         while (opModeInInit()) {
-             if (globalRobotData.hasAutonRun){
-                 startingPose = globalRobotData.autonPose;
-                 globalRobotData.hasAutonRun = false;
-             }
 
         }
         robot.pose = startingPose;

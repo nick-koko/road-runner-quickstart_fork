@@ -1,16 +1,17 @@
 package org.firstinspires.ftc.teamcode.mechanisms;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
+@Config
 public class OuttakeDumpMechanism {
     // Assuming some motor control library is used, e.g., FTC SDK, but this can be customized
     private Servo dumperServo;
 
     // Target positions for the servo arm
-    private static final double DOWN_POSITION = 0.23;
-    private static final double DUMP_POSITION = 0.96;
+    public static double DOWN_POSITION = 0.11;  //Axon was 0.23, switched to .11 with the DSSERVO
+    public static double DUMP_POSITION = 0.96;
     private ElapsedTime dumperTimer = new ElapsedTime();
     public enum DUMPER_STATES{
         DUMPER_DUMP_POS, DUMPER_DOWN_POS

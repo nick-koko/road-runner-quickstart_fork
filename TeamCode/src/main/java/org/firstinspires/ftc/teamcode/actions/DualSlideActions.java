@@ -33,6 +33,31 @@ public class DualSlideActions extends DualSlideMechanism {
         return new Low();
     }
 
+    public class DropSpecimen implements Action {
+        private boolean initialized = false;
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (!initialized) {
+                slidePositionLow();
+                initialized = true;
+            }
+
+            SLIDE_STATES state = getSlideState();
+            int slideMotorPos = getSlideLMotorPos();
+            packet.put("liftstate", state);
+            packet.put("LiftEncoder", slideMotorPos);
+            if (slideMotorPos < (DualSlideMechanism.SPECIMENDROP_POSITION_LEFT - 300)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+    public Action specimenDropDown() {
+        return new DropSpecimen();
+    }
+
     public class StopSlide implements Action {
         private boolean initialized = false;
 

@@ -1,21 +1,22 @@
 package org.firstinspires.ftc.teamcode.mechanisms;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
+@Config
 public class IntakeArm {
     // Assuming some motor control library is used, e.g., FTC SDK, but this can be customized
     private Servo intakeArmServo;
 
     // Target positions for the servo arm
-    private static final double INTAKE_POSITION = 0.208; //above group... will kill power .245
-    private static final double INTAKE_TELEOP_POSITION = 0.211;
-    private static final double DRIVE_POSITION = 0.77; //perpindicuar .8
-    private static final double TRANSFER_POSITION = 0.85; //servo towards slides .88
-    private static final double ABYSS_POSITION = 0.37; //servo towards slides .4
-    private static final double INTAKE_FAR_POSITION = 0.225; //above group... will kill power .245
+    public static double INTAKE_POSITION = 0.208; //above group... will kill power .245
+    static double INTAKE_TELEOP_POSITION = 0.211;
+    static double DRIVE_POSITION = 0.77; //perpindicuar .8
+    static double TRANSFER_POSITION = 0.85; //servo towards slides .88
+    static double ABYSS_POSITION = 0.37; //servo towards slides .4
+    public static double INTAKE_FAR_POSITION = 0.225; //above group... will kill power .245
 
     private ElapsedTime armTimer = new ElapsedTime();
     public enum INTAKE_ARM_STATES{

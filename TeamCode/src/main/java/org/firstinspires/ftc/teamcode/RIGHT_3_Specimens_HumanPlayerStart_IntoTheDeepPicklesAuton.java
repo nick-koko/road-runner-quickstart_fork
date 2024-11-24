@@ -32,6 +32,14 @@ public class RIGHT_3_Specimens_HumanPlayerStart_IntoTheDeepPicklesAuton extends 
         Pose2d initialPoseLeftSideBuckets = new Pose2d(9.25, 62, Math.toRadians(90));
         Pose2d initialPoseLeftSideSampleStart = new Pose2d(32.875, 62, Math.toRadians(90));
         Pose2d startingPose = initialPoseRightSideSpecimen;
+
+        // Set standard max Velocities/Accels for this auto
+        MecanumDrive.PARAMS.maxAngAccel = Math.PI;
+        MecanumDrive.PARAMS.maxAngVel = Math.PI;
+        MecanumDrive.PARAMS.maxProfileAccel = 50.0;
+        MecanumDrive.PARAMS.maxWheelVel = 50.0;
+        MecanumDrive.PARAMS.minProfileAccel = -30.0;
+
         PinpointDrive drive = new PinpointDrive(hardwareMap, startingPose);
 
         globalRobotData.hasAutonRun = true;

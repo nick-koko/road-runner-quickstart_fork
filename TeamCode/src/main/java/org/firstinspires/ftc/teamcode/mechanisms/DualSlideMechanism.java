@@ -10,11 +10,11 @@ public class DualSlideMechanism {
     DcMotor slideMotorR;
     // Target positions for the slide mechanism
     private static final int LOW_POSITION_LEFT = 0;
-    private static final int SPECIMENDROP_POSITION_LEFT = 1316;
+    public static final int SPECIMENDROP_POSITION_LEFT = 1316;
     private static final int HIGH_POSITION_LEFT = 1900;
     private static final int SPECIMENGRAB_POSITION_LEFT = 0;
     private static final int LOW_POSITION_RIGHT = 0;
-    private static final int SPECIMENDROP_POSITION_RIGHT = 1316;
+    public static final int SPECIMENDROP_POSITION_RIGHT = 1316;
     private static final int HIGH_POSITION_RIGHT = 1900;
     private static final int SPECIMENGRAB_POSITION_RIGHT = 0;
     private static final int CLIMB_POSITION_LEFT = 1550;
