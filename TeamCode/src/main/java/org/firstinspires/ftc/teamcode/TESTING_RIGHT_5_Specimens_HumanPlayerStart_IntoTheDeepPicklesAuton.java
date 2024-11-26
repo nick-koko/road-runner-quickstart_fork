@@ -19,8 +19,8 @@ import org.firstinspires.ftc.teamcode.actions.OuttakeDumpActions;
 
 
 @Config
-@Autonomous(name = "RIGHT_FIVE_SPECIMENS_HumanPlayer_GigglyPicklesAuton", group = "Autonomous")
-public class RIGHT_5_Specimens_HumanPlayerStart_IntoTheDeepPicklesAuton extends LinearOpMode {
+@Autonomous(name = "TESTTTT RIGHT_FIVE_SPECIMENS_HumanPlayer_GigglyPicklesAuton", group = "Autonomous")
+public class TESTING_RIGHT_5_Specimens_HumanPlayerStart_IntoTheDeepPicklesAuton extends LinearOpMode {
 
     //OUTTAKE DUAL SLIDE SUBSYSTEM
         //TODO Add Outtake Dual Slide constants here
@@ -88,26 +88,27 @@ public class RIGHT_5_Specimens_HumanPlayerStart_IntoTheDeepPicklesAuton extends 
                 .splineToConstantHeading(new Vector2d(-66, 50), Math.toRadians(70))
 
                 .afterTime(.1, outtakeClaw.open())
-                .splineToConstantHeading(new Vector2d(-46.5, 55), Math.toRadians(80), null, new ProfileAccelConstraint(-35.0, 68.0)) //change from 46 to 55
-                .waitSeconds(.1) //change from 0.5 to 0.1
+                .splineToConstantHeading(new Vector2d(-46.5, 55), Math.toRadians(80), null, new ProfileAccelConstraint(-25.0, 68.0)) //change from 46 to 55
+                //     .waitSeconds(.1) //change from 0.5 to 0.1
                 .setTangent(Math.toRadians(90))
+                .splineToConstantHeading(new Vector2d(-46.5, 62.5), Math.toRadians(90), null, new ProfileAccelConstraint(-20.0, 68.0)) //change from 46 to 55
                 .strafeTo(new Vector2d(-46.5,62.5)) //TODO Maybe reduce max decel
                 .stopAndAdd(outtakeClaw.close())
                 .stopAndAdd(outtakeSlide.extendAction())
-                .setTangent(Math.toRadians(-40))
+                .setTangent(Math.toRadians(-35))
                 .afterTime(.01, outtakeSlide.specimenDrop())
                 .afterTime(0.5, outtakeClaw.dropPosition()) //change to aftertime
 
                 // Second Specimen target 1.0"
-                .splineToLinearHeading(new Pose2d(1.0, 31.5,Math.toRadians(90)),Math.toRadians(-90), null, new ProfileAccelConstraint(-35.0, 68.0)) //TODO Fix drop location and slow down decel
- //               .strafeTo(new Vector2d(-10.25,32))
+                .splineToLinearHeading(new Pose2d(1.0, 31.5,Math.toRadians(90)),Math.toRadians(-75), null, new ProfileAccelConstraint(-35.0, 68.0)) //TODO Fix drop location and slow down decel
+                //               .strafeTo(new Vector2d(-10.25,32))
                 .stopAndAdd(outtakeSlide.specimenDropDown()) //TODO move before slide goes to low
-                .setTangent(Math.toRadians(120))
+                .setTangent(Math.toRadians(122))
                 .afterTime(.1, outtakeClaw.open())
-                .splineToLinearHeading(new Pose2d(-46.5, 55,Math.toRadians(-90)),Math.toRadians(120), null, new ProfileAccelConstraint(-45.0, 68.0))
-  //              .waitSeconds(.2)
+                .splineToSplineHeading(new Pose2d(-46.5, 55,Math.toRadians(-90)),Math.toRadians(90), null, new ProfileAccelConstraint(-45.0, 68.0))
+                //              .waitSeconds(.2)
                 .setTangent(Math.toRadians(90))
-                .strafeTo(new Vector2d(-46.5,62.5)) //TODO Maybe reduce max decel
+                .strafeTo(new Vector2d(-46.5,62.5), null, new ProfileAccelConstraint(-30.0, 68.0)) //TODO Maybe reduce max decel
                 .stopAndAdd(outtakeClaw.close())
                 .stopAndAdd(outtakeSlide.extendAction())
                 .setTangent(Math.toRadians(-40))
@@ -115,15 +116,15 @@ public class RIGHT_5_Specimens_HumanPlayerStart_IntoTheDeepPicklesAuton extends 
                 .afterTime(0.5, outtakeClaw.dropPosition()) //change to aftertime
 
                 // Third Sepcimen target -1.0"
-                .splineToLinearHeading(new Pose2d(-1.0, 31.5,Math.toRadians(90)),Math.toRadians(-90), null, new ProfileAccelConstraint(-35.0, 68.0)) //TODO Fix drop location and slow down decel
-  //              .strafeTo(new Vector2d(-11.25,32))
+                .splineToLinearHeading(new Pose2d(-1.0, 31.5,Math.toRadians(90)),Math.toRadians(-75), null, new ProfileAccelConstraint(-35.0, 68.0)) //TODO Fix drop location and slow down decel
+                //              .strafeTo(new Vector2d(-11.25,32))
                 .stopAndAdd(outtakeSlide.specimenDropDown()) //TODO move before slide goes to low
-                .setTangent(Math.toRadians(120))
+                .setTangent(Math.toRadians(123))
                 .afterTime(.1, outtakeClaw.open())
-                .splineToLinearHeading(new Pose2d(-46.5, 55,Math.toRadians(-90)),Math.toRadians(120), null, new ProfileAccelConstraint(-45.0, 68.0))
-  //              .waitSeconds(.2)
+                .splineToSplineHeading(new Pose2d(-46.5, 55,Math.toRadians(-90)),Math.toRadians(90), null, new ProfileAccelConstraint(-45.0, 68.0))
+                //              .waitSeconds(.2)
                 .setTangent(Math.toRadians(90))
-                .strafeTo(new Vector2d(-46.5,62.5)) //TODO Maybe reduce max decel
+                .strafeTo(new Vector2d(-46.5,62.5), null, new ProfileAccelConstraint(-30.0, 68.0)) //TODO Maybe reduce max decel
                 .stopAndAdd(outtakeClaw.close())
                 .stopAndAdd(outtakeSlide.extendAction())
                 .setTangent(-120)                .setTangent(Math.toRadians(-40))
@@ -131,15 +132,15 @@ public class RIGHT_5_Specimens_HumanPlayerStart_IntoTheDeepPicklesAuton extends 
                 .afterTime(0.5, outtakeClaw.dropPosition()) //change to aftertime
 
                 //Fourth Specimen Target -4.0"
-                .splineToLinearHeading(new Pose2d(-4.0, 31.5,Math.toRadians(90)),Math.toRadians(-90), null, new ProfileAccelConstraint(-35.0, 68.0)) //TODO Fix drop location and slow down decel
+                .splineToLinearHeading(new Pose2d(-4.0, 31.5,Math.toRadians(90)),Math.toRadians(-75), null, new ProfileAccelConstraint(-35.0, 68.0)) //TODO Fix drop location and slow down decel
                 //              .strafeTo(new Vector2d(-11.75,32))
                 .stopAndAdd(outtakeSlide.specimenDropDown()) //TODO move before slide goes to low
-                .setTangent(Math.toRadians(120))
+                .setTangent(Math.toRadians(131))
                 .afterTime(.1, outtakeClaw.open())
-                .splineToLinearHeading(new Pose2d(-46.5, 55,Math.toRadians(-90)),Math.toRadians(120), null, new ProfileAccelConstraint(-45.0, 68.0))
+                .splineToSplineHeading(new Pose2d(-46.5, 55,Math.toRadians(-90)),Math.toRadians(90), null, new ProfileAccelConstraint(-45.0, 68.0))
                 //              .waitSeconds(.2)
                 .setTangent(Math.toRadians(90))
-                .strafeTo(new Vector2d(-46.5,62.5)) //TODO Maybe reduce max decel
+                .strafeTo(new Vector2d(-46.5,62.5), null, new ProfileAccelConstraint(-30.0, 68.0)) //TODO Maybe reduce max decel
                 .stopAndAdd(outtakeClaw.close())
                 .stopAndAdd(outtakeSlide.extendAction())
                 .setTangent(-120)                .setTangent(Math.toRadians(-40))
@@ -147,7 +148,7 @@ public class RIGHT_5_Specimens_HumanPlayerStart_IntoTheDeepPicklesAuton extends 
                 .afterTime(0.5, outtakeClaw.dropPosition()) //change to aftertime
 
                 // Fifth Specimen target -7.0"
-                .splineToLinearHeading(new Pose2d(-7.0, 31.5,Math.toRadians(90)),Math.toRadians(-90), null, new ProfileAccelConstraint(-35.0, 68.0)) //TODO Fix drop location and slow down decel
+                .splineToLinearHeading(new Pose2d(-7.0, 31.5,Math.toRadians(90)),Math.toRadians(-75), null, new ProfileAccelConstraint(-35.0, 68.0)) //TODO Fix drop location and slow down decel
                 //              .strafeTo(new Vector2d(-11.75,32))
                 .stopAndAdd(outtakeSlide.specimenDropDown()) //TODO move before slide goes to low
                 .setTangent(Math.toRadians(135))

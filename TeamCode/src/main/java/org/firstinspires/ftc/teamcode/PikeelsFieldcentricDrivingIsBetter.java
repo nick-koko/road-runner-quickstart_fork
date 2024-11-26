@@ -164,7 +164,7 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
                         stateDelayTime = 0.5;
                     }
                 if (intakeArmTime.time() > stateDelayTime) {
-                    if (intakeSlide.getSlideMotorPos()>220) {
+                    if (intakeSlide.getSlideMotorPos()>380) {
                         intakeArmServo.armPositionFarIntake();
                     } else {
                         intakeArmServo.armPositionIntake();

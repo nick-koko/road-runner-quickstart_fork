@@ -29,80 +29,91 @@ public class RightSideSpecimenFAST_MeepMeepTesting {
             trajectoryActionRightSideSpecimen = myBot.getDrive().actionBuilder(initialPoseRightSideSpecimen)
 //                    .afterTime(0.1, outtakeSlide.specimenDrop())
 //                    .afterTime(0.5, outtakeClaw.dropPosition()) //change to aftertime
-                    .strafeTo(new Vector2d(-9.25,32))
-//                    .stopAndAdd(outtakeSlide.specimenDropDown()) //TODO move before slide goes to low
-                    .waitSeconds(.5)
+                    .strafeTo(new Vector2d(-11.0,32))  // First Specimen target 9.25"
+                    .waitSeconds(.5) //change from 0.5 to 0.1
+//                    .stopAndAdd(outtakeSlide.specimenDropDown())
                     .setTangent(Math.toRadians(120))
                     .splineToSplineHeading(new Pose2d(-22, 36,Math.toRadians(180)), Math.toRadians(180))
-                    .splineToConstantHeading(new Vector2d(-25, 17), Math.toRadians(-90)) //TODO Go closer to sub to avoid hitting the sample
+                    .splineToConstantHeading(new Vector2d(-23, 17), Math.toRadians(-90)) //TODO Check all sample locations to make sure pushed in Observation Zone
                     .splineToSplineHeading(new Pose2d(-47, 16, Math.toRadians(-90)), Math.toRadians(120))
                     .splineToConstantHeading(new Vector2d(-44, 46), Math.toRadians(90))
                     .splineToConstantHeading(new Vector2d(-55, 10), Math.toRadians(200))
-                    .splineToConstantHeading(new Vector2d(-57, 48), Math.toRadians(60)) //TODO drive closer to human player to make sure sample is pushed in
+                    .splineToConstantHeading(new Vector2d(-57, 48), Math.toRadians(60))
                     .splineToConstantHeading(new Vector2d(-66, 11), Math.toRadians(200))
                     .splineToConstantHeading(new Vector2d(-66, 50), Math.toRadians(70))
-                    //+
+
 //                    .afterTime(.1, outtakeClaw.open())
-                    .splineToConstantHeading(new Vector2d(-46.5, 55), Math.toRadians(80), null, new ProfileAccelConstraint(-35.0, 68.0)) //change from 46 to 55
-                    .waitSeconds(.1) //change from 0.5 to 0.1
-                    .setTangent(Math.toRadians(90))
-                    .strafeTo(new Vector2d(-46.5,62.5)) //TODO Maybe reduce max decel
-//                    .stopAndAdd(outtakeClaw.close())
-//                    .stopAndAdd(outtakeSlide.extendAction())
-                    .setTangent(Math.toRadians(-40))
+                    .splineToConstantHeading(new Vector2d(-46.5, 55), Math.toRadians(80), null, new ProfileAccelConstraint(-25.0, 68.0)) //change from 46 to 55
+                //    .waitSeconds(.1) //change from 0.5 to 0.1
+//                    .setTangent(Math.toRadians(90))
+                    .splineToConstantHeading(new Vector2d(-46.5, 62.5), Math.toRadians(90), null, new ProfileAccelConstraint(-20.0, 68.0)) //change from 46 to 55
+//                    .strafeTo(new Vector2d(-46.5,62.5)) //TODO Maybe reduce max decel
+                    //                   .stopAndAdd(outtakeClaw.close())
+                    //                   .stopAndAdd(outtakeSlide.extendAction())
+                    .setTangent(Math.toRadians(-35))
 //                    .afterTime(.01, outtakeSlide.specimenDrop())
 //                    .afterTime(0.5, outtakeClaw.dropPosition()) //change to aftertime
-                    .splineToLinearHeading(new Pose2d(-9.25, 31,Math.toRadians(90)),Math.toRadians(-90), null, new ProfileAccelConstraint(-35.0, 68.0)) //TODO Fix drop location and slow down decel
+
+                    // Second Specimen target 10.5"
+        //            .splineToSplineHeading(new Pose2d(-1.0, 40,Math.toRadians(90)),Math.toRadians(-75), null, new ProfileAccelConstraint(-45.0, 68.0)) //TODO Fix drop location and slow down decel
+                    .splineToLinearHeading(new Pose2d(1.0, 31.5,Math.toRadians(90)),Math.toRadians(-75), null, new ProfileAccelConstraint(-35.0, 68.0)) //TODO Fix drop location and slow down decel
+                    .waitSeconds(.5) //change from 0.5 to 0.1
                     //               .strafeTo(new Vector2d(-10.25,32))
-                    .waitSeconds(.5)
 //                    .stopAndAdd(outtakeSlide.specimenDropDown()) //TODO move before slide goes to low
-                    .setTangent(Math.toRadians(120))
+                    .setTangent(Math.toRadians(122))
 //                    .afterTime(.1, outtakeClaw.open())
-                    .splineToLinearHeading(new Pose2d(-46.5, 55,Math.toRadians(-90)),Math.toRadians(120), null, new ProfileAccelConstraint(-45.0, 68.0))
+                    .splineToSplineHeading(new Pose2d(-46.5, 55,Math.toRadians(-90)),Math.toRadians(90), null, new ProfileAccelConstraint(-45.0, 68.0))
                     //              .waitSeconds(.2)
                     .setTangent(Math.toRadians(90))
-                    .strafeTo(new Vector2d(-46.5,62.5)) //TODO Maybe reduce max decel
+                    .strafeTo(new Vector2d(-46.5,62.5), null, new ProfileAccelConstraint(-30.0, 68.0)) //TODO Maybe reduce max decel
 //                    .stopAndAdd(outtakeClaw.close())
 //                    .stopAndAdd(outtakeSlide.extendAction())
                     .setTangent(Math.toRadians(-40))
 //                    .afterTime(.01, outtakeSlide.specimenDrop())
 //                    .afterTime(0.5, outtakeClaw.dropPosition()) //change to aftertime
-                    .splineToLinearHeading(new Pose2d(-10.25, 31,Math.toRadians(90)),Math.toRadians(-90), null, new ProfileAccelConstraint(-35.0, 68.0)) //TODO Fix drop location and slow down decel
+
+                    // Third Sepcimen target 8.5"
+                    .splineToLinearHeading(new Pose2d(-1.0, 31.5,Math.toRadians(90)),Math.toRadians(-75), null, new ProfileAccelConstraint(-35.0, 68.0)) //TODO Fix drop location and slow down decel
+                    .waitSeconds(.5) //change from 0.5 to 0.1
                     //              .strafeTo(new Vector2d(-11.25,32))
-                    .waitSeconds(.5)
-//                    .stopAndAdd(outtakeSlide.specimenDropDown()) //TODO move before slide goes to low
-                    .setTangent(Math.toRadians(120))
+                    //                   .stopAndAdd(outtakeSlide.specimenDropDown()) //TODO move before slide goes to low
+                    .setTangent(Math.toRadians(123))
 //                    .afterTime(.1, outtakeClaw.open())
-                    .splineToLinearHeading(new Pose2d(-46.5, 55,Math.toRadians(-90)),Math.toRadians(120), null, new ProfileAccelConstraint(-45.0, 68.0))
+                    .splineToSplineHeading(new Pose2d(-46.5, 55,Math.toRadians(-90)),Math.toRadians(90), null, new ProfileAccelConstraint(-45.0, 68.0))
                     //              .waitSeconds(.2)
                     .setTangent(Math.toRadians(90))
-                    .strafeTo(new Vector2d(-46.5,62.5)) //TODO Maybe reduce max decel
+                    .strafeTo(new Vector2d(-46.5,62.5), null, new ProfileAccelConstraint(-30.0, 68.0)) //TODO Maybe reduce max decel
 //                    .stopAndAdd(outtakeClaw.close())
 //                    .stopAndAdd(outtakeSlide.extendAction())
                     .setTangent(-120)                .setTangent(Math.toRadians(-40))
 //                    .afterTime(.01, outtakeSlide.specimenDrop())
 //                    .afterTime(0.5, outtakeClaw.dropPosition()) //change to aftertime
-                    .splineToLinearHeading(new Pose2d(-2.0, 31,Math.toRadians(90)),Math.toRadians(-90), null, new ProfileAccelConstraint(-35.0, 68.0)) //TODO Fix drop location and slow down decel
+
+                    //Fourth Specimen Target 1.0"
+                    .splineToLinearHeading(new Pose2d(-4.0, 31.5,Math.toRadians(90)),Math.toRadians(-75), null, new ProfileAccelConstraint(-35.0, 68.0)) //TODO Fix drop location and slow down decel
+                    .waitSeconds(.5) //change from 0.5 to 0.1
                     //              .strafeTo(new Vector2d(-11.75,32))
-                    .waitSeconds(.5)
 //                    .stopAndAdd(outtakeSlide.specimenDropDown()) //TODO move before slide goes to low
-                    .setTangent(Math.toRadians(120))
+                    .setTangent(Math.toRadians(131))
 //                    .afterTime(.1, outtakeClaw.open())
-                    .splineToLinearHeading(new Pose2d(-46.5, 55,Math.toRadians(-90)),Math.toRadians(120), null, new ProfileAccelConstraint(-45.0, 68.0))
+                    .splineToSplineHeading(new Pose2d(-46.5, 55,Math.toRadians(-90)),Math.toRadians(90), null, new ProfileAccelConstraint(-45.0, 68.0))
                     //              .waitSeconds(.2)
                     .setTangent(Math.toRadians(90))
-                    .strafeTo(new Vector2d(-46.5,62.5)) //TODO Maybe reduce max decel
+                    .strafeTo(new Vector2d(-46.5,62.5), null, new ProfileAccelConstraint(-30.0, 68.0)) //TODO Maybe reduce max decel
 //                    .stopAndAdd(outtakeClaw.close())
 //                    .stopAndAdd(outtakeSlide.extendAction())
                     .setTangent(-120)                .setTangent(Math.toRadians(-40))
 //                    .afterTime(.01, outtakeSlide.specimenDrop())
 //                    .afterTime(0.5, outtakeClaw.dropPosition()) //change to aftertime
-                    .splineToLinearHeading(new Pose2d(-2.0, 31,Math.toRadians(90)),Math.toRadians(-90), null, new ProfileAccelConstraint(-35.0, 68.0)) //TODO Fix drop location and slow down decel
+
+                    // Fifth Specimen target 3.5"
+                    .splineToLinearHeading(new Pose2d(-7.0, 31.5,Math.toRadians(90)),Math.toRadians(-75), null, new ProfileAccelConstraint(-35.0, 68.0)) //TODO Fix drop location and slow down decel
+                    .waitSeconds(.5) //change from 0.5 to 0.1
                     //              .strafeTo(new Vector2d(-11.75,32))
-                    .waitSeconds(.5)
 //                    .stopAndAdd(outtakeSlide.specimenDropDown()) //TODO move before slide goes to low
                     .setTangent(Math.toRadians(135))
                     .strafeTo(new Vector2d(-50.5, 60), null, new ProfileAccelConstraint(-99.0, 99.0))
+
                     .build();
 
 
