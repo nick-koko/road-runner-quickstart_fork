@@ -150,7 +150,7 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
 
             // INTAKE CONDITIONS
             if(-gamepad2.right_stick_y > 0){
-                intakeSlidePowerFactor = 0.15;
+                intakeSlidePowerFactor = 0.20;
             }
             else{
                 intakeSlidePowerFactor = 0.4;

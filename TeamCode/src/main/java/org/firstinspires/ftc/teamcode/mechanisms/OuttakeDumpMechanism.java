@@ -10,7 +10,7 @@ public class OuttakeDumpMechanism {
     private Servo dumperServo;
 
     // Target positions for the servo arm
-    public static double DOWN_POSITION = 0.11;  //Axon was 0.23, switched to .11 with the DSSERVO
+    public static double DOWN_POSITION = 0.08;  //Axon was 0.23, switched to .11 with the DSSERVO
     public static double DUMP_POSITION = 0.96;
     private ElapsedTime dumperTimer = new ElapsedTime();
     public enum DUMPER_STATES{
