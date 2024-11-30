@@ -76,7 +76,7 @@ public class RightSideSpecimenFAST_MeepMeepTesting {
                     //                    .afterTime(0.5, outtakeClaw.dropPosition()) //change to aftertime
 
                     // Third Sepcimen target -1.0"
-                    .splineToLinearHeading(new Pose2d(-3.5, 31.5,Math.toRadians(89.9)),Math.toRadians(-50), null, new ProfileAccelConstraint(-35.0, 68.0)) //TODO Fix drop location and slow down decel
+                    .splineToLinearHeading(new Pose2d(-4.0, 31.5,Math.toRadians(89.9)),Math.toRadians(-50), null, new ProfileAccelConstraint(-35.0, 68.0)) //TODO Fix drop location and slow down decel
 //                    .stopAndAdd(outtakeSlide.specimenDropDown()) //TODO move before slide goes to low
                     .waitSeconds(.5)
                     .setTangent(Math.toRadians(150))
@@ -91,7 +91,7 @@ public class RightSideSpecimenFAST_MeepMeepTesting {
 //                    .afterTime(0.5, outtakeClaw.dropPosition()) //change to aftertime
 
                     //Fourth Specimen Target -4.0"
-                    .splineToLinearHeading(new Pose2d(-5.0, 31.5,Math.toRadians(89.9)),Math.toRadians(-50), null, new ProfileAccelConstraint(-35.0, 68.0)) //TODO Fix drop location and slow down decel
+                    .splineToLinearHeading(new Pose2d(-6.0, 31.5,Math.toRadians(89.9)),Math.toRadians(-50), null, new ProfileAccelConstraint(-35.0, 68.0)) //TODO Fix drop location and slow down decel
 //                    .stopAndAdd(outtakeSlide.specimenDropDown()) //TODO move before slide goes to low
                     .waitSeconds(.5)
                     .setTangent(Math.toRadians(150))
@@ -106,7 +106,7 @@ public class RightSideSpecimenFAST_MeepMeepTesting {
 //                    .afterTime(0.5, outtakeClaw.dropPosition()) //change to aftertime
 
                     // Fifth Specimen target -7.0"
-                    .splineToLinearHeading(new Pose2d(-7.0, 31.5,Math.toRadians(89.9)),Math.toRadians(-50), null, new ProfileAccelConstraint(-35.0, 68.0)) //TODO Fix drop location and slow down decel
+                    .splineToLinearHeading(new Pose2d(-8.0, 31.5,Math.toRadians(89.9)),Math.toRadians(-63), null, new ProfileAccelConstraint(-35.0, 68.0)) //TODO Fix drop location and slow down decel
 //                    .stopAndAdd(outtakeSlide.specimenDropDown()) //TODO move before slide goes to low
                     .waitSeconds(.5)
                     .setTangent(Math.toRadians(135))
