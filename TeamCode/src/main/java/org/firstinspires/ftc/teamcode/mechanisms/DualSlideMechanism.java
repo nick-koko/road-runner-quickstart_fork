@@ -12,19 +12,21 @@ public class DualSlideMechanism {
     private static final int LOW_POSITION_LEFT = 0;
     public static final int SPECIMENDROP_POSITION_LEFT = 1316;
     private static final int HIGH_POSITION_LEFT = 1900;
+    private static final int MIDDLE_POSITION_LEFT = 520;
+    private static final int MIDDLE_POSITION_RIGHT = 520;
     private static final int SPECIMENGRAB_POSITION_LEFT = 0;
     private static final int LOW_POSITION_RIGHT = 0;
     public static final int SPECIMENDROP_POSITION_RIGHT = 1316;
     private static final int HIGH_POSITION_RIGHT = 1900;
     private static final int SPECIMENGRAB_POSITION_RIGHT = 0;
-    private static final int CLIMB_POSITION_LEFT = 1550;
-    private static final int CLIMB_POSITION_RIGHT = 1550; //😎👌👌 🐽🐖🐈🦕🐉🐍🦖🦎🐊
-    private static final int END_HANG_POSITION_LEFT = 1150;
-    private static final int END_HANG_POSITION_RIGHT = 1150; //😎👌👌 🐽🐖🐈🦕🐉🐍🦖🦎🐊
+    private static final int CLIMB_POSITION_LEFT = 2300;
+    private static final int CLIMB_POSITION_RIGHT = 2300; //😎👌👌 🐽🐖🐈🦕🐉🐍🦖🦎🐊
+    private static final int END_HANG_POSITION_LEFT = 1900;
+    private static final int END_HANG_POSITION_RIGHT = 1900; //😎👌👌 🐽🐖🐈🦕🐉🐍🦖🦎🐊
 
     //TODONE 😎👌👌
     public enum SLIDE_STATES{
-        SLIDE_INTAKE_POS, SLIDE_LOW_POS, SLIDE_SPECIMENGRAB_POS, SLIDE_SPECIMENDROP_POS, SLIDE_HIGH_POS, SLIDE_CLIMB_POS, SLIDE_END_HANG
+        SLIDE_INTAKE_POS, SLIDE_LOW_POS, SLIDE_SPECIMENGRAB_POS, SLIDE_SPECIMENDROP_POS, SLIDE_HIGH_POS, SLIDE_MIDDLE_POS, SLIDE_CLIMB_POS, SLIDE_END_HANG
     }
 
     private SLIDE_STATES curSlideState = null;
@@ -108,6 +110,11 @@ public class DualSlideMechanism {
         nextSlideState = SLIDE_STATES.SLIDE_LOW_POS;
         moveToPosition(LOW_POSITION_LEFT, LOW_POSITION_RIGHT);
     }
+    // Method to move the slide to the low position
+    public void slidePositionMiddle() {
+        nextSlideState = SLIDE_STATES.SLIDE_MIDDLE_POS;
+        moveToPosition(MIDDLE_POSITION_RIGHT, MIDDLE_POSITION_RIGHT);
+    }
 
     // Method to move the slide to any position
     public void slidePositionAny(int leftPos, int rightPos) {
@@ -170,6 +177,8 @@ public class DualSlideMechanism {
             curSlideState = SLIDE_STATES.SLIDE_SPECIMENDROP_POS;
         } else if(slidePos > (HIGH_POSITION_LEFT - 20)) {
             curSlideState = SLIDE_STATES.SLIDE_HIGH_POS;
+        } else if(Math.abs(slidePos - MIDDLE_POSITION_LEFT) < (15)) {
+            curSlideState = SLIDE_STATES.SLIDE_MIDDLE_POS;
         } else if(slidePos < (LOW_POSITION_LEFT + 20)){
             curSlideState = SLIDE_STATES.SLIDE_LOW_POS;
         } else if(Math.abs(slidePos - CLIMB_POSITION_LEFT) < (15)){

@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.mechanisms.ClawMechanism;
+import org.firstinspires.ftc.teamcode.mechanisms.ClimbingHooks;
 import org.firstinspires.ftc.teamcode.mechanisms.DualSlideMechanism;
 import org.firstinspires.ftc.teamcode.mechanisms.IntakeArm;
 import org.firstinspires.ftc.teamcode.mechanisms.IntakeServoSpinner;
@@ -43,6 +44,9 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
 
         DualSlideMechanism outtakeSlide =  new DualSlideMechanism();  //Mr. Todone
         outtakeSlide.init(hardwareMap);
+
+        ClimbingHooks climbingServo = new ClimbingHooks();
+        climbingServo.init(hardwareMap);
 
         IntakeSlide intakeSlide =  new IntakeSlide();  //Mr. Todone
         intakeSlide.init(hardwareMap);
@@ -79,6 +83,7 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
         intakeSlide.slidePositionTransfer();
         intakeArmServo.armPositionDrive();
         specimenClaw.clawOpen();
+        climbingServo.hookPositionDown();
 
 
         while (opModeIsActive()) {
@@ -231,7 +236,7 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
             }
             else if (gamepad2.x) {
                 intakeArmServo.armPositionDrive();
-                outtakeSlide.slidePositionClimb();
+                outtakeSlide.slidePositionMiddle();
             }
             else if (gamepad2.b) {
                 intakeArmServo.armPositionDrive();
@@ -239,8 +244,14 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
             }
             else if (gamepad2.start) {
                 intakeArmServo.armPositionDrive();
+                specimenClaw.clawClose();
+                outtakeSlide.slidePositionClimb();
+                climbingServo.hookPositionHigh();
+            } else if (gamepad2.back) {
+                climbingServo.hookPositionHigh();
                 outtakeSlide.slidePositionEndHang();
-            } else {
+            }
+            else {
                 if ((outtakeSlide.getSlideState() == DualSlideMechanism.SLIDE_STATES.SLIDE_LOW_POS) &&
                         (outtakeSlide.getNextSlideState() == DualSlideMechanism.SLIDE_STATES.SLIDE_LOW_POS)) {
                     outtakeSlide.stopSlide();
