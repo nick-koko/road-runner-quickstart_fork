@@ -30,7 +30,7 @@ public class LEFT_START_WithYellowSample_IntoTheDeepPicklesAuton extends LinearO
         Pose2d initialPoseRightSideSpecimen = new Pose2d(-9.25, 62, Math.toRadians(90));
         Pose2d initialPoseLeftSideBuckets = new Pose2d(9.25, 62, Math.toRadians(90));
         Pose2d initialPoseLeftSideSampleStart = new Pose2d(32.875, 62, Math.toRadians(90));
-        Pose2d startingPose = initialPoseRightSideSpecimen;
+        Pose2d startingPose = initialPoseLeftSideSampleStart;
 
         // Set standard max Velocities/Accels for this auto
         MecanumDrive.PARAMS.maxAngAccel = Math.PI;
@@ -146,18 +146,22 @@ public class LEFT_START_WithYellowSample_IntoTheDeepPicklesAuton extends LinearO
                 .afterTime(0.25, intakeSpinner.stopPosition())
                 .afterTime(2.0, outtakeDump.dumpPosition())
                 .splineToLinearHeading(new Pose2d(57, 55, Math.toRadians(-135)), Math.toRadians(0))
-                .waitSeconds(0.5)
+                .waitSeconds(1.0)
                 .afterTime(0.01,outtakeDump.downPosition())
                 .afterTime(0.1,outtakeSlide.low())
-                .afterTime(1.0,intakeArm.armIntake())
-                .afterTime(1.0,intakeSpinner.intakePosition())
                 .splineToLinearHeading(new Pose2d(38.5, 25.5, Math.toRadians(0)), Math.toRadians(-100))
                 .setTangent(0)
-                .lineToX(48.5)
+                .lineToX(46.5)
+                .setTangent(Math.toRadians(180))
+                .lineToX(38.5)
+                .stopAndAdd(intakeArm.armIntake())
+                .stopAndAdd(intakeSpinner.intakePosition())
+                .waitSeconds(0.4)
+                .lineToX(42.5)
                 // PICKUP 1st Yellow Sample
                 .afterTime(0.01, intakeArm.armTransfer())
                 .afterTime(0.25, intakeSpinner.outtakePosition())
-                .lineToX(44.5)
+                .lineToX(41.0)
                 .afterTime(0.1, outtakeSlide.high())
                 .afterTime(0.25, intakeSpinner.stopPosition())
                 .afterTime(2.0, outtakeDump.dumpPosition())
@@ -168,10 +172,10 @@ public class LEFT_START_WithYellowSample_IntoTheDeepPicklesAuton extends LinearO
                 .afterTime(0.5,intakeArm.armIntake())
                 .afterTime(0.5,intakeSpinner.intakePosition())
                 .setTangent(180)
-                .splineToLinearHeading(new Pose2d(41.5, 25.5, Math.toRadians(0)), Math.toRadians(10))
+                .splineToLinearHeading(new Pose2d(44.5, 25.5, Math.toRadians(0)), Math.toRadians(10))
                 .setTangent(0)
                 // PICKUP 2nd Yellow Sample
-                .lineToX(51.5)
+                .lineToX(50.5)
                 .afterTime(0.01, intakeArm.armTransfer())
                 .afterTime(0.25, intakeSpinner.outtakePosition())
                 .waitSeconds(0.2)

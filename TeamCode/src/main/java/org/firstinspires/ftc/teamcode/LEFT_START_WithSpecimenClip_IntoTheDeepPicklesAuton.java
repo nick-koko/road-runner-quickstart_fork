@@ -31,7 +31,7 @@ public class LEFT_START_WithSpecimenClip_IntoTheDeepPicklesAuton extends LinearO
         Pose2d initialPoseRightSideSpecimen = new Pose2d(-9.25, 62, Math.toRadians(90));
         Pose2d initialPoseLeftSideBuckets = new Pose2d(9.25, 62, Math.toRadians(90));
         Pose2d initialPoseLeftSideSampleStart = new Pose2d(32.875, 62, Math.toRadians(90));
-        Pose2d startingPose = initialPoseRightSideSpecimen;
+        Pose2d startingPose = initialPoseLeftSideBuckets;
 
         // Set standard max Velocities/Accels for this auto
         MecanumDrive.PARAMS.maxAngAccel = Math.PI;
