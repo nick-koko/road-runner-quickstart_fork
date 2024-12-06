@@ -168,14 +168,16 @@ public class PikeelsFieldcentricDrivingIsBetter extends LinearOpMode {
                         intakeArmTime.reset();
                         stateDelayTime = 0.5;
                     }
-                if (intakeArmTime.time() > stateDelayTime) {
-                    if (intakeSlide.getSlideMotorPos()>380) {
-                        intakeArmServo.armPositionFarIntake();
+                if (!gamepad2.right_stick_button) {
+                    if (intakeArmTime.time() > stateDelayTime) {
+                        if (intakeSlide.getSlideMotorPos() > 380) {
+                            intakeArmServo.armPositionFarIntake();
+                        } else {
+                            intakeArmServo.armPositionIntake();
+                        }
                     } else {
-                        intakeArmServo.armPositionIntake();
+                        intakeArmServo.armPositionAbyss();
                     }
-                } else {
-                    intakeArmServo.armPositionAbyss();
                 }
                 //intakeArmServo.armPositionIntake();
                 frontIntake.Intake();

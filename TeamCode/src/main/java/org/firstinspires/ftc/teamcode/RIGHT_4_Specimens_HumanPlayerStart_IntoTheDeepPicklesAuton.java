@@ -17,6 +17,7 @@ import org.firstinspires.ftc.teamcode.actions.IntakeArmActions;
 import org.firstinspires.ftc.teamcode.actions.IntakeSlideAction;
 import org.firstinspires.ftc.teamcode.actions.IntakeservoSpinnerActions;
 import org.firstinspires.ftc.teamcode.actions.OuttakeDumpActions;
+import org.firstinspires.ftc.teamcode.mechanisms.ClimbingHooks;
 
 
 @Config
@@ -54,6 +55,7 @@ public class RIGHT_4_Specimens_HumanPlayerStart_IntoTheDeepPicklesAuton extends 
         IntakeSlideAction intakeSlide = new IntakeSlideAction();
         IntakeArmActions intakeArm = new IntakeArmActions();
         IntakeservoSpinnerActions intakeSpinner = new IntakeservoSpinnerActions();
+        ClimbingHooks climbingServo = new ClimbingHooks();
         SIDE fieldSide = SIDE.RIGHT;
         int numPieces = 4;
 
@@ -64,6 +66,7 @@ public class RIGHT_4_Specimens_HumanPlayerStart_IntoTheDeepPicklesAuton extends 
         intakeArm.init(hardwareMap);
         intakeSpinner.init(hardwareMap);
         intakeSlide.init(hardwareMap);
+        climbingServo.init(hardwareMap);
         intakeSlide.resetSlide();
         outtakeSlide.resetSlide();
 
@@ -87,10 +90,10 @@ public class RIGHT_4_Specimens_HumanPlayerStart_IntoTheDeepPicklesAuton extends 
                 .splineToConstantHeading(new Vector2d(-68, 49), Math.toRadians(70))
 
                 .afterTime(.1, outtakeClaw.open())
-                .splineToConstantHeading(new Vector2d(-45.5, 55), Math.toRadians(89.9), new TranslationalVelConstraint(35), new ProfileAccelConstraint(-15.0, 68.0)) //change from 46 to 55
+                .splineToConstantHeading(new Vector2d(-45.5, 55), Math.toRadians(89.9), new TranslationalVelConstraint(25), new ProfileAccelConstraint(-15.0, 68.0)) //change from 46 to 55
            //     .waitSeconds(.001) //change from 0.5 to 0.1
                 .setTangent(Math.toRadians(90))
-                .strafeTo(new Vector2d(-45.5, 62.5), new TranslationalVelConstraint(15), new ProfileAccelConstraint(-20.0, 68.0)) //change from 46 to 55
+                .strafeTo(new Vector2d(-45.5, 63.0), new TranslationalVelConstraint(15), new ProfileAccelConstraint(-15.0, 68.0)) //change from 46 to 55
            //     .strafeTo(new Vector2d(-46.5,62.5)) //TODO Maybe reduce max decel
                 .stopAndAdd(outtakeClaw.close())
                 .stopAndAdd(outtakeSlide.extendAction())
@@ -106,7 +109,7 @@ public class RIGHT_4_Specimens_HumanPlayerStart_IntoTheDeepPicklesAuton extends 
                 .splineToLinearHeading(new Pose2d(-45.5, 55,Math.toRadians(-90.0)),Math.toRadians(110), null, new ProfileAccelConstraint(-25.0, 68.0))
                 .waitSeconds(.002)
                 .setTangent(Math.toRadians(90))
-                .strafeTo(new Vector2d(-45.5,62.5),  new TranslationalVelConstraint(15), new ProfileAccelConstraint(-15.0, 68.0)) //TODO Maybe reduce max decel
+                .strafeTo(new Vector2d(-45.5,63.0),  new TranslationalVelConstraint(15), new ProfileAccelConstraint(-15.0, 68.0)) //TODO Maybe reduce max decel
                 .stopAndAdd(outtakeClaw.close())
                 .stopAndAdd(outtakeSlide.extendAction())
                 .setTangent(Math.toRadians(-40))
@@ -120,7 +123,7 @@ public class RIGHT_4_Specimens_HumanPlayerStart_IntoTheDeepPicklesAuton extends 
                 .afterTime(.1, outtakeClaw.open())
                 .splineToLinearHeading(new Pose2d(-45.5, 55,Math.toRadians(-90.0)),Math.toRadians(110), null, new ProfileAccelConstraint(-25.0, 68.0))
                 .setTangent(Math.toRadians(90))
-                .strafeTo(new Vector2d(-45.5,62.5), new TranslationalVelConstraint(15), new ProfileAccelConstraint(-15.0, 68.0)) //TODO Maybe reduce max decel
+                .strafeTo(new Vector2d(-45.5,63.0), new TranslationalVelConstraint(15), new ProfileAccelConstraint(-15.0, 68.0)) //TODO Maybe reduce max decel
                 .stopAndAdd(outtakeClaw.close())
                 .stopAndAdd(outtakeSlide.extendAction())
                 .setTangent(Math.toRadians(-40))
@@ -140,6 +143,7 @@ public class RIGHT_4_Specimens_HumanPlayerStart_IntoTheDeepPicklesAuton extends 
         Actions.runBlocking(outtakeClaw.close());
         Actions.runBlocking(intakeArm.armDrive());
         Actions.runBlocking(outtakeDump.downPosition());
+        climbingServo.hookPositionDown();
 
 
         drive.pose = startingPose;

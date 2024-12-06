@@ -15,6 +15,7 @@ import org.firstinspires.ftc.teamcode.actions.IntakeArmActions;
 import org.firstinspires.ftc.teamcode.actions.IntakeSlideAction;
 import org.firstinspires.ftc.teamcode.actions.IntakeservoSpinnerActions;
 import org.firstinspires.ftc.teamcode.actions.OuttakeDumpActions;
+import org.firstinspires.ftc.teamcode.mechanisms.ClimbingHooks;
 
 
 @Config
@@ -54,6 +55,7 @@ public class LEFT_START_WithSpecimenClip_IntoTheDeepPicklesAuton extends LinearO
         IntakeSlideAction intakeSlide = new IntakeSlideAction();
         IntakeArmActions intakeArm = new IntakeArmActions();
         IntakeservoSpinnerActions intakeSpinner = new IntakeservoSpinnerActions();
+        ClimbingHooks climbingServo = new ClimbingHooks();
         SIDE fieldSide = SIDE.RIGHT;
         int numPieces = 3;
 
@@ -64,6 +66,7 @@ public class LEFT_START_WithSpecimenClip_IntoTheDeepPicklesAuton extends LinearO
         intakeArm.init(hardwareMap);
         intakeSpinner.init(hardwareMap);
         intakeSlide.init(hardwareMap);
+        climbingServo.init(hardwareMap);
         intakeSlide.resetSlide();
         outtakeSlide.resetSlide();
 
@@ -215,7 +218,65 @@ public class LEFT_START_WithSpecimenClip_IntoTheDeepPicklesAuton extends LinearO
                 .afterTime(1.75, intakeSpinner.intakePosition())
                 .splineToLinearHeading(new Pose2d(38.5, 25.5, Math.toRadians(0)), Math.toRadians(-61.9))
                 .setTangent(0)
-                .lineToX(48.5)
+
+               .lineToX(46.5)
+               .setTangent(Math.toRadians(180))
+               .lineToX(38.5)
+               .stopAndAdd(intakeArm.armIntake())
+               .stopAndAdd(intakeSpinner.intakePosition())
+               .waitSeconds(0.4)
+               .lineToX(42.5)
+               // PICKUP 1st Yellow Sample
+               .afterTime(0.01, intakeArm.armTransfer())
+               .afterTime(0.25, intakeSpinner.outtakePosition())
+               .lineToX(41.0)
+               .afterTime(0.1, outtakeSlide.high())
+               .afterTime(0.25, intakeSpinner.stopPosition())
+               .afterTime(2.0, outtakeDump.dumpPosition())
+               .splineToLinearHeading(new Pose2d(57, 55, Math.toRadians(-135)), Math.toRadians(0)) //😎👌👌
+               .waitSeconds(0.2)
+               .afterTime(0.01,outtakeDump.downPosition())
+               .afterTime(0.1,outtakeSlide.low())
+               .afterTime(0.5,intakeArm.armIntake())
+               .afterTime(0.5,intakeSpinner.intakePosition())
+               .setTangent(180)
+               .splineToLinearHeading(new Pose2d(44.5, 25.5, Math.toRadians(0)), Math.toRadians(10))
+               .setTangent(0)
+               // PICKUP 2nd Yellow Sample
+               .lineToX(50.5)
+               .afterTime(0.01, intakeArm.armTransfer())
+               .afterTime(0.25, intakeSpinner.outtakePosition())
+               .waitSeconds(0.2)
+               .lineToX(49.0)
+               .afterTime(0.1, outtakeSlide.high())
+               .afterTime(0.25, intakeSpinner.stopPosition())
+               .afterTime(2.0, outtakeDump.dumpPosition())
+               .splineToLinearHeading(new Pose2d(57, 55, Math.toRadians(-135)), Math.toRadians(0))
+               .waitSeconds(0.2)
+               .afterTime(0.01,outtakeDump.downPosition())
+               .afterTime(0.1,outtakeSlide.low())
+               .afterTime(0.5,intakeArm.armIntake())
+               .afterTime(0.5,intakeSpinner.intakePosition())
+               .splineToLinearHeading(new Pose2d(49, 25.5, Math.toRadians(0)), Math.toRadians(0))
+               // PICKUP 3rd sample
+               .lineToX(57.0)
+               .afterTime(0.01, intakeArm.armTransfer())
+               .lineToX(54.0)
+               .stopAndAdd(intakeSpinner.outtakePosition())
+               .setTangent(-180)
+               .afterTime(0.5, outtakeSlide.high())
+               .afterTime(0.25, intakeSpinner.stopPosition())
+               .afterTime(1.8, outtakeDump.dumpPosition())
+               .splineToLinearHeading(new Pose2d(57, 55, Math.toRadians(-135)), Math.toRadians(110))
+               .waitSeconds(0.2)
+               .afterTime(0.01,outtakeDump.downPosition())
+               .afterTime(0.1,outtakeSlide.low())
+               .afterTime(0.5,outtakeSlide.endAutonPos())
+               .splineToLinearHeading(new Pose2d(21, 0, Math.toRadians(0)), Math.toRadians(180))
+               .stopAndAdd(outtakeSlide.stopOuttakeSlide())
+                       .build();
+
+/*                .lineToX(48.5)
                     // PICKUP 1st Yellow Sample
                 .afterTime(0.01, intakeArm.armTransfer())
                 .afterTime(0.25, intakeSpinner.outtakePosition())
@@ -265,12 +326,13 @@ public class LEFT_START_WithSpecimenClip_IntoTheDeepPicklesAuton extends LinearO
                 .splineToLinearHeading(new Pose2d(20, 0, Math.toRadians(0)), Math.toRadians(180))
                 .stopAndAdd(outtakeSlide.stopOuttakeSlide())
                 .build();
-
+*/
 
         // actions that need to happen on init; for instance, a claw tightening.
         Actions.runBlocking(outtakeClaw.close());
         Actions.runBlocking(intakeArm.armDrive());
         Actions.runBlocking(outtakeDump.downPosition());
+        climbingServo.hookPositionDown();
 
 
         drive.pose = startingPose;

@@ -14,6 +14,7 @@ import org.firstinspires.ftc.teamcode.actions.IntakeArmActions;
 import org.firstinspires.ftc.teamcode.actions.IntakeSlideAction;
 import org.firstinspires.ftc.teamcode.actions.IntakeservoSpinnerActions;
 import org.firstinspires.ftc.teamcode.actions.OuttakeDumpActions;
+import org.firstinspires.ftc.teamcode.mechanisms.ClimbingHooks;
 
 
 @Config
@@ -53,6 +54,7 @@ public class LEFT_START_WithYellowSample_IntoTheDeepPicklesAuton extends LinearO
         IntakeSlideAction intakeSlide = new IntakeSlideAction();
         IntakeArmActions intakeArm = new IntakeArmActions();
         IntakeservoSpinnerActions intakeSpinner = new IntakeservoSpinnerActions();
+        ClimbingHooks climbingServo = new ClimbingHooks();
         SIDE fieldSide = SIDE.RIGHT;
         int numPieces = 3;
 
@@ -63,6 +65,7 @@ public class LEFT_START_WithYellowSample_IntoTheDeepPicklesAuton extends LinearO
         intakeArm.init(hardwareMap);
         intakeSpinner.init(hardwareMap);
         intakeSlide.init(hardwareMap);
+        climbingServo.init(hardwareMap);
         intakeSlide.resetSlide();
         outtakeSlide.resetSlide();
 
@@ -151,6 +154,7 @@ public class LEFT_START_WithYellowSample_IntoTheDeepPicklesAuton extends LinearO
                 .afterTime(0.1,outtakeSlide.low())
                 .splineToLinearHeading(new Pose2d(38.5, 25.5, Math.toRadians(0)), Math.toRadians(-100))
                 .setTangent(0)
+
                 .lineToX(46.5)
                 .setTangent(Math.toRadians(180))
                 .lineToX(38.5)
@@ -275,6 +279,7 @@ public class LEFT_START_WithYellowSample_IntoTheDeepPicklesAuton extends LinearO
         Actions.runBlocking(outtakeClaw.close());
         Actions.runBlocking(intakeArm.armDrive());
         Actions.runBlocking(outtakeDump.downPosition());
+        climbingServo.hookPositionDown();
 
 
         drive.pose = startingPose;

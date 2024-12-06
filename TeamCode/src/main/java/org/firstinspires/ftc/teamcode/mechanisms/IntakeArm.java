@@ -11,12 +11,12 @@ public class IntakeArm {
     private Servo intakeArmServo;
 
     // Target positions for the servo arm
-    public static double INTAKE_POSITION = 0.212; //above group... will kill power .245
+    public static double INTAKE_POSITION = 0.215; //above group... will kill power .245
     static double INTAKE_TELEOP_POSITION = 0.211;
     static double DRIVE_POSITION = 0.77; //perpindicuar .8
     static double TRANSFER_POSITION = 0.85; //servo towards slides .88
     static double ABYSS_POSITION = 0.37; //servo towards slides .4
-    public static double INTAKE_FAR_POSITION = 0.224; //above group... will kill power .245
+    public static double INTAKE_FAR_POSITION = 0.227; //above group... will kill power .245   ༼ つ ◕_◕ ༽つ
 
     private ElapsedTime armTimer = new ElapsedTime();
     public enum INTAKE_ARM_STATES{
