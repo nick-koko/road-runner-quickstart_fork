@@ -44,12 +44,12 @@ public class RightSideSpecimenFAST_MeepMeepTesting {
 //                    .waitSeconds(.5)
                     .splineToSplineHeading(new Pose2d(-49, 50, Math.toRadians(-90)), Math.toRadians(100))
 //                    .waitSeconds(.5)
-                    .splineToSplineHeading(new Pose2d(-54, 10, Math.toRadians(-95)), Math.toRadians(200))
+                    .splineToSplineHeading(new Pose2d(-54, 9, Math.toRadians(-95)), Math.toRadians(200))
 //                    .waitSeconds(.5)
-                    .splineToLinearHeading(new Pose2d(-57, 53, Math.toRadians(-95)), Math.toRadians(-80), new TranslationalVelConstraint(55), new ProfileAccelConstraint(-50.0, 68.0))
-                    .splineToConstantHeading(new Vector2d(-71, 13), Math.toRadians(130), new TranslationalVelConstraint(50), new ProfileAccelConstraint(-50.0, 68.0))
+                    .splineToLinearHeading(new Pose2d(-52, 53, Math.toRadians(-95)), Math.toRadians(-80), new TranslationalVelConstraint(55), new ProfileAccelConstraint(-50.0, 68.0))
+                    .splineToConstantHeading(new Vector2d(-71, 11), Math.toRadians(130), new TranslationalVelConstraint(50), new ProfileAccelConstraint(-50.0, 68.0))
 //                    .waitSeconds(.5)
-                    .splineToConstantHeading(new Vector2d(-71, 42), Math.toRadians(90), new TranslationalVelConstraint(50), new ProfileAccelConstraint(-50.0, 68.0))
+                    .splineToConstantHeading(new Vector2d(-71, 40), Math.toRadians(90), new TranslationalVelConstraint(50), new ProfileAccelConstraint(-50.0, 68.0))
 
 //                    .afterTime(.1, outtakeClaw.open())
                     .splineToConstantHeading(new Vector2d(-35.5, 55), Math.toRadians(89.9), new TranslationalVelConstraint(35), new ProfileAccelConstraint(-30.0, 68.0)) //change from 46 to 55
@@ -95,7 +95,7 @@ public class RightSideSpecimenFAST_MeepMeepTesting {
 //                    .afterTime(0.5, outtakeClaw.dropPosition()) //change to aftertime
 
                     //Fourth Specimen Target -6.0"
-                    .splineToLinearHeading(new Pose2d(-6.0, 31.5,Math.toRadians(89.9)),Math.toRadians(-50), null, new ProfileAccelConstraint(-37.0, 68.0)) //TODO Fix drop location and slow down decel
+                    .splineToLinearHeading(new Pose2d(-6.0, 31.5,Math.toRadians(89.9)),Math.toRadians(-75), null, new ProfileAccelConstraint(-37.0, 68.0)) //TODO Fix drop location and slow down decel
 //                    .stopAndAdd(outtakeSlide.specimenDropDown()) //TODO move before slide goes to low
                     .waitSeconds(.5)
                     .setTangent(Math.toRadians(150))
@@ -110,7 +110,7 @@ public class RightSideSpecimenFAST_MeepMeepTesting {
 //                    .afterTime(0.5, outtakeClaw.dropPosition()) //change to aftertime
 
                     // Fifth Specimen target -8.0"
-                    .splineToLinearHeading(new Pose2d(-8.0, 31.5,Math.toRadians(89.9)),Math.toRadians(-63), null, new ProfileAccelConstraint(-37.0, 68.0)) //TODO Fix drop location and slow down decel
+                    .splineToLinearHeading(new Pose2d(-8.0, 31.5,Math.toRadians(89.9)),Math.toRadians(-80), null, new ProfileAccelConstraint(-37.0, 68.0)) //TODO Fix drop location and slow down decel
 //                    .stopAndAdd(outtakeSlide.specimenDropDown()) //TODO move before slide goes to low
                     .waitSeconds(.5)
                     .setTangent(Math.toRadians(135))
