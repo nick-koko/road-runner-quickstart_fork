@@ -15,7 +15,7 @@ public class MeepMeepTesting {
     public static void main(String[] args) {
         MeepMeep meepMeep = new MeepMeep(900);
 
-        int autonChoice = 8;
+        int autonChoice = 1;
         Action blueCloseSideLeftLine;
         Action blueCloseSideCenterLine;
         Action blueCloseSideRightLine;
@@ -28,55 +28,74 @@ public class MeepMeepTesting {
                 .setConstraints(50, 40, Math.toRadians(180), Math.toRadians(180), 14)
                 .build();
         if (autonChoice == 1) {
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(32.875, 62, Math.toRadians(90)))
-                                .setTangent(Math.toRadians(-80))
-          //      .stopAndAdd(intakeArm.armTransfer())
-          //      .stopAndAdd(intakeSpinner.outtakePosition())
-                .waitSeconds(.2)
-          //      .afterTime(0.1, outtakeSlide.high())
-           //     .afterTime(0.25, intakeSpinner.stopPosition())
-           //     .afterTime(2.0, outtakeDump.dumpPosition())
-                .splineToLinearHeading(new Pose2d(57, 55, Math.toRadians(-135)), Math.toRadians(0))
-                .waitSeconds(0.5)
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(9.25, 62, Math.toRadians(90)))
+//                .afterTime(0.1, outtakeSlide.specimenDrop())
+                .lineToY(32)
+//                .stopAndAdd(outtakeClaw.dropPosition())
+//                .stopAndAdd(outtakeSlide.low())
+                .setTangent(Math.toRadians(60))
+//                .afterTime(1.5, intakeArm.armIntake())
+//                .afterTime(1.75, intakeSpinner.intakePosition())
+                .splineToLinearHeading(new Pose2d(38.5, 25.5, Math.toRadians(0)), Math.toRadians(-80))
+                .setTangent(0)
+
+                .lineToX(46.5)
+                .setTangent(Math.toRadians(180))
+                .lineToX(38.5)
+//                .stopAndAdd(intakeArm.armIntake())
+//                .stopAndAdd(intakeSpinner.intakePosition())
+                .waitSeconds(0.4)
+                .lineToX(42.5)
+                // PICKUP 1st Yellow Sample
+//                .afterTime(0.01, intakeArm.armTransfer())
+//                .afterTime(0.25, intakeSpinner.outtakePosition())
+                .lineToX(41.0)
+//                .afterTime(0.1, outtakeSlide.high())
+//                .afterTime(0.25, intakeSpinner.stopPosition())
+//                .afterTime(2.0, outtakeDump.dumpPosition())
+                .setTangent(Math.toRadians(140))
+                .splineToLinearHeading(new Pose2d(57, 55, Math.toRadians(-135)), Math.toRadians(0)) //😎👌👌
+                .waitSeconds(0.2)
 //                .afterTime(0.01,outtakeDump.downPosition())
 //                .afterTime(0.1,outtakeSlide.low())
 //                .afterTime(0.5,intakeArm.armIntake())
 //                .afterTime(0.5,intakeSpinner.intakePosition())
-                .splineToLinearHeading(new Pose2d(38.5, 25.5, Math.toRadians(0)), Math.toRadians(-100))
-                // PICKUP 3rd sample
+                .setTangent(180)
+                .splineToLinearHeading(new Pose2d(44.5, 25.5, Math.toRadians(0)), Math.toRadians(10))
                 .setTangent(0)
-                .lineToX(48.0)
-//                .afterTime(0.01, intakeArm.armTransfer())
-                .lineToX(43.0)
-//                .stopAndAdd(intakeSpinner.outtakePosition())
-                .setTangent(-180)
- //               .afterTime(0.5, outtakeSlide.high())
+                // PICKUP 2nd Yellow Sample
+                .lineToX(50.5)
+ //               .afterTime(0.01, intakeArm.armTransfer())
+ //               .afterTime(0.25, intakeSpinner.outtakePosition())
+                .waitSeconds(0.2)
+                .lineToX(49.0)
+ //               .afterTime(0.1, outtakeSlide.high())
  //               .afterTime(0.25, intakeSpinner.stopPosition())
- //               .afterTime(1.8, outtakeDump.dumpPosition())
+ //               .afterTime(2.0, outtakeDump.dumpPosition())
+                .splineToLinearHeading(new Pose2d(57, 55, Math.toRadians(-135)), Math.toRadians(0))
+                .waitSeconds(0.2)
+ //               .afterTime(0.01,outtakeDump.downPosition())
+ //               .afterTime(0.1,outtakeSlide.low())
+ //               .afterTime(0.5,intakeArm.armIntake())
+ //               .afterTime(0.5,intakeSpinner.intakePosition())
+                .splineToLinearHeading(new Pose2d(49, 25.5, Math.toRadians(0)), Math.toRadians(0))
+                // PICKUP 3rd sample
+                .lineToX(57.0)
+  //              .afterTime(0.01, intakeArm.armTransfer())
+                .lineToX(54.0)
+  //              .stopAndAdd(intakeSpinner.outtakePosition())
+                .setTangent(-180)
+  //              .afterTime(0.5, outtakeSlide.high())
+  //              .afterTime(0.25, intakeSpinner.stopPosition())
+  //              .afterTime(1.8, outtakeDump.dumpPosition())
                 .splineToLinearHeading(new Pose2d(57, 55, Math.toRadians(-135)), Math.toRadians(110))
-
-/*
-
-
-
-
+                .waitSeconds(0.2)
   //              .afterTime(0.01,outtakeDump.downPosition())
   //              .afterTime(0.1,outtakeSlide.low())
-  //              .afterTime(0.5,intakeArm.armIntake())
-  //              .afterTime(0.5,intakeSpinner.intakePosition())
-                .setTangent(Math.toRadians(180))
-                .splineToLinearHeading(new Pose2d(38.5, 25.5, Math.toRadians(0)), Math.toRadians(10))
-                .setTangent(0)
+  //              .afterTime(0.5,outtakeSlide.endAutonPos())
+                .splineToLinearHeading(new Pose2d(21, 0, Math.toRadians(0)), Math.toRadians(180))
+  //              .stopAndAdd(outtakeSlide.stopOuttakeSlide())
 
-
-                /*               .lineToYSplineHeading(33, Math.toRadians(0))
-                .waitSeconds(2)
-                 .setTangent(Math.toRadians(90))
-                .splineToConstantHeading(new Vector2d(15, 48), Math.toRadians(0))
-                .splineToConstantHeading(new Vector2d(32, 48), Math.toRadians(0))
-                .splineToSplineHeading(new Pose2d(44.5, 30,Math.toRadians(180)), Math.toRadians(0))
-                .lineToX(47.5)
-                .waitSeconds(3) */
                 .build());
 
         } else if (autonChoice == 2) {

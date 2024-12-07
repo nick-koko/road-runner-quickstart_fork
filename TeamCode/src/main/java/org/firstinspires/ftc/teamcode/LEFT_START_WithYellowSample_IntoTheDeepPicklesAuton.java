@@ -169,6 +169,7 @@ public class LEFT_START_WithYellowSample_IntoTheDeepPicklesAuton extends LinearO
                 .afterTime(0.1, outtakeSlide.high())
                 .afterTime(0.25, intakeSpinner.stopPosition())
                 .afterTime(2.0, outtakeDump.dumpPosition())
+                .setTangent(Math.toRadians(150))
                 .splineToLinearHeading(new Pose2d(57, 55, Math.toRadians(-135)), Math.toRadians(0))
                 .waitSeconds(0.2)
                 .afterTime(0.01,outtakeDump.downPosition())

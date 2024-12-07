@@ -81,17 +81,17 @@ public class RIGHT_5_Specimens_HumanPlayerStart_IntoTheDeepPicklesAuton extends 
                 .stopAndAdd(outtakeSlide.specimenDropDown())
                 .setTangent(Math.toRadians(120))
                 .splineToSplineHeading(new Pose2d(-22, 36,Math.toRadians(180)), Math.toRadians(180))
-                .splineToConstantHeading(new Vector2d(-24, 17), Math.toRadians(-90)) //TODO Check all sample locations to make sure pushed in Observation Zone
+                .splineToConstantHeading(new Vector2d(-25, 17), Math.toRadians(-90)) //TODO Check all sample locations to make sure pushed in Observation Zone
                 .splineToSplineHeading(new Pose2d(-48, 17, Math.toRadians(-90)), Math.toRadians(120))
 
                 .splineToLinearHeading(new Pose2d(-49, 50, Math.toRadians(-90)), Math.toRadians(100))
 //                    .waitSeconds(.5)
-                .splineToLinearHeading(new Pose2d(-54, 10, Math.toRadians(-90)), Math.toRadians(200))
+                .splineToLinearHeading(new Pose2d(-54, 9, Math.toRadians(-90)), Math.toRadians(200))
 //                    .waitSeconds(.5)
                 .splineToLinearHeading(new Pose2d(-57, 53, Math.toRadians(-90)), Math.toRadians(-80), new TranslationalVelConstraint(55), new ProfileAccelConstraint(-50.0, 68.0))
-                .splineToConstantHeading(new Vector2d(-71, 13), Math.toRadians(130), new TranslationalVelConstraint(50), new ProfileAccelConstraint(-50.0, 68.0))
+                .splineToConstantHeading(new Vector2d(-71, 11), Math.toRadians(130), new TranslationalVelConstraint(50), new ProfileAccelConstraint(-50.0, 68.0))
 //                    .waitSeconds(.5)
-                .splineToConstantHeading(new Vector2d(-71, 42), Math.toRadians(90), new TranslationalVelConstraint(50), new ProfileAccelConstraint(-50.0, 68.0))
+                .splineToConstantHeading(new Vector2d(-71, 40), Math.toRadians(90), new TranslationalVelConstraint(50), new ProfileAccelConstraint(-50.0, 68.0))
 
 
 

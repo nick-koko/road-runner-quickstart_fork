@@ -214,9 +214,7 @@ public class LEFT_START_WithSpecimenClip_IntoTheDeepPicklesAuton extends LinearO
                 .stopAndAdd(outtakeClaw.dropPosition())
                 .stopAndAdd(outtakeSlide.low())
                 .setTangent(Math.toRadians(60))
-                .afterTime(1.5, intakeArm.armIntake())
-                .afterTime(1.75, intakeSpinner.intakePosition())
-                .splineToLinearHeading(new Pose2d(38.5, 25.5, Math.toRadians(0)), Math.toRadians(-61.9))
+                .splineToLinearHeading(new Pose2d(38.5, 25.5, Math.toRadians(0)), Math.toRadians(-80))
                 .setTangent(0)
 
                .lineToX(46.5)
@@ -233,6 +231,7 @@ public class LEFT_START_WithSpecimenClip_IntoTheDeepPicklesAuton extends LinearO
                .afterTime(0.1, outtakeSlide.high())
                .afterTime(0.25, intakeSpinner.stopPosition())
                .afterTime(2.0, outtakeDump.dumpPosition())
+               .setTangent(Math.toRadians(140))
                .splineToLinearHeading(new Pose2d(57, 55, Math.toRadians(-135)), Math.toRadians(0)) //😎👌👌
                .waitSeconds(0.2)
                .afterTime(0.01,outtakeDump.downPosition())

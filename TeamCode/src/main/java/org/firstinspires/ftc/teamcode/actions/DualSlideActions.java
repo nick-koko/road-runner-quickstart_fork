@@ -169,7 +169,7 @@ public class ExtendAction implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
             if (!initialized) {
-                slidePositionAny(865,865);
+                slidePositionAny(880,880);
                 initialized = true;
                 return true;
             }
