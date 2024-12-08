@@ -94,7 +94,7 @@ public class OLD_RIGHT_4_Specimens_HumanPlayerStart_IntoTheDeepPicklesAuton exte
 
                 .afterTime(.01, outtakeSlide.specimenDrop())
                 .afterTime(0.5, outtakeClaw.dropPosition()) //change to aftertime
-                .splineToLinearHeading(new Pose2d(-6.25, 31.5,Math.toRadians(89.9)),Math.toRadians(-90), new TranslationalVelConstraint(40), new ProfileAccelConstraint(-30.0, 50.0))
+                .splineToLinearHeading(new Pose2d(-10.25, 31,Math.toRadians(90)),Math.toRadians(-90))
  //               .strafeTo(new Vector2d(-10.25,32))
                 .stopAndAdd(outtakeSlide.specimenDropDown()) //TODO move before slide goes to low
 
@@ -110,7 +110,7 @@ public class OLD_RIGHT_4_Specimens_HumanPlayerStart_IntoTheDeepPicklesAuton exte
 
                 .afterTime(.01, outtakeSlide.specimenDrop())
                 .afterTime(0.5, outtakeClaw.dropPosition()) //change to aftertime
-                .splineToLinearHeading(new Pose2d(-2.25, 31.5,Math.toRadians(89.9)),Math.toRadians(-90), new TranslationalVelConstraint(40), new ProfileAccelConstraint(-30.0, 50.0))
+                .splineToLinearHeading(new Pose2d(-6.25, 31,Math.toRadians(90)),Math.toRadians(-90))
   //              .strafeTo(new Vector2d(-11.25,32))
                 .stopAndAdd(outtakeSlide.specimenDropDown()) //TODO move before slide goes to low
 
@@ -130,7 +130,7 @@ public class OLD_RIGHT_4_Specimens_HumanPlayerStart_IntoTheDeepPicklesAuton exte
 
                 .afterTime(.01, outtakeSlide.specimenDrop())
                 .afterTime(0.5, outtakeClaw.dropPosition()) //change to aftertime
-                .splineToLinearHeading(new Pose2d(2.0, 31.5,Math.toRadians(89.9)),Math.toRadians(-90), new TranslationalVelConstraint(40), new ProfileAccelConstraint(-30.0, 50.0))
+                .splineToLinearHeading(new Pose2d(-2.0, 31,Math.toRadians(90)),Math.toRadians(-90))
   //              .strafeTo(new Vector2d(-11.75,32))
                 .stopAndAdd(outtakeSlide.specimenDropDown()) //TODO move before slide goes to low
                 .setTangent(Math.toRadians(135))
