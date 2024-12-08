@@ -12,7 +12,7 @@ public class ClimbingHooks {
 
     // Target positions for the servo arm
     public static double DOWN_POSITION = 0.067; //above group... will kill power .245
-    public static double HIGH_POSITION = 0.712; //above group... will kill power .245
+    public static double HIGH_POSITION = 0.652; //above group... will kill power .245
 
     private ElapsedTime armTimer = new ElapsedTime();
     public enum CLIMBING_HOOK_STATE{

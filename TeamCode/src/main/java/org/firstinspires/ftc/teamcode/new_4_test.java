@@ -3,9 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
-import com.acmerobotics.roadrunner.ProfileAccelConstraint;
 import com.acmerobotics.roadrunner.SequentialAction;
-import com.acmerobotics.roadrunner.TranslationalVelConstraint;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -20,8 +18,8 @@ import org.firstinspires.ftc.teamcode.actions.OuttakeDumpActions;
 
 
 @Config
-@Autonomous(name = "zOLD_RIGHT_FOUR_SPECIMENS_HumanPlayer_GigglyPicklesAuton", group = "Autonomous")
-public class OLD_RIGHT_4_Specimens_HumanPlayerStart_IntoTheDeepPicklesAuton extends LinearOpMode {
+@Autonomous(name = "test_new_RIGHT_FOUR_SPECIMENS_GigglyPickles", group = "Autonomous")
+public class new_4_test extends LinearOpMode {
 
     //OUTTAKE DUAL SLIDE SUBSYSTEM
         //TODO Add Outtake Dual Slide constants here
@@ -73,7 +71,7 @@ public class OLD_RIGHT_4_Specimens_HumanPlayerStart_IntoTheDeepPicklesAuton exte
         outtakeClaw.init(hardwareMap);
         trajectoryActionRightSideSpecimen = drive.actionBuilder(initialPoseRightSideSpecimen)
                 .afterTime(0.1, outtakeSlide.specimenDrop())
-                .strafeTo(new Vector2d(-10.25,32))
+                .strafeTo(new Vector2d(-9.25,32))
                 .stopAndAdd(outtakeClaw.dropPosition())
                 .stopAndAdd(outtakeSlide.low())
                 .setTangent(Math.toRadians(120))
@@ -91,13 +89,11 @@ public class OLD_RIGHT_4_Specimens_HumanPlayerStart_IntoTheDeepPicklesAuton exte
                 .stopAndAdd(outtakeClaw.close())
                 .stopAndAdd(outtakeSlide.extendAction())
                 .setTangent(Math.toRadians(-40))
-
                 .afterTime(.01, outtakeSlide.specimenDrop())
-                .afterTime(0.5, outtakeClaw.dropPosition()) //change to aftertime
-                .splineToLinearHeading(new Pose2d(-6.25, 31.5,Math.toRadians(89.9)),Math.toRadians(-90), new TranslationalVelConstraint(40), new ProfileAccelConstraint(-30.0, 50.0))
+                .splineToLinearHeading(new Pose2d(-10.25, 31,Math.toRadians(90)),Math.toRadians(-90))
  //               .strafeTo(new Vector2d(-10.25,32))
-                .stopAndAdd(outtakeSlide.specimenDropDown()) //TODO move before slide goes to low
-
+                .stopAndAdd(outtakeClaw.dropPosition())
+                .stopAndAdd(outtakeSlide.low())
                 .setTangent(Math.toRadians(120))
                 .afterTime(.1, outtakeClaw.open())
                 .splineToLinearHeading(new Pose2d(-46.5, 46,Math.toRadians(-90)),Math.toRadians(120))
@@ -107,14 +103,11 @@ public class OLD_RIGHT_4_Specimens_HumanPlayerStart_IntoTheDeepPicklesAuton exte
                 .stopAndAdd(outtakeClaw.close())
                 .stopAndAdd(outtakeSlide.extendAction())
                 .setTangent(Math.toRadians(-40))
-
                 .afterTime(.01, outtakeSlide.specimenDrop())
-                .afterTime(0.5, outtakeClaw.dropPosition()) //change to aftertime
-                .splineToLinearHeading(new Pose2d(-2.25, 31.5,Math.toRadians(89.9)),Math.toRadians(-90), new TranslationalVelConstraint(40), new ProfileAccelConstraint(-30.0, 50.0))
+                .splineToLinearHeading(new Pose2d(-11.25, 31,Math.toRadians(90)),Math.toRadians(-90))
   //              .strafeTo(new Vector2d(-11.25,32))
-                .stopAndAdd(outtakeSlide.specimenDropDown()) //TODO move before slide goes to low
-
-
+                .stopAndAdd(outtakeClaw.dropPosition())
+                .stopAndAdd(outtakeSlide.low())
                 .setTangent(Math.toRadians(120))
                 .afterTime(.1, outtakeClaw.open())
                 .splineToLinearHeading(new Pose2d(-46.5, 46,Math.toRadians(-90)),Math.toRadians(120))
@@ -126,16 +119,12 @@ public class OLD_RIGHT_4_Specimens_HumanPlayerStart_IntoTheDeepPicklesAuton exte
         trajectoryActionExtraSpecimen = drive.actionBuilder(new Pose2d(-46.5, 62.5,Math.toRadians(-90)))
                 .stopAndAdd(outtakeClaw.close())
                 .stopAndAdd(outtakeSlide.extendAction())
-                .setTangent(Math.toRadians(-40))
-
+                .setTangent(-120)                .setTangent(Math.toRadians(-40))
                 .afterTime(.01, outtakeSlide.specimenDrop())
-                .afterTime(0.5, outtakeClaw.dropPosition()) //change to aftertime
-                .splineToLinearHeading(new Pose2d(2.0, 31.5,Math.toRadians(89.9)),Math.toRadians(-90), new TranslationalVelConstraint(40), new ProfileAccelConstraint(-30.0, 50.0))
+                .splineToLinearHeading(new Pose2d(-2.0, 31,Math.toRadians(90)),Math.toRadians(-90))
   //              .strafeTo(new Vector2d(-11.75,32))
-                .stopAndAdd(outtakeSlide.specimenDropDown()) //TODO move before slide goes to low
-                .setTangent(Math.toRadians(135))
-                .strafeTo(new Vector2d(-50.5, 60), new TranslationalVelConstraint(65), new ProfileAccelConstraint(-99.0, 99.0))
-
+                .stopAndAdd(outtakeClaw.dropPosition())
+                .stopAndAdd(outtakeSlide.low())
                 .build();
 
 
