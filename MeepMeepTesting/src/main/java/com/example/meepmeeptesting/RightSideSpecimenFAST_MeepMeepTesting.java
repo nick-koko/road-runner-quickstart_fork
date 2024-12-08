@@ -42,12 +42,12 @@ public class RightSideSpecimenFAST_MeepMeepTesting {
                     .splineToConstantHeading(new Vector2d(-24, 17), Math.toRadians(-90)) //TODO Check all sample locations to make sure pushed in Observation Zone
                     .splineToSplineHeading(new Pose2d(-48, 17, Math.toRadians(-90)), Math.toRadians(120))
 //                    .waitSeconds(.5)
-                    .splineToSplineHeading(new Pose2d(-49, 50, Math.toRadians(-90)), Math.toRadians(100))
+                    .splineToLinearHeading(new Pose2d(-49, 50, Math.toRadians(-90)), Math.toRadians(100))
 //                    .waitSeconds(.5)
-                    .splineToSplineHeading(new Pose2d(-54, 9, Math.toRadians(-95)), Math.toRadians(200))
+                    .splineToLinearHeading(new Pose2d(-54, 9, Math.toRadians(-90)), Math.toRadians(200))
 //                    .waitSeconds(.5)
-                    .splineToLinearHeading(new Pose2d(-52, 53, Math.toRadians(-95)), Math.toRadians(-80), new TranslationalVelConstraint(55), new ProfileAccelConstraint(-50.0, 68.0))
-                    .splineToConstantHeading(new Vector2d(-71, 11), Math.toRadians(130), new TranslationalVelConstraint(50), new ProfileAccelConstraint(-50.0, 68.0))
+                    .splineToLinearHeading(new Pose2d(-52, 53, Math.toRadians(-90)), Math.toRadians(-80), new TranslationalVelConstraint(55), new ProfileAccelConstraint(-50.0, 68.0))
+                    .splineToConstantHeading(new Vector2d(-67, 11), Math.toRadians(130), new TranslationalVelConstraint(50), new ProfileAccelConstraint(-50.0, 68.0))
 //                    .waitSeconds(.5)
                     .splineToConstantHeading(new Vector2d(-71, 40), Math.toRadians(90), new TranslationalVelConstraint(50), new ProfileAccelConstraint(-50.0, 68.0))
 
@@ -80,7 +80,7 @@ public class RightSideSpecimenFAST_MeepMeepTesting {
 //                    .afterTime(0.5, outtakeClaw.dropPosition()) //change to aftertime
 
                     // Third Sepcimen target -4.0"
-                    .splineToLinearHeading(new Pose2d(-4.0, 31.5,Math.toRadians(89.9)),Math.toRadians(-50), null, new ProfileAccelConstraint(-37.0, 68.0)) //TODO Fix drop location and slow down decel
+                    .splineToLinearHeading(new Pose2d(-4.0, 31.5,Math.toRadians(89.9)),Math.toRadians(-65), null, new ProfileAccelConstraint(-37.0, 68.0)) //TODO Fix drop location and slow down decel
 //                    .stopAndAdd(outtakeSlide.specimenDropDown()) //TODO move before slide goes to low
                     .waitSeconds(.5)
                     .setTangent(Math.toRadians(150))

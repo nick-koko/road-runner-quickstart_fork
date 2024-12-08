@@ -89,7 +89,7 @@ public class Test_Right_5_Specimens_Auton extends LinearOpMode {
                 .splineToLinearHeading(new Pose2d(-54, 9, Math.toRadians(-90)), Math.toRadians(200))
 //                    .waitSeconds(.5)
                 .splineToLinearHeading(new Pose2d(-52, 53, Math.toRadians(-90)), Math.toRadians(-80), new TranslationalVelConstraint(55), new ProfileAccelConstraint(-50.0, 68.0))
-                .splineToConstantHeading(new Vector2d(-66, 11), Math.toRadians(130), new TranslationalVelConstraint(50), new ProfileAccelConstraint(-50.0, 68.0))
+                .splineToConstantHeading(new Vector2d(-58, 11), Math.toRadians(130), new TranslationalVelConstraint(50), new ProfileAccelConstraint(-50.0, 68.0))
 //                    .waitSeconds(.5)
                 .splineToConstantHeading(new Vector2d(-68, 40), Math.toRadians(90), new TranslationalVelConstraint(50), new ProfileAccelConstraint(-50.0, 68.0))
 
@@ -131,7 +131,7 @@ public class Test_Right_5_Specimens_Auton extends LinearOpMode {
                 .afterTime(0.5, outtakeClaw.dropPosition()) //change to aftertime
 
                 // Third Sepcimen target -4.0"
-                .splineToLinearHeading(new Pose2d(-4.0, 31.5,Math.toRadians(89.9)),Math.toRadians(-50), null, new ProfileAccelConstraint(-38.0, 68.0)) //TODO Fix drop location and slow down decel
+                .splineToLinearHeading(new Pose2d(-4.0, 31.5,Math.toRadians(89.9)),Math.toRadians(-65), null, new ProfileAccelConstraint(-38.0, 68.0)) //TODO Fix drop location and slow down decel
                 .stopAndAdd(outtakeSlide.specimenDropDown()) //TODO move before slide goes to low
                 .setTangent(Math.toRadians(150))
                 .afterTime(.1, outtakeClaw.open())
