@@ -22,7 +22,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.ClimbingHooks;
 
 @Config
 @Autonomous(name = "Test_5_Specimen_Auton", group = "Autonomous")
-public class Test_Right_5_Specimens_Auton extends LinearOpMode {
+public class _STATES_Right_5_Specimens_Auton extends LinearOpMode {
 
     //OUTTAKE DUAL SLIDE SUBSYSTEM
         //TODO Add Outtake Dual Slide constants here

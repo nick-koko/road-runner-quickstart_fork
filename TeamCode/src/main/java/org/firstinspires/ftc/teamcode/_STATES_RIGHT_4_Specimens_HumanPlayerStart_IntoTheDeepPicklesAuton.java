@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.actions.OuttakeDumpActions;
 
 @Config
 @Autonomous(name = "zOLD_RIGHT_FOUR_SPECIMENS_HumanPlayer_GigglyPicklesAuton", group = "Autonomous")
-public class OLD_RIGHT_4_Specimens_HumanPlayerStart_IntoTheDeepPicklesAuton extends LinearOpMode {
+public class _STATES_RIGHT_4_Specimens_HumanPlayerStart_IntoTheDeepPicklesAuton extends LinearOpMode {
 
     //OUTTAKE DUAL SLIDE SUBSYSTEM
         //TODO Add Outtake Dual Slide constants here
