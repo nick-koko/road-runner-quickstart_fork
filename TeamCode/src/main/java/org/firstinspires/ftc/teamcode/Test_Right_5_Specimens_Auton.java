@@ -9,6 +9,7 @@ import com.acmerobotics.roadrunner.TranslationalVelConstraint;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.actions.ClawActions;
@@ -21,6 +22,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.ClimbingHooks;
 
 
 @Config
+@Disabled
 @Autonomous(name = "Test_5_Specimen_Auton", group = "Autonomous")
 public class Test_Right_5_Specimens_Auton extends LinearOpMode {
 

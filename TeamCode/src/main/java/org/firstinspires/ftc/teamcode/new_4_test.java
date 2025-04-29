@@ -18,7 +18,7 @@ import org.firstinspires.ftc.teamcode.actions.OuttakeDumpActions;
 
 
 @Config
-@Autonomous(name = "test_new_RIGHT_FOUR_SPECIMENS_GigglyPickles", group = "Autonomous")
+@Autonomous(name = "RIGHT_FOUR_SPECIMENS_GigglyPickles", group = "Autonomous")
 public class new_4_test extends LinearOpMode {
 
     //OUTTAKE DUAL SLIDE SUBSYSTEM

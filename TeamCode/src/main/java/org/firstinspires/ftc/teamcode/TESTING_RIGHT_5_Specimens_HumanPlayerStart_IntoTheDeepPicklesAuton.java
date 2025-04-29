@@ -9,6 +9,7 @@ import com.acmerobotics.roadrunner.TranslationalVelConstraint;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.actions.ClawActions;
@@ -20,6 +21,7 @@ import org.firstinspires.ftc.teamcode.actions.OuttakeDumpActions;
 
 
 @Config
+@Disabled
 @Autonomous(name = "TESTTTT RIGHT_FIVE_SPECIMENS_HumanPlayer_GigglyPicklesAuton", group = "Autonomous")
 public class TESTING_RIGHT_5_Specimens_HumanPlayerStart_IntoTheDeepPicklesAuton extends LinearOpMode {
 

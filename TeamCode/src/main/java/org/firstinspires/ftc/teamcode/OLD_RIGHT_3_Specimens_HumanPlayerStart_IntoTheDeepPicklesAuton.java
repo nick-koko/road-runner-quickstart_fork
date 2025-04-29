@@ -7,6 +7,7 @@ import com.acmerobotics.roadrunner.SequentialAction;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.actions.ClawActions;
@@ -18,6 +19,7 @@ import org.firstinspires.ftc.teamcode.actions.OuttakeDumpActions;
 
 
 @Config
+@Disabled
 @Autonomous(name = "zOld_RIGHT_THREE_SPECIMENS_GigglyPicklesAuton", group = "Autonomous")
 public class OLD_RIGHT_3_Specimens_HumanPlayerStart_IntoTheDeepPicklesAuton extends LinearOpMode {
 
